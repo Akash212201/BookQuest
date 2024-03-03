@@ -6,7 +6,6 @@
 }
 body {
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
   /* background-color: #141414; */
 }
 /*---------------global-------------*/
@@ -46,6 +45,3 @@ body {
   height: 3px;
   background-color: rgb(35, 239, 195);
 }
-
-
-

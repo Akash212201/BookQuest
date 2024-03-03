@@ -28,7 +28,12 @@ exports.createCategory = async (req, resp) => {
 
 exports.getCategories=async (req,resp)=>{
     try{
-        const categories=await Category.find({},{categoryName:true});
+      // const skip=2;
+      // const limit=2;
+      // for pagination we use skip and limit 
+        // const categories=(await Category.find({},null,{skip,limit}));
+        // const categories=(await Category.find({}).skip(2).limit(2));
+        const categories=(await Category.find({},{categoryName:true}));
         if(categories.length==0){
             resp.status(400).json({
                 success: false,

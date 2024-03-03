@@ -51,12 +51,12 @@ const BookInfo = () => {
 
     return (
        <>
-        <div className='py-10 px-5 lg:px-[10vw] flex lg:flex-row flex-col gap-4'>
+        <div className='py-10 px-7 lg:px-[10vw] flex lg:flex-row flex-col gap-4'>
             <div className='lg:w-[30%] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] w-full h-[450px] px-2 py-4'>
                 <img src="../images/temp.jpeg" alt="" className="w-full h-[420px] object-contain" />
             </div>
             <div className='lg:w-2/3 w-full'>
-                <div className='lg:px-5 px-0 pt-3 font-medium'>
+                <div className='px-5 pt-3 font-medium'>
                     <h2 className='text-2xl'>Attitude Is Everything: Change Your Attitude ... Change Your Life!</h2>
                     <p className='my-3'>  <b>Author: </b> Jeff Keller</p>
                     <p><b>Publisher: </b> HARPERCOLLINS PUBLISHERS INDIA</p>

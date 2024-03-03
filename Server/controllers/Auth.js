@@ -10,8 +10,9 @@ const passwordUpdate = require("../Mail/Templates/passwordUpdated");
 exports.sendOtp= async (req,resp)=>{
     try{
             // fetch email from the request body
+            console.log("sendooootp")
             const {email}=req.body;
-    
+    console.log(email)
             // check user is already exists
     
            

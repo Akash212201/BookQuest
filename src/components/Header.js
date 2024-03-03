@@ -23,13 +23,17 @@ const Header = () => {
       name: "Sci-Fi",
       path:"/scifi",
     },
+    {
+      name: "Love Stories",
+      path:"/lovestories",
+    },
   ]
   return (
-    <div className=' bg-green-500 text-white'>
-      <ul className="flex lg:justify-center justify-evenly items-center">
+    <div className='bg-red-500 text-white'>
+      <ul className="flex justify-center items-center">
         {
           navLinks.map((link,idx)=>(
-            <li key={idx} className="lg:px-6 lg:text-xl text-base py-3"><Link to={link.path}>{link.name}</Link></li>
+            <li key={idx} className="lg:px-6 px-2 text-xl py-3"><Link to={link.path}>{link.name}</Link></li>
 
           ))
         }

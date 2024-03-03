@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Books = require("../models/Books");
 const RatingAndReviews = require("../models/RatingAndReviews");
 
@@ -67,13 +68,24 @@ exports.RatingAndReviews = async (req, resp) => {
   }
 };
 
+
+// const { ObjectId } = require('mongodb'); // Or use Mongoose
+
+// const bookid = "63fc77b2087f2b79d5915eb2"; // Sample valid ObjectID value 
+// const newBookDocumentId = new ObjectId(bookid); 
+
+// console.log(newBookDocumentId);
+
+
 exports.getAverageRating = async (req, resp) => {
   try {
-    const { bookid } = req.body;
+    const  bookid  = req.body;
 
     const result = await RatingAndReviews.aggregate([
       {
-        $match: { eBook: bookid },
+        $match: { 
+            eBook:new ObjectId(bookid) 
+        },
       },
       {
         $group: {
@@ -114,6 +126,7 @@ exports.getAllRatings = async (req, resp) => {
       .populate({
         path: "eBooks",
         select: "bookName bookSummary bookAuthor",
+        
       })
       .exec();
 
