@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  /* background-color: #141414; */
+}
+/*---------------global-------------*/
+
+.news{
+  background-image: url('../public/images/news_texture.png');
+}
+/*---------------MovieBox-------------*/
+@media only screen and (max-width: 768px) {
+  .MovieBox {
+    width: 320px;
+    height: 250px;
+  }
+  .input{
+    border: 1px solid yellow;
+    display: none;
+  }
+}
+
+
+.f1::after{
+  position: absolute;
+  bottom: -10px;
+  left: 98px;
+  content: '';
+  width: 120%;
+  height: 3px;
+  background-color: rgb(239, 96, 35);
+  z-index: 999;
+}
+.f2::after{
+  position: absolute;
+  bottom: -5px;
+  left: -9px;
+  content: '';
+  width: 10%;
+  height: 3px;
+  background-color: rgb(35, 239, 195);
+}
+
+
+
