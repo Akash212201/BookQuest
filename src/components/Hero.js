@@ -9,8 +9,8 @@ const SampleNextArrow = (props) => {
   const { onClick } = props
   return (
     <div className="cursor-pointer" onClick={onClick}>
-      <button className='flex justify-center items-center absolute top-[40%] right-1 rounded-[50%] border-[2px] lg:w-[50px] lg:h-[50px] w-[40px] h-[40px] border-white'>
-        <FaLongArrowAltRight className="lg:text-3xl text-2xl text-white" />
+      <button className='flex justify-center items-center absolute top-1/2 right-1 rounded-[50%] border-[2px] w-[50px] h-[50px] border-black'>
+        <FaLongArrowAltRight className="text-3xl" />
       </button>
     </div>
   )
@@ -19,8 +19,8 @@ const SamplePrevArrow = (props) => {
   const { onClick } = props
   return (
     <div className="cursor-pointer" onClick={onClick}>
-      <button className='flex justify-center items-center absolute top-[40%] left-1 rounded-[50%] border-[2px] lg:w-[50px] lg:h-[50px] w-[40px] h-[40px] border-white z-10'>
-        < FaLongArrowAltLeft className="lg:text-3xl text-2xl text-white" />
+      <button className='flex justify-center items-center absolute top-1/2 left-1 rounded-[50%] border-[2px] w-[50px] h-[50px] border-black z-10'>
+        < FaLongArrowAltLeft className="text-3xl" />
       </button>
     </div>
   )
@@ -50,7 +50,7 @@ const Hero = () => {
     infinite: true,
     fade: true,
     autoplay: true,
-    speed: 1000,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     pauseOnHover: true,
@@ -58,20 +58,18 @@ const Hero = () => {
     prevArrow: <SamplePrevArrow />,
   }
   return (
-    <div className="lg:h-[55vh] h-[14vh]">
+    <div className="bg-slate-400">
       <Slider {...settings}>
-        {
-          homeData.map((item) => {
-            return (
-              <div className="lg:h-[55vh] h-[14vh]" key={item.id}>
-                <div className='coverImage absolute top-0 w-full lg:h-[55vh] h-[14.6vh]'>
-                  <img src={item.cover} alt='' className="w-full lg:h-full object-cover h-full" />
-                </div>
-              </div>
-            )
-          })
-        }
-      </Slider>
+      {homeData.map((item) => {
+        return (
+          <div className="lg:h-[60vh] h-[20vh]" key={item.id}>
+            <div className='coverImage absolute top-0 w-full lg:h-[60vh] h-[20vh]'>
+              <img src={item.cover} alt='' className="w-full lg:h-full lg:object-cover object-contain" />
+            </div>
+          </div>
+        )
+      })}
+    </Slider>
     </div>
   )
 }

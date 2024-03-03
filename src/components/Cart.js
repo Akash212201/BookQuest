@@ -62,7 +62,7 @@ const Cart = ({data}) => {
                     <div className='flex justify-between items-center my-5'><p>Total MRP</p> 2540</div>
                     <span className='block border border-[#333] w-full mt-5 mb-2'></span>
                     <div className='flex justify-between items-center'><p>Total Amount</p> 2540</div>
-                    <button className='text-white bg-green-500 hover:bg-green-600 w-full py-3 absolute bottom-0 left-0'>CheckOut</button>
+                    <button className='text-white bg-red-500 w-full py-3 absolute bottom-0 left-0'>CheckOut</button>
                 </div>
             </div>
         </div>
