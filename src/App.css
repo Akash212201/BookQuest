@@ -23,6 +23,9 @@ body {
     border: 1px solid yellow;
     display: none;
   }
+  .mobile{
+    display: none;
+  }
 }
 
 
