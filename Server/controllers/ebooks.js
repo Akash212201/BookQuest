@@ -53,11 +53,16 @@ exports.createBook = async (req, resp) => {
         message: "Invalid admin credentials!",
       });
     }
+console.log("mark5")
+// console.log( process.env.FOLDER_NAME)
+// console.log(thumbnail)
 
-    const thumbnailImage = await imageUploadCloudinary(
-      thumbnail,
-      process.env.FOLDER_NAME
-    );
+const thumbnailImage = await imageUploadCloudinary(
+  thumbnail,
+  process.env.FOLDER_NAME
+  );
+
+  console.log("mark6")
 
     const PDFURL = await imageUploadCloudinary(pdfUrl, process.env.FOLDER_NAME);
     console.log(PDFURL);
@@ -101,7 +106,7 @@ exports.createBook = async (req, resp) => {
       message: "new book added",
     });
   } catch (error) {
-    resp.status(200).json({
+    resp.status(400).json({
       success: false,
       message: "some problem occured",
     });
