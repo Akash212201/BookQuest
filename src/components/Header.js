@@ -29,7 +29,7 @@ const Header = () => {
     },
   ]
   return (
-    <div className='bg-red-500 text-white'>
+    <div className='bg-green-500 text-white mobile'>
       <ul className="flex justify-center items-center">
         {
           navLinks.map((link,idx)=>(

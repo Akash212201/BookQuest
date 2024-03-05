@@ -63,8 +63,8 @@ const Hero = () => {
       {homeData.map((item) => {
         return (
           <div className="lg:h-[60vh] h-[20vh]" key={item.id}>
-            <div className='coverImage absolute top-0 w-full lg:h-[60vh] h-[20vh]'>
-              <img src={item.cover} alt='' className="w-full lg:h-full lg:object-cover object-contain" />
+            <div className='coverImage absolute top-0 w-full lg:h-[62vh] h-[20vh]'>
+              <img src={item.cover} alt='' className="w-full lg:h-full lg:object-cover object-cover" />
             </div>
           </div>
         )

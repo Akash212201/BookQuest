@@ -1,6 +1,6 @@
 import {
-  BrowserRouter as Router, 
-  Routes, 
+  BrowserRouter as Router,
+  Routes,
   Route
 } from 'react-router-dom';
 import Header1 from './components/Header1';
@@ -12,14 +12,14 @@ import Cart from './components/Cart';
 import BooksPage from './components/BooksPage';
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
-import './App.css';
 import ForgotPassword from './pages/ForgotPassword';
 import UpdatePassword from './pages/UpdatePassword';
 import VerifyEmail from './pages/VerifyEmail';
+import './App.css';
 
 const App = () => {
   return (
-  <div>
+    <div>
       <Header1 />
       <Header />
       <div className="">
@@ -34,16 +34,15 @@ const App = () => {
           <Route path='/books' element={<BooksPage />} />
           <Route path='/bookinfo' element={<BookInfo />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/signup" element={<Signup/>}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
           <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
           <Route path="/update-password/:id" element={<UpdatePassword />}></Route>
           <Route path="/verify-email" element={<VerifyEmail />}></Route>
-
         </Routes>
       </div>
       <Footer />
-      </div>
+    </div>
   );
 }
 
