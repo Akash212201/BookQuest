@@ -34,8 +34,8 @@ app.use("/api/v1/user",user);
 app.use("/api/v1/books",books);
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(`Server is starting at port no ${process.env.PORT}` )
+app.listen(8080,()=>{
+    console.log('Server is starting at port no 8080' )
 })
 
 app.get("/",(req,resp)=>{{
