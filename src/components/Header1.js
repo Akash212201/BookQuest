@@ -34,10 +34,11 @@ const Header1 = () => {
                     <FiUser className="mr-2" /><p className="lg:block hidden">My Account</p>
                 </div>
                 </Link>
-                <Link to="/cart">
-                    <div className="flex items-center cursor-pointer">
-                        <LuShoppingBag className="lg:mr-2 mr-5" /><p className="lg:block hidden">Cart</p>
-                    </div>
+                <Link to="/cart" >
+                        <div className="flex items-center cursor-pointer relative">
+                            <LuShoppingBag className="lg:mr-2 mr-5" />
+                            <span className=' absolute -top-3 right-[2px] text-sm bg-green-500 text-white px-1 rounded-[50%]'>{data.cartItems.length}</span>
+                        </div>
                 </Link>
                 <div className="lg:hidden cursor-pointer relative" onClick={() => setSidebar(!showSidebar)} >
                     <div className='w-[30px] bg-black h-[5px] mb-1 naviline1'></div>

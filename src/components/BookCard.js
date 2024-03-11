@@ -5,7 +5,6 @@ import { addToCart } from '../Slices/cartSlice';
 
 const BookCard = ({ book }) => {
   const dispatch = useDispatch();
-
   
   const addToCartHandler = () => {
     let totalPrice = 1 * book.price;
