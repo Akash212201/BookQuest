@@ -1,19 +1,15 @@
-import React from 'react'
-import BookCard from './BookCard'
+import React from 'react';
+import BookCard from './BookCard';
 
-const Books = ({data}) => {
-    
+const Books = ({ books }) => {
+  console.log("books",books)
   return (
-    <div className='flex flex-wrap my-5 items-center justify-center'>
-        { 
-            data.map((data)=>(
-                <div key={data.id} className='mx-2 lg:mx-5 mb-6'>
-                <BookCard item={data}/>
-                </div>
-            ))
-        }
-    </div> 
-  )
-}
+    <div className="products">
+      {books.map(book => (
+        <BookCard key={book.id} book={book} /> 
+      ))}
+    </div>
+  );
+};
 
-export default Books
+export default Books;

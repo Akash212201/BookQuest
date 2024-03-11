@@ -1,13 +1,19 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { LuShoppingBag } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
 import Search from './Search';
-import MobileNav from './MobileNav';
+import Sidebar from './Sidebar'
 
 const Header1 = () => {
-    const [nav, setNav] = useState(false)
+    const [showSidebar, setSidebar] = useState(false);
+    const data = useSelector((state) => state.cart)
+
+    const hideSidebar = () => {
+        setSidebar(false);
+    }
     return (
        <>
         <div className='lg:px-8 px-3 py-3 flex justify-between items-center'>
@@ -33,14 +39,17 @@ const Header1 = () => {
                         <LuShoppingBag className="lg:mr-2 mr-5" /><p className="lg:block hidden">Cart</p>
                     </div>
                 </Link>
-                <div className="lg:hidden cursor-pointer relative" onClick={()=>setNav(!nav)}>
+                <div className="lg:hidden cursor-pointer relative" onClick={() => setSidebar(!showSidebar)} >
                     <div className='w-[30px] bg-black h-[5px] mb-1 naviline1'></div>
                     <div className='w-[30px] bg-black h-[5px] mb-1 naviline2'></div>
                     <div className='w-[30px] bg-black h-[5px] naviline3'></div>
                 </div>
             </div>
         </div>
-        { nav && <div className="z-10 absolute bg-white h-full w-full"><MobileNav /></div>}
+        {showSidebar && <div className="z-10 absolute bg-white h-full w-full">
+                <Sidebar hideSidebar={hideSidebar} />
+            </div>
+            }
        </>
     )
 }

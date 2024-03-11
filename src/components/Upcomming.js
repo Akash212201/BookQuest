@@ -27,20 +27,20 @@ const SamplePrevArrow = (props) => {
     </div>
   )
 }
-const Upcomming = ({ items, title }) => {
+const Upcomming = ({ books, title }) => {
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 5,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow/>,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 800,
+        breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
@@ -54,11 +54,11 @@ const Upcomming = ({ items, title }) => {
         <Link to="/books" className="text-[#e50813] font-medium">View All</Link>
       </div>
 
-      <div>
+      <div> 
       <Slider {...settings}>
-        {items.map((item) => {
+        {books.map((book) => {
           return (
-            <Link to="/bookinfo" key={item.id}><BookCard item={item} /></Link>
+          <div key={book.id} className="px-4"> <BookCard book = {book} /> </div>
           )
         })}
       </Slider>
