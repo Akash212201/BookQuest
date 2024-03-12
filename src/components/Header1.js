@@ -10,6 +10,7 @@ import Sidebar from './Sidebar'
 const Header1 = () => {
     const [showSidebar, setSidebar] = useState(false);
     const data = useSelector((state) => state.cart)
+    console.log("data",data)
 
     const hideSidebar = () => {
         setSidebar(false);

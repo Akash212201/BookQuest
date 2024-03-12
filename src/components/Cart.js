@@ -6,7 +6,7 @@ import { decrementQuantity, incrementQuantity, removeFromCart } from '../Slices/
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-
+console.log("Cartitems",cartItems)
   // Calculate total price for each item
   const calculateTotalPrice = (item) => {
     return item.quantity * item.price;
@@ -29,13 +29,13 @@ const Cart = () => {
             {cartItems.map((item, idx) => (
               <div key={idx} className='flex items-center mt-2 border py-2'>
                 <div className='lg:w-[120px] w-[190px] h-[150px]'>
-                  <img src={item.cover} alt="" className='w-full h-full object-contain' />
+                  <img src={item.thumbnail} alt="" className='w-full h-full object-contain' />
                 </div>
                 <div className='w-full px-5 pt-3 font-medium flex items-center justify-between'>
                   <div>
-                    <h2 className='text-xl lg:text-2xl  leading-6 lg:leading-7'>{item.name}</h2>
-                    <p className='mb-2'>  <b>Author: </b> {item.author}</p>
-                    <p><b>Availability: </b> {item.available}</p>
+                    <h2 className='text-xl lg:text-2xl  leading-6 lg:leading-7'>{item.bookName}</h2>
+                    <p className='mb-2'>  <b>Author: </b> {item.bookAuthor}</p>
+                    <p><b>Availability: </b> {item.bookStock}</p>
                     <p className="text-red-500 text-2xl">{item.price}</p>
                     <div className='flex items-center my-2'>
                       <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(decrementQuantity( {id: item.id} ))}>-</button>

@@ -12,7 +12,8 @@ export const cartSlice = createSlice({
     initialState,
     reducers:  {
         addToCart: (state, action)=> {
-            const tempItem = state.cartItems.find(item => item.id === action.payload.id);
+            const tempItem = state.cartItems.find(item => item.id === action.payload._id);
+            console.log("tempItem",tempItem)
             if(tempItem){
                 state.cartItems = state.cartItems.map(item => {
                     if(item.id === action.payload.id){
@@ -24,6 +25,7 @@ export const cartSlice = createSlice({
                     }
                 });
             } else {
+                console.log("actionpayload",action.payload)
                 state.cartItems.push(action.payload);
             }
         },

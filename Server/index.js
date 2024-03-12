@@ -34,8 +34,8 @@ app.use("/api/v1/user",user);
 app.use("/api/v1/books",books);
 
 
-app.listen(8080,()=>{
-    console.log('Server is starting at port no 8080' )
+app.listen(process.env.PORT,()=>{
+    console.log('Server is starting at port no 4000' )
 })
 
 app.get("/",(req,resp)=>{{
