@@ -1,63 +1,41 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Hero from './Hero'
 import Upcomming from "./Upcomming"
 import Newsletter from './Newsletter';
+import { groupCategory } from "../services/operations/bookcategory";
 
 const HomePage = () => {
-  const latestBooks = [
-    {
-      id: 1,
-      cover: "./images/upcome/u6.png",
-      name: "King of Jungle",
-      author: "Rudyard Kipling",
-      price: 200
-    },
-    {
-      id: 2,
-      cover: "./images/upcome/u2.jpg",
-      name: "Brave",
-      author: "Rachna Bisht Rawat",
-      price: 240
-    },
-    {
-      id: 3,
-      cover: "./images/upcome/u7.jpg",
-      name: "The illusion",
-      author: "Sudha Murthy",
-      price: 450
-    },
-    {
-      id: 4,
-      cover: "./images/upcome/u1.jpg",
-      name: "Doglapan",
-      author: "By Ashneer Grover",
-      price: 350
-    },
-    {
-      id: 5,
-      cover: "./images/upcome/u5.jpg",
-      name: "Karma: A Yogi's Guide to Crafting",
-      author: "By Sadhguru",
-      price: 150
-    },
-    {
-      id: 6,
-      cover: "./images/upcome/u4.jpg",
-      name: "Me Before You",
-      author: "By Jojo Moyes",
-      price: 550
-    },
-  ]
-  const upcommingBooks = [...latestBooks];
-  const newArrivalBooks = [...latestBooks];
-  const bestsellerBooks = [...latestBooks];
+
+  
+  const [categorybooks,setcategorybooks]=useState([])
+  const [latestbooks,setlatestbooks]=useState([])
+  const [mostSellingBooks,setmostSellingBooks]=useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resp = await groupCategory();
+        console.log("resp", resp.data);
+
+        setcategorybooks(resp.data.categorybooks)
+        setlatestbooks(resp.data.mostrecentbooks)
+        setmostSellingBooks(resp.data.mostSellingBooks)
+      } catch (error) {
+        console.error(error); // Use console.error for errors
+      }
+    };
+  
+    fetchData();
+
+  }, [])
+
+
 
   return (
     <div>
       <Hero />
-      <Upcomming books={latestBooks} title="Upcoming Books" />
-      <Upcomming books={latestBooks} title="New Arrival" />
-      <Upcomming books={latestBooks} title="Bestseller" />
+      <Upcomming books={categorybooks} title="Upcoming Books" />
+      <Upcomming books={latestbooks} title="New Arrival" />
+      <Upcomming books={mostSellingBooks} title="Bestseller" />
       <Newsletter />
     </div>
   );
