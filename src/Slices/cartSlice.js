@@ -12,11 +12,11 @@ export const cartSlice = createSlice({
     initialState,
     reducers:  {
         addToCart: (state, action)=> {
-            const tempItem = state.cartItems.find(item => item.id === action.payload._id);
+            const tempItem = state.cartItems.find(item => item._id === action.payload._id);
             console.log("tempItem",tempItem)
             if(tempItem){
                 state.cartItems = state.cartItems.map(item => {
-                    if(item.id === action.payload.id){
+                    if(item._id === action.payload._id){
                         const newQty = item.quantity + action.payload.quantity;
                         const newTotalPrice = newQty * item.price;
                         return { ...item, quantity: newQty, totalPrice: newTotalPrice };
@@ -33,8 +33,10 @@ export const cartSlice = createSlice({
             state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
         },
         incrementQuantity: (state, action) => {
+
             const { id } = action.payload;
-            const itemIndex = state.cartItems.findIndex(item => item.id === id);
+            console.log("id",action.payload)
+            const itemIndex = state.cartItems.findIndex(item => item._id === id);
             if (itemIndex !== -1) {
                 state.cartItems[itemIndex].quantity += 1;
                 state.cartItems[itemIndex].totalPrice = state.cartItems[itemIndex].quantity * state.cartItems[itemIndex].price;
@@ -42,7 +44,7 @@ export const cartSlice = createSlice({
         },
         decrementQuantity: (state, action) => {
             const { id } = action.payload;
-            const itemIndex = state.cartItems.findIndex(item => item.id === id);
+            const itemIndex = state.cartItems.findIndex(item => item._id === id);
             if (itemIndex !== -1) {
                 state.cartItems[itemIndex].quantity -= 1;
                 if (state.cartItems[itemIndex].quantity === 0) {
