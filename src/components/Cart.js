@@ -38,9 +38,9 @@ const Cart = () => {
                     <p><b>Availability: </b> {item.available}</p>
                     <p className="text-red-500 text-2xl">{item.price}</p>
                     <div className='flex items-center my-2'>
-                      <button className='py-[2px] px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(decrementQuantity( {id: item.id} ))}>-</button>
-                      <p className='mx-3'>{item.quantity}</p>
-                      <button className='py-[2px] px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(incrementQuantity( {id: item.id} )) }>+</button>
+                      <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(decrementQuantity( {id: item.id} ))}>-</button>
+                      <p className='mx-3 text-2xl font-bold'>{item.quantity}</p>
+                      <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(incrementQuantity( {id: item.id} )) }>+</button>
                     </div>
                     
                     <h2 className=''>Total Amount: {calculateTotalPrice(item)}</h2></div>

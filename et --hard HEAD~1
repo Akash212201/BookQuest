@@ -1,0 +1,54 @@
+[33mcommit 345d1cea84dc7ed282f4c21e2c5cd390ed920de4[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Akash212201 <agrawal.138658@gmail.com>
+Date:   Tue Mar 12 00:56:38 2024 +0530
+
+    Cart Added
+
+[33mcommit c9e74366f1465d3b375023595b220f9a5b7a5ddc[m
+Merge: 28e062a 971deb3
+Author: bhavishya <121548550+bhavishya3102@users.noreply.github.com>
+Date:   Tue Mar 5 18:03:14 2024 +0530
+
+    Merge pull request #2 from bhavishya3102/master
+    
+    fix error in cloudinary
+
+[33mcommit 971deb3a73eb8e55693be4545106942e5140dd4d[m
+Merge: 70e1dee 28e062a
+Author: bhavishya <bhavisachdeva3102@gmail.com>
+Date:   Tue Mar 5 17:57:18 2024 +0530
+
+    fix cloudinary error
+
+[33mcommit 70e1deee231b18173bcd63179d5927339d9e3ac3[m
+Author: bhavishya <bhavisachdeva3102@gmail.com>
+Date:   Tue Mar 5 17:51:13 2024 +0530
+
+    fix error in cloudinary
+
+[33mcommit 28e062a500c0ee4b180f253462a398985ab286da[m
+Author: Akash212201 <agrawal.138658@gmail.com>
+Date:   Mon Mar 4 00:44:49 2024 +0530
+
+    Theme Updated
+
+[33mcommit fbedcd0a22f379d1004db154c362a4baa8e1e436[m
+Merge: f9e417f 4e41a4a
+Author: bhavishya <121548550+bhavishya3102@users.noreply.github.com>
+Date:   Sun Mar 3 16:10:27 2024 +0530
+
+    Merge pull request #1 from bhavishya3102/master
+    
+    add login signup module
+
+[33mcommit 4e41a4ab8cf86edfe133266a6f403fcbd898603f[m
+Author: bhavishya <bhavisachdeva3102@gmail.com>
+Date:   Sun Mar 3 16:09:15 2024 +0530
+
+    add login signup module
+
+[33mcommit f9e417fd75efb24e352932501a00faee79f8cb78[m
+Author: Akash212201 <agrawal.138658@gmail.com>
+Date:   Sun Mar 3 15:52:37 2024 +0530
+
+    New Repo
