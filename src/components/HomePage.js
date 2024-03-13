@@ -48,9 +48,7 @@ const HomePage = () => {
       price: 550
     },
   ]
-  const upcommingBooks = [...latestBooks];
-  const newArrivalBooks = [...latestBooks];
-  const bestsellerBooks = [...latestBooks];
+
 
   return (
     <div>
