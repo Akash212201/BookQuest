@@ -20,7 +20,7 @@ const HomePage = () => {
         setlatestbooks(resp.data.mostrecentbooks)
         setmostSellingBooks(resp.data.mostSellingBooks)
       } catch (error) {
-        console.error(error); // Use console.error for errors
+        console.error(error); 
       }
     };
   
