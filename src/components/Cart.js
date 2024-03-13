@@ -44,7 +44,7 @@ console.log("Cartitems",cartItems)
                     </div>
                     
                     <h2 className=''>Total Amount: {calculateTotalPrice(item)}</h2></div>
-                  <RiDeleteBin6Line className='text-red-500 text-2xl cursor-pointer' onClick={() => dispatch(removeFromCart(item.id))} />
+                  <RiDeleteBin6Line className='text-red-500 text-2xl cursor-pointer' onClick={() => dispatch(removeFromCart(item._id))} />
                 </div>
               </div>
             ))}
