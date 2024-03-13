@@ -18,5 +18,7 @@ export const contact = {
     CONTACT_DETAILS: BASE_URL + "/contact"
 }
 
-
+export const category={
+    HOMEPAGE_BOOKS:BASE_URL+"/user/groupCategory"
+}
 

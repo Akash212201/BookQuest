@@ -1,4 +1,6 @@
+const { default: mongoose } = require("mongoose");
 const Category = require("../models/Category");
+const Books = require("../models/Books");
 
 exports.createCategory = async (req, resp) => {
   try {
@@ -55,6 +57,79 @@ exports.getCategories=async (req,resp)=>{
           });
     }
 }
+
+exports.groupcategory=async (req,resp)=>{
+  try{
+
+    const categoryid="65e22940c05eccafe3477a54";
+    const categorybooks=await Category.aggregate([
+      {
+        $match:{
+          _id:new mongoose.Types.ObjectId(categoryid)
+        }
+      },{
+        $lookup:{
+          from:"books",
+          localField:"eBooks",
+          foreignField:"_id",
+          as:"books",
+          pipeline:[
+            {
+              $project:{
+
+                bookName:1,bookAuthor:1,
+                bookSummary:1,bookStock:1,
+                price:1,thumbnail:1
+              }
+            }
+          ]
+        }
+      },
+      {
+        $addFields:{
+          books:"$books"
+        }
+      },
+      {
+        $unwind: "$books" // Unwind the "books" array (optional but recommended)
+      },
+      {
+        $replaceRoot: { // Replace the root document with the "books" document
+          newRoot: "$books"
+        }
+      },
+      
+    ])
+
+const mostrecentbooks=await Books.find({}).sort({createdAt:-1})
+
+    const allCategory=await Category.find({}).populate({
+      path:"eBooks",
+      match:{status:"Published"},
+      populate:"ratingAndReviews"
+  }).exec();
+  
+  const allBooks=allCategory.flatMap((category)=> category.eBooks );
+  const mostSellingBooks=allBooks.sort((a,b)=> b.customerPurchased.length-a.customerPurchased.length).slice(0,10);
+
+
+    return resp.status(200).json({
+      success:true,
+      data:{
+        categorybooks,
+        mostrecentbooks,
+        mostSellingBooks
+      },
+      message:"get all the books"
+    })
+  }catch(error){
+return resp.status(400).json({
+  success:false,
+  message:"error occured"
+})
+  }
+}
+
 
 exports.categoryPageDetails=async (req,resp)=>{
     try{
