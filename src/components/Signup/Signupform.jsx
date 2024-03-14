@@ -158,7 +158,7 @@ const Signupform = () => {
               </p>
               <div className="relative">
                 <input
-                  className=" rounded-lg text-black border px-[10px] py-[12px] w-full outline-none"
+                  className=" rounded-lg text-black border px-2 py-[12px] w-full outline-none"
                   placeholder="Confirm password"
                   type={`${isvisible1 ? "text" : "password"}`}
                   name="confirmPassword"
