@@ -21,7 +21,7 @@ console.log("Cartitems",cartItems)
   }
 
   return (
-    <div className="min-h-[500px]">
+    <div className="min-h-[500px] px-5">
       <h1 className="text-center mt-5 text-4xl mb-2">Your Bag</h1>
       {cartItems && cartItems.length > 0 ? (
         <div className='lg:py-10 flex justify-between lg:flex-row flex-col gap-4'>
@@ -38,9 +38,11 @@ console.log("Cartitems",cartItems)
                     <p><b>Availability: </b> {item.bookStock}</p>
                     <p className="text-red-500 text-2xl">{item.price}</p>
                     <div className='flex items-center my-2'>
-                      <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(decrementQuantity( {id: item._id} ))}>-</button>
+                      <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' 
+                      onClick={() => dispatch(decrementQuantity( {id: item._id} ))}>-</button>
                       <p className='mx-3 text-2xl font-bold'>{item.quantity}</p>
-                      <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' onClick={() => dispatch(incrementQuantity( {id: item._id} )) }>+</button>
+                      <button className='text-3xl px-[10px] border border-black hover:border-slate-200 hover:bg-slate-200' 
+                      onClick={() => dispatch(incrementQuantity( {id: item._id} )) }>+</button>
                     </div>
                     
                     <h2 className=''>Total Amount: {calculateTotalPrice(item)}</h2></div>
@@ -56,7 +58,7 @@ console.log("Cartitems",cartItems)
               {cartItems.map((item, idx) => (
                 <div key={idx}>
                   <div className='flex justify-between items-center text-xl'>
-                    <p>{item.name}</p>
+                    <p className=''>{item.bookName}</p>
                     <p>{calculateTotalPrice(item)}</p>
                   </div>
                  

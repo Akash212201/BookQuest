@@ -7,7 +7,7 @@ const cors=require("cors")
 const {database}=require("./config/database");
 const {cloudinary}=require("./config/cloudinary")
 const user=require("./routes/user")
-const books=require("./routes/books")
+const books=require("./routes/books") 
 
 
 database();
