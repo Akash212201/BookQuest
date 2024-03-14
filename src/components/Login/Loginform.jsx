@@ -39,49 +39,57 @@ const Loginform = () => {
     }
   }
   return (
-    <div className='flex flex-col '>
-
+    <>
       <form onSubmit={submithandler}>
-
-        <div className='flex flex-col items-start gap-4 w-fit'>
-          <label>
-            <p className='text-richblack-900 '>Email <sup>*</sup></p>
-            <input placeholder='Enter Your Email' name='email' className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] pr-40 outline-none" onChange={changehandler} value={formdata.email}></input>
-
-          </label>
-
-          <label>
-            <p className='text-richblack-900 '>Password <sup>*</sup></p>
-            <div className='relative flex-row items-center'>
-              <input placeholder='Enter Password' type={`${isvisible ? "text" : "password"}`} name='password' className="pr-40 rounded-lg text-black bg-[#e2e8f0] px-[20px] py-[12px] w-full outline-none" onChange={changehandler} value={formdata.password}></input>
-              <div className='text-black absolute right-8 flex -translate-y-[30px]' onClick={() => toggle()}>
-                {
-                  isvisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />
-                }
-              </div>
+        <label>
+          <p className='text-richblack-900 '>Email <sup>*</sup></p>
+          <input placeholder='Enter Your Email' name='email' 
+          className="text-black border w-full py-2 px-3 text-lg rounded-xl my-3 outline-none"
+            onChange={changehandler}
+            value={formdata.email}>
+          </input>
+        </label>
+        <label>
+          <p className='text-richblack-900 mt-4'>Password <sup>*</sup></p>
+          <div className='relative flex-row items-center'>
+            <input
+              placeholder='Enter Password'
+              type={`${isvisible ? "text" : "password"}`}
+              name='password'
+              className="text-black border w-full py-2 px-3 text-lg rounded-xl outline-none"
+              onChange={changehandler} value={formdata.password}>
+            </input>
+            <div
+              className='text-black absolute right-8 flex -translate-y-[30px]'
+              onClick={() => toggle()}>
+              {
+                isvisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />
+              }
             </div>
-
-          </label>
-
-          <div className='text-blue-400 translate-x-64 '>
-            <Link to="/forgotpassword">
-              Forgot password
-            </Link>
           </div>
 
-          <button
-            type="submit"
-            className="rounded-[8px] bg-black py-[8px] px-[15px] font-medium text-white text-lg"
-          >
-            Sign In
-          </button>
-        </div>
-      </form>
-      <div className='font-inter  text-pure-greys-400 pt-5'>Don’t have an account?
-        <Link to="/signup"><span className='font-bold text-black pl-2'>Sign up</span></Link>
-      </div>
+        </label>
 
-    </div>
+        <div className='text-[#ff0056]  mt-2 flex justify-end'>
+          <Link to="/forgotpassword">
+            Forgot password
+          </Link>
+        </div>
+
+        <button
+          type="submit"
+          className="rounded bg-[#dbddf9] py-2 px-5 font-bold text-lg"
+        >
+          Sign In
+        </button>
+
+      </form>
+      <div className='font-inter text-pure-greys-400 pt-5'>Don’t have an account?
+        <Link to="/signup">
+          <span className='font-bold pl-2 text-[#ff0056] '>Sign Up Here</span>
+        </Link>
+      </div>
+    </>
 
   )
 }

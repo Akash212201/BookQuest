@@ -8,30 +8,24 @@ const Template = ({ heading, para1, formtype, frame }) => {
   const { loading } = useSelector((state) => state.auth);
   console.log("signupb");
   return (
-    <div>
+    <>
       {
-        loading ? (<div>Loading...</div>) : (
-          <div className="flex lg:flex-row lg:gap-7 flex-col gap-0">
-            {/**left part */}
-            <div className="lg:w-[50%] flex justify-center items-center">
-              <img src={frame} className="lg:h-[550px] h-[400px]" alt="error"></img>
-            </div>
-            {/**right part */}
-            <div className="lg:w-[50%] flex flex-col items-start gap-5 text-[1rem]">
+        loading ? (<div className="my-10 h-[85vh] text-center text-2xl">Loading...</div>) : (
+          <div className="flex justify-center items-center min-h-[80vh] lg:mt-0 mt-14">
+            <div className="bg-white lg:w-[480px] w-[350px] rounded text-[1rem] px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'">
               {/**form type */}
-              <div className="formtemplate px-10 lg:py-16 py-8">
                 <h1 className="text-center text-3xl">{heading}</h1>
-                <p className="text-center">{para1}</p>
+                <p className="text-center mb-6">{para1}</p>
                 {
                   formtype === "signup" ? <Signupform /> : <Loginform />
 
                 }
-              </div>
+              
             </div>
           </div>
         )
       }
-    </div>
+    </>
   );
 };
 
