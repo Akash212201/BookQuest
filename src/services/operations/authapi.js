@@ -7,14 +7,17 @@ const { RESETPASSWORDTOKEN_API, RESETPASSWORD_API, SENDOTP_API, SIGNUP_API, LOGI
 
 export const signup = (firstName, lastName, email, accountType, password, confirmPassword, otp, navigation) => {
     return async (dispatch) => {
-        dispatch(setloading(true));
+       
         console.log("a");
+    
+        
         try {
             console.log("d");
             console.log(firstName);
             console.log(otp);
+            console.log("accounttype",accountType)
 
-            const resp = await apiconnector("POST", SIGNUP_API, { firstName, lastName, email, accountType, password, confirmPassword, otp });
+          const  resp = await apiconnector("POST", SIGNUP_API, { firstName, lastName, email, accountType, password, confirmPassword, otp });
             console.log("b");
             console.log(resp);
             console.log("c");
@@ -26,11 +29,11 @@ export const signup = (firstName, lastName, email, accountType, password, confir
             navigation("/login");
 
         } catch (error) {
-            console.log(error);
-            toast.error("failed to signup");
+            console.log("auth error",error);
+            toast.error(error);
 
         }
-        dispatch(setloading(false));
+      
 
     }
 }
@@ -39,7 +42,7 @@ export const signup = (firstName, lastName, email, accountType, password, confir
 
 export const login = (email, password, navigate) => {
     return async (dispatch) => {
-        dispatch(setloading(true));
+       
         console.log("a");
 
         try {
@@ -63,7 +66,7 @@ export const login = (email, password, navigate) => {
             toast.error("Login failed");
         }
 
-        dispatch(setloading(false));
+       
     }
 }
 
