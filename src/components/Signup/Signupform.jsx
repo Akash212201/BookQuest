@@ -10,12 +10,12 @@ const Signupform = () => {
   const [formdata, setformdata] = useState({
     firstName: "",
     lastName: "",
-    accountType: "", // Remove accountType from the initial state
+    accountType: "", 
     password: "",
     confirmPassword: "",
     email: ""
   });
-  const { firstName, lastName, password, confirmPassword, email } = formdata; // Remove accountType from destructuring
+  const { firstName, lastName, password, confirmPassword, email,accountType } = formdata; 
   const [isvisible, setisvisible] = useState(false);
   const [isvisible1, setisvisible1] = useState(false);
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const Signupform = () => {
 
     // reset the form 
     setformdata({
-      firstName: "", lastName: "", phone: "", password: "", confirmPassword: "", email: "",
+      firstName: "", lastName: "", phone: "", password: "", confirmPassword: "", email: "",accountType:""
     })
 
   }
@@ -115,7 +115,7 @@ const Signupform = () => {
               <p className='text-richblack-900 '>Account Type <sup>*</sup></p>
               <select name='accountType'
                 onChange={changehandler}
-                value={formdata.accountType}
+                value={accountType}
                 className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none">
                 <option value="">Select Account Type</option>
                 <option value="Admin">Admin</option>

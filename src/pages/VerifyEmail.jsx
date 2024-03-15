@@ -37,7 +37,7 @@ const VerifyEmail = () => {
     <div className="template flex justify-center items-center h-[90vh]">
       <div className="py-8 px-10 lg:w-[30%] w-[380px] rounded-xl shadow-[0, 3px ,101px ,rgba(0,0,0,0.10)] bg-white">
         {
-          loading ? (<div>Loading.....</div>) : (<div>
+          <div>
             <form onSubmit={submithandler}>
               <h1 className="text-4xl mt-5 mb-1 text-center">Verify Email</h1>
               <p className="text-base mb-10 text-center">A verification code has been sent to you. Enter the code below</p>
@@ -65,7 +65,7 @@ const VerifyEmail = () => {
                 </Link>
               </div>
               <div>
-                <button onClick={() => sendotp()} className="bg-[#f4f5ff] ml-2 border border-black px-4 py-1 rounded-lg">
+                <button onClick={() => dispatch(sendotp(signupdata.email,navigation))} className="bg-[#f4f5ff] ml-2 border border-black px-4 py-1 rounded-lg">
                   Resend it
                 </button>
               </div>
@@ -73,7 +73,7 @@ const VerifyEmail = () => {
 
 
 
-          </div>)
+          </div>
         }
       </div>
     </div>
