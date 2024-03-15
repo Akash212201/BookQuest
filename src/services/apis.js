@@ -19,6 +19,13 @@ export const contact = {
 }
 
 export const category={
-    HOMEPAGE_BOOKS:BASE_URL+"/user/groupCategory"
+    HOMEPAGE_BOOKS:BASE_URL+"/user/groupCategory",
+
 }
+
+export const books={
+SHOW_ALL_BOOKS:BASE_URL+"/books/showAllBooks",
+SHOW_BOOK_DETAILS:BASE_URL+"/books/showBookDetails"
+}
+
 

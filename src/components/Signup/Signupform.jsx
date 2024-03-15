@@ -35,6 +35,10 @@ const Signupform = () => {
 
   function submithandler(e) {
     e.preventDefault();
+    if(password.length<5){
+      toast.error("Password length at least 5")
+      return ;
+    }
     if (password !== confirmPassword) {
       toast.error("Password not matching");
       return;

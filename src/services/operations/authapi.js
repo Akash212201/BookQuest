@@ -9,12 +9,14 @@ export const signup = (firstName, lastName, email, accountType, password, confir
     return async (dispatch) => {
         dispatch(setloading(true));
         console.log("a");
+        let resp;
+        
         try {
             console.log("d");
             console.log(firstName);
             console.log(otp);
 
-            const resp = await apiconnector("POST", SIGNUP_API, { firstName, lastName, email, accountType, password, confirmPassword, otp });
+            resp = await apiconnector("POST", SIGNUP_API, { firstName, lastName, email, accountType, password, confirmPassword, otp });
             console.log("b");
             console.log(resp);
             console.log("c");
@@ -26,8 +28,8 @@ export const signup = (firstName, lastName, email, accountType, password, confir
             navigation("/login");
 
         } catch (error) {
-            console.log(error);
-            toast.error("failed to signup");
+            console.log("auth error",resp.data.error);
+            toast.error(resp.data.error);
 
         }
         dispatch(setloading(false));
