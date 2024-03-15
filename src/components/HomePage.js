@@ -14,7 +14,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const resp = await groupCategory();
-        console.log("resp", resp.data);
+        console.log("resp1", resp.data);
 
         setcategorybooks(resp.data.categorybooks)
         setlatestbooks(resp.data.mostrecentbooks)

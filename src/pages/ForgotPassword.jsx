@@ -20,7 +20,7 @@ const ForgotPassword = () => {
   }
   return (
     <div className="template flex justify-center items-center h-[85vh]">
-      <div className='w-[380px] lg:w-[450px] rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
+      <div className='w-[350px] lg:w-[450px] rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'>
         {
           emailsent ? <h1 className=' text-center text-3xl font-semibold '>Check Email</h1> : <h1 className='text-center text-3xl font-semibold'>Reset password</h1>
         }

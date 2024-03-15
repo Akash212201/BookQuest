@@ -21,7 +21,7 @@ const SamplePrevArrow = (props) => {
   const { onClick } = props
   return (
     <div className="cursor-pointer" onClick={onClick}>
-      <button className='flex justify-center items-center absolute -top-14 lg:left-[94%] left-[78%] rounded border-[2px] w-[40px] h-[40px] border-[#000]'>
+      <button className='flex justify-center items-center absolute -top-14 lg:left-[94%] left-[76%] rounded border-[2px] w-[40px] h-[40px] border-[#000]'>
         <FaLongArrowAltLeft className="text-3xl text-black"/>
       </button>
     </div>

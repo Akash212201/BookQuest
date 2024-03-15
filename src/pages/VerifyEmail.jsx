@@ -34,8 +34,8 @@ const VerifyEmail = () => {
   }
 
   return (
-    <div className="template flex justify-center items-center h-[90vh]">
-      <div className="py-8 px-10 lg:w-[30%] w-[380px] rounded-xl shadow-[0, 3px ,101px ,rgba(0,0,0,0.10)] bg-white">
+    <div className="template flex justify-center items-center lg:h-[90vh] h-[85vh]">
+      <div className="py-8 px-10 lg:w-[30%] w-[350px] rounded-xl shadow-[0, 3px ,101px ,rgba(0,0,0,0.10)] bg-white">
         {
           <div>
             <form onSubmit={submithandler}>

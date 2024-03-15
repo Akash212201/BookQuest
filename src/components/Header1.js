@@ -32,13 +32,14 @@ const Header1 = () => {
             <div className="flex justify-evenly items-center lg:w-[20vw] w-[30vw] lg:text-xl">
             <Link to="/login">
                 <div className="flex items-center cursor-pointer lg:mr-0 mr-5">
-                    <FiUser className="mr-2" /><p className="lg:block hidden">My Account</p>
+                    <FiUser className="lg:mr-2 text-2xl" />
+                    <p className="lg:block hidden">My Account</p>
                 </div>
                 </Link>
                 <Link to="/cart" >
                         <div className="flex items-center cursor-pointer relative">
-                            <LuShoppingBag className="lg:mr-2 mr-5" />
-                            <span className=' absolute -top-3 right-[2px] text-sm bg-green-500 text-white px-1 rounded-[50%]'>{data.cartItems.length}</span>
+                            <LuShoppingBag className="lg:mr-2 mr-5 text-2xl" />
+                            <span className=' absolute -top-3 lg:right-[2px] right-[7px] text-sm bg-green-500 text-white px-1 rounded-[50%]'>{data.cartItems.length}</span>
                         </div>
                 </Link>
                 <div className="lg:hidden cursor-pointer relative" onClick={() => setSidebar(!showSidebar)} >

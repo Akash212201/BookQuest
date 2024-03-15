@@ -140,7 +140,7 @@ const Signupform = () => {
                   value={password}
                 />
                 <div
-                  className="text-black absolute lg:translate-x-[185px] translate-x-[290px] -translate-y-[30px]"
+                  className="text-black absolute lg:translate-x-[185px] translate-x-[275px] -translate-y-[30px]"
                   onClick={toggle}
                 >
                   {isvisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
@@ -163,7 +163,7 @@ const Signupform = () => {
                   value={confirmPassword}
                 />
                 <div
-                  className="text-black absolute lg:translate-x-[185px] translate-x-[290px] -translate-y-[30px]"
+                  className="text-black absolute lg:translate-x-[185px] translate-x-[275px] -translate-y-[30px]"
                   onClick={toggle1}
                 >
                   {isvisible1 ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}

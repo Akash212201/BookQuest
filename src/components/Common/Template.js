@@ -11,7 +11,7 @@ const Template = ({ heading, para1, formtype, frame }) => {
     <>
       {
  
-          <div className="flex justify-center items-center min-h-[80vh] lg:mt-0 mt-14">
+          <div className="flex justify-center items-center min-h-[80vh] lg:mt-0 lg:mt-14 mt-8">
             <div className="bg-white lg:w-[480px] w-[350px] rounded text-[1rem] px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]'">
               {/**form type */}
                 <h1 className="text-center text-3xl">{heading}</h1>
