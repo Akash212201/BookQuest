@@ -10,12 +10,12 @@ const Signupform = () => {
   const [formdata, setformdata] = useState({
     firstName: "",
     lastName: "",
-    accountType: "",
+    accountType: "", // Remove accountType from the initial state
     password: "",
     confirmPassword: "",
     email: ""
   });
-  const { firstName, lastName, accountType, password, confirmPassword, email } = formdata;
+  const { firstName, lastName, password, confirmPassword, email } = formdata; // Remove accountType from destructuring
   const [isvisible, setisvisible] = useState(false);
   const [isvisible1, setisvisible1] = useState(false);
   const dispatch = useDispatch();
@@ -31,7 +31,6 @@ const Signupform = () => {
       };
     });
   }
-
 
   function submithandler(e) {
     e.preventDefault();
@@ -53,51 +52,44 @@ const Signupform = () => {
 
     // reset the form 
     setformdata({
-      firstName: "", lastName: "", phone: "", password: "", confirmPassword: "", email: "", accountType: "",
+      firstName: "", lastName: "", phone: "", password: "", confirmPassword: "", email: "",
     })
 
   }
+
   function toggle() {
-    if (isvisible) {
-      setisvisible(false);
-    } else {
-      setisvisible(true);
-    }
+    setisvisible(prev => !prev);
   }
 
   function toggle1() {
-    if (isvisible1) {
-      setisvisible1(false);
-    } else {
-      setisvisible1(true);
-    }
+    setisvisible1(prev => !prev);
   }
+
   return (
-    <div className="flex flex-col gap-6 mt-6">
-      {/**button */}
+    <>
       <form onSubmit={submithandler}>
-        <div className="flex flex-row items-center gap-3 w-full mb-3">
-          <div className="w-[50%]">
+        <div className="flex flex-col lg:flex-row items-center gap-3 w-full mb-3">
+          <div className="lg:w-[50%] w-[100%]">
             <label>
               <p className="text-richblack-900 ">
                 First Name <sup>*</sup>
               </p>
               <input
                 placeholder="Enter First Name"
-                className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] w-full outline-none"
+                className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none"
                 name="firstName"
                 onChange={changehandler}
                 value={firstName}
               />
             </label>
           </div>
-          <div className="w-[50%]">
+          <div className="lg:w-[50%] w-[100%]">
             <label>
               <p className="text-richblack-900 ">
                 Last Name <sup>*</sup>
               </p>
               <input
-                className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] w-full outline-none"
+                className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none"
                 placeholder="Enter Last Name"
                 name="lastName"
                 onChange={changehandler}
@@ -106,66 +98,73 @@ const Signupform = () => {
             </label>
           </div>
         </div>
-        <div className="flex flex-row items-center gap-3 w-full mb-3">
-          <div className="w-[50%]">
+        <div className="flex flex-col lg:flex-row items-center gap-3 w-full mb-3">
+          <div className="lg:w-[50%] w-[100%]">
             <label>
               <p className='text-richblack-900 '>Email <sup>*</sup></p>
-              <input type="email" placeholder='Enter Email' name='email' onChange={changehandler} className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] w-full outline-none" value={email}></input>
-
+              <input type="email" placeholder='Enter Email'
+                name='email'
+                onChange={changehandler}
+                className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none"
+                value={email}>
+              </input>
             </label>
           </div>
-          <div className="w-[50%]">
-
+          <div className="lg:w-[50%] w-[100%]">
             <label>
               <p className='text-richblack-900 '>Account Type <sup>*</sup></p>
-              <input type="text" placeholder='Enter Account Type' name='accountType' onChange={changehandler} className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] w-full outline-none" value={accountType}></input>
-
+              <select name='accountType'
+                onChange={changehandler}
+                value={formdata.accountType}
+                className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none">
+                <option value="">Select Account Type</option>
+                <option value="Admin">Admin</option>
+                <option value="Customer">Customer</option>
+              </select>
             </label>
           </div>
         </div>
-        <div className="flex flex-row items-center gap-3 w-full mb-3">
-          <div className="w-[50%]">
+        <div className="flex flex-col lg:flex-row items-center gap-3 w-full mb-3">
+          <div className="lg:w-[50%] w-[100%]">
             <label>
               <p className="text-richblack-900 ">
                 Create Password <sup>*</sup>
               </p>
               <div className="relative">
                 <input
-                  className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] w-full outline-none"
+                  className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none"
                   placeholder="Create Password"
                   type={`${isvisible ? "text" : "password"}`}
                   name="password"
-
                   onChange={changehandler}
                   value={password}
                 />
                 <div
-                  className="text-black absolute translate-x-[196px] -translate-y-[30px]"
-                  onClick={() => toggle()}
+                  className="text-black absolute lg:translate-x-[185px] translate-x-[290px] -translate-y-[30px]"
+                  onClick={toggle}
                 >
                   {isvisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </div>
               </div>
             </label>
           </div>
-          <div className="w-[50%]">
+          <div className="lg:w-[50%] w-[100%]">
             <label>
               <p className="text-richblack-900 ">
                 Confirm Password <sup>*</sup>
               </p>
               <div className="relative">
                 <input
-                  className=" rounded-lg bg-[#e2e8f0] text-black px-[20px] py-[12px] w-full outline-none"
-                  placeholder="Enter confirm password"
+                  className=" rounded-lg text-black border px-2 py-[12px] w-full outline-none"
+                  placeholder="Confirm password"
                   type={`${isvisible1 ? "text" : "password"}`}
                   name="confirmPassword"
-
                   onChange={changehandler}
                   value={confirmPassword}
                 />
                 <div
-                  className="text-black absolute translate-x-[196px] -translate-y-[30px]"
-                  onClick={() => toggle1()}
+                  className="text-black absolute lg:translate-x-[185px] translate-x-[290px] -translate-y-[30px]"
+                  onClick={toggle1}
                 >
                   {isvisible1 ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </div>
@@ -173,20 +172,21 @@ const Signupform = () => {
             </label>
           </div>
         </div>
-        <div className="w-fit items-center">
 
-          <button
-            type="submit"
-            className="mt-6 rounded-[8px] bg-black py-[8px] px-[12px] font-medium text-white"
-          >
-            Create Account
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="rounded bg-[#dbddf9] py-2 px-5 font-bold text-lg"
+        >
+          Create Account
+        </button>
+
         <div className='text-pure-greys-400 pt-5'>Already Register?
-        <Link to="/login"><span className='font-bold text-black pl-2'>Login Here</span></Link>
-      </div>
+          <Link to="/login">
+            <span className='font-bold pl-2 text-[#ff0056] '>Login Here</span>
+          </Link>
+        </div>
       </form>
-    </div>
+    </>
   );
 };
 export default Signupform;

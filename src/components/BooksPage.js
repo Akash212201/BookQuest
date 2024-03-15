@@ -54,7 +54,7 @@ const BooksPage = () => {
         <div className="flex">
             <div className=" w-[20%] bg-red-500 mobile">
             </div>
-            <div className="lg:w-[80%] w-[100%] relative bg-green-400 py-4 px-2">
+            <div className="lg:w-[80%] w-[100%] relative py-4 px-2">
                 <Books books={books} />
             </div>
         </div>
