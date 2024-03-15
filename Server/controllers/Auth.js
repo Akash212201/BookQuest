@@ -7,64 +7,69 @@ const jwt=require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
 const passwordUpdate = require("../Mail/Templates/passwordUpdated");
 
-
+exports.sendOtp= async (req,resp)=>{
+    try{
+            // fetch email from the request body
+            console.log("sendooootp")
+            const {email}=req.body;
+    console.log(email)
+            // check user is already exists
     
-exports.sendOtp = async (req, resp) => {
-  try {
-    // 1. Fetch email from request body
-    console.log("Sending OTP...");
-    const { email } = req.body;
-    console.log(email);
-
-    // 2. Check user existence (optional for signup)
-    const checkUser = await User.findOne({ email: email });
-
-    // 3. Handle existing user (optional)
-    if (checkUser) {
-      // Customize based on your logic:
-      // - Return 409 (Conflict) for signup scenarios
-      // - Allow sending OTP for existing users (e.g., forgot password)
-      return resp.status(402).json({
-        success: false,
-        message: "User already exists", // Or a more specific message
-      });
+           
+            const checkuser=await User.findOne({email:email});
+            //to be used in case of signup
+        
+            // if user already exists then return the response
+            if(checkuser){
+                return resp.status(402).json({
+                    success:false,
+                    message:"user is already exists"
+                })
+            }
+        
+            // generate otp
+            var otp=otpgenerator.generate(6,{
+                upperCaseAlphabets:false,
+                lowerCaseAlphabets:false,
+                specialChars:false
+            });
+        
+            // check unique otp or not
+            
+          // This mechanism seems to ensure that each OTP used is unique within the context of the database.
+            
+          const result=await Otp.findOne({otp:otp});
+            console.log("OTP", otp);
+            console.log("Result", result);
+            while(result){
+                otp=otpgenerator.generate(6,{
+                    upperCaseAlphabets:false,
+                   
+                });
+                
+            }
+           
+               // create entry for otp
+            const otpbody=await Otp.create({email,otp});
+            console.log(otpbody._id);
+        
+            // return response successfull
+            resp.status(200).json({
+                success:true,
+                message:"Otp send successfully",
+                otp
+            })
+           
+    } catch(error){
+      return   resp.status(400).json({
+            success:false,
+            message:"Otp send failed",
+        
+        })       
     }
-
-    // 4. Generate unique OTP
-    var otp;
-    do {
-      otp = otpgenerator.generate(6, {
-        upperCaseAlphabets: false,
-        lowerCaseAlphabets: false,
-        specialChars: false,
-      });
-      const existingOtp = await Otp.findOne({ otp: otp });
-    } while (existingOtp); // Repeat until a unique OTP is found
-
-    console.log("Generated OTP:", otp);
-
-    // 5. Create OTP entry
-    const otpBody = await Otp.create({ email, otp });
-    console.log("Created OTP document:", otpBody._id);
-
-    // 6. Send OTP (integration with your preferred method)
-    // Replace with your actual logic for sending OTP (e.g., email, SMS)
-    console.log(`Sending OTP ${otp} to ${email}...`);
-
-    // 7. Success response
-    return resp.status(200).json({
-      success: true,
-      message: "OTP sent successfully",
-      otp, // Include the generated OTP in the response
-    });
-  } catch (error) {
-    console.error("Error sending OTP:", error);
-    return resp.status(400).json({
-      success: false,
-      message: "OTP send failed",
-    });
-  }
-};
+    
+    }
+    
 
 
     // sign up
