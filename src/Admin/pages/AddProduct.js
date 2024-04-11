@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { addnewbook, getcategories } from '../../services/operations/bookcategory';
+import { useSelector } from "react-redux";
 
 const AddProduct = () => {
   const [bookName, setBookName] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [price, setPrice] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-  const [category, setCategory] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnail1, setThumbnail1] = useState("");
+  const [category, setCategory] = useState(""); // State to store selected category
   const [bookSummary, setBookSummary] = useState("");
-  const [pdf, setpdf] = useState("");
+  const [pdfUrl, setpdf] = useState(null);
+  const [pdfUrl1, setpdf1] = useState("");
+  const [loading, setloading] = useState("");
+  const [category1, setCategory1] = useState([]);
+  const { token } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    async function fetchData() {
+      const resp = await getcategories();
+      console.log(resp.data);
+      setCategory1(resp.data);
+    }
+    fetchData();
+  }, []);
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
 
   const Form = [
     {
@@ -35,22 +55,22 @@ const AddProduct = () => {
       Label: "Book Thumbnail",
       type: "file",
       placeHolder: "",
-      value: thumbnail,
-      onChange: (e) => setThumbnail(e.target.value),
-    },
-    {
-      Label: "Category",
-      type: "text",
-      placeHolder: "Category Here",
-      value: category,
-      onChange: (e) => setCategory(e.target.value),
+      value: thumbnail1,
+      onChange: (e) => {
+        setThumbnail1(e.target.value)
+        setThumbnail(e.target.files[0]);
+      }
     },
     {
       Label: "Book PDF",
       type: "file",
       placeHolder: "Upload Book PDF",
-      value: pdf,
-      onChange: (e) => setpdf(e.target.value),
+      value: pdfUrl1,
+      onChange: (e) => {
+        setpdf1(e.target.value)
+        setpdf(e.target.files[0]);
+        console.log("e.target", e.target.files[0])
+      }
     },
     {
       Label: "Book Summary",
@@ -61,27 +81,36 @@ const AddProduct = () => {
     },
   ];
 
-  //function for sending data to server
-  //update it accordingly
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const data = { bookAuthor, bookName, bookSummary, category, price, thumbnail, pdf };
-    console.log(data);
-    setBookAuthor("");
-    setBookName("");
-    setBookSummary("");
-    setCategory("");
-    setPrice("");
-    setThumbnail("");
-    setpdf("");
-  };
-
   const chunkArray = (arr, chunkSize) => {
     const chunkedArray = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
       chunkedArray.push(arr.slice(i, i + chunkSize));
     }
     return chunkedArray;
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("bookAuthor", bookAuthor);
+    formData.append("bookName", bookName);
+    formData.append("bookSummary", bookSummary);
+    formData.append("category", category); // Use the selected category
+    formData.append("price", price);
+    formData.append("thumbnail", thumbnail);
+    formData.append("pdfUrl", pdfUrl);
+    console.log(formData);
+    setloading(true);
+    const resp = await addnewbook(formData, token);
+    setloading(false);
+    console.log("response", resp);
+    setBookAuthor("");
+    setBookName("");
+    setBookSummary("");
+    setCategory("");
+    setPrice("");
+    setThumbnail1("");
+    setpdf1("");
   };
 
   return (
@@ -102,7 +131,7 @@ const AddProduct = () => {
                         onChange={item.onChange}
                         className="text-lg input outline-none border border-[#7da0fa] text-[#6C7383] rounded px-[10px] py-[8px] w-full mb-1 resize-none"
                       />
-                      ) : (
+                    ) : (
                       <input
                         type={item.type}
                         placeholder={item.placeHolder}
@@ -114,6 +143,17 @@ const AddProduct = () => {
                   }
                 </div>
               ))}
+
+              <select
+                value={category} // Set the value of the select to the selected category
+                onChange={handleCategoryChange} // Handle category change
+                className="form-style w-full"
+              >
+                <option value="">Choose a Category</option>
+                {category1.map((item, index) => (
+                  <option key={index} value={item?._id}>{item?.categoryName}</option>
+                ))}
+              </select>
             </div>
           ))}
           <button type="submit"

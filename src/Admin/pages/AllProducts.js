@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
-import Alldata from './MOCK_DATA.json';
 import { useSortBy, useTable, usePagination } from 'react-table';
+import { showallbooks } from '../../services/operations/bookcategory';
 
 //componet to show all product 
 //some correction are pending
@@ -12,19 +12,19 @@ const Columns = [
     header: 'ID',
   },
   {
-    accessor: 'image',
-    header: 'Book Image',
+    accessor: 'thumbnail', // Make sure this matches the accessor used in the data
+    header: 'BookImage',
   },
   {
     accessor: 'bookName',
     header: 'Book Name',
   },
   {
-    accessor: 'author',
+    accessor: 'bookAuthor',
     header: 'Author',
   },
   {
-    accessor: 'category',
+    accessor: 'categoryName',
     header: 'Category',
   },
   {
@@ -33,23 +33,37 @@ const Columns = [
     editable: true,
   },
   {
-    accessor: 'stock',
+    accessor: 'bookStock',
     header: 'Stock',
-    editable: true,
-  },
-  {
-    accessor: 'status',
-    header: 'Status',
     editable: true,
   },
 ];
 
+
 const AllProducts = () => {
   const columns = useMemo(() => Columns, []);
-  const data = useMemo(() => Alldata, []);
-
+  const [books,setbooks]=useState([]);
   const [editingRows, setEditingRows] = useState({});
   const [dataa, setDataa] =useState();
+  
+  useEffect(() => {
+    async function fetchBooks() {
+      try {
+        const resp = await showallbooks();
+        console.log(resp.data);
+        setbooks(resp.data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+        // Handle error here, e.g., show an error message to the user
+      }
+    }
+    fetchBooks();
+  }, []);
+  
+  const data = useMemo(() => books, [books]);
+
+  
+  console.log("object",data)
   const table = useTable(
     {
       columns,
@@ -140,8 +154,16 @@ const handleEdit = (_id, columnId, value) => {
                 <tr {...row.getRowProps()} className='text-center'>
                   {row.cells.map((cell, index) => (
                     <td key={index} className={` border border-black h-full`}>
-                      {cell.column.accessor === 'image' ? (
-                        <img src={cell.value} alt="Book Image" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                    {
+                    
+                      console.log(cell.column)
+                    }
+                      {
+
+                        cell.column.header === 'BookImage' ? (
+                        <img src={cell.value} alt="BookImage" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+
+                      
                       ) : cell.column.editable && isRowEditing ? (
                         <input
   type="text"

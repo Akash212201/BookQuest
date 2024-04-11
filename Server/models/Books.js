@@ -19,6 +19,7 @@ const bookSchema=new mongoose.Schema({
     },
     bookStock:{
         type:Number,
+        default:1,
         required:true
     },
     adminUser:{
@@ -44,6 +45,7 @@ const bookSchema=new mongoose.Schema({
     }],
     status:{
         type:String,
+        default:"Draft",
         enum:["Draft","Published"]
     },
     createdAt:{

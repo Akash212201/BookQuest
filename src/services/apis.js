@@ -20,12 +20,21 @@ export const contact = {
 
 export const category={
     HOMEPAGE_BOOKS:BASE_URL+"/user/groupCategory",
+    GET_CATEGORY:BASE_URL+"/user/getCategories"
 
 }
 
 export const books={
 SHOW_ALL_BOOKS:BASE_URL+"/books/showAllBooks",
-SHOW_BOOK_DETAILS:BASE_URL+"/books/showBookDetails"
+SHOW_BOOK_DETAILS:BASE_URL+"/books/showBookDetails",
+ADD_NEW_BOOK:BASE_URL+"/books/createBook"
 }
+
+// STUDENTS ENDPOINTS
+export const customerEndpoints = {
+     BOOK_PAYMENT_API: BASE_URL + "/payment/capturePayment",
+    BOOK_VERIFY_API: BASE_URL + "/payment/verifySignature",
+    SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
+  };
 
 

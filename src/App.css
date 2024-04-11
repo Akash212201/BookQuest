@@ -74,3 +74,30 @@ body {
   }    
 }
 
+.admin{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: unset;
+}
+
+.header{
+  box-shadow: 0 5px 21px -5px #c7d0f4;
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.adminsidebar {
+  width: 250px; 
+  transition: transform 0.3s ease; 
+}
+
+.sidebar-hidden {
+  transform: translateX(-100%); 
+}
