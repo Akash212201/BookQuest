@@ -8,6 +8,7 @@ const {database}=require("./config/database");
 const {cloudinary}=require("./config/cloudinary")
 const user=require("./routes/user")
 const books=require("./routes/books") 
+const Payment=require("./routes/Payment") 
 
 
 database();
@@ -22,6 +23,7 @@ app.use(
         credentials:true,
     })
 )
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
     fileupload({
@@ -32,6 +34,7 @@ app.use(
 
 app.use("/api/v1/user",user);
 app.use("/api/v1/books",books);
+app.use("/api/v1/Payment",Payment);
 
 
 app.listen(process.env.PORT,()=>{

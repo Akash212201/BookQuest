@@ -8,6 +8,7 @@ require("dotenv").config();
 exports.createBook = async (req, resp) => {
   try {
     console.log("mark");
+    // console.log("req",req)
 
     const {
       bookName,
@@ -15,14 +16,12 @@ exports.createBook = async (req, resp) => {
       bookSummary,
       price,
       category,
-      status,
-      bookStock,
     } = req.body;
-    console.log(bookName);
-    const thumbnail = req.files.thumbnail;
-    const pdfUrl = req.files.pdfUrl;
-    console.log(thumbnail);
-    console.log(pdfUrl);
+    const {thumbnail, pdfUrl} = req.files;
+
+    console.log("category",category)
+
+    // console.log("pdfurl",pdfUrl);
 
     if (
       !bookName ||
@@ -30,9 +29,9 @@ exports.createBook = async (req, resp) => {
       !bookSummary ||
       !price ||
       !category ||
-      !status ||
+    
       !thumbnail ||
-      !bookStock ||
+    
       !pdfUrl
     ) {
       resp.status(400).json({
@@ -54,8 +53,7 @@ exports.createBook = async (req, resp) => {
       });
     }
 console.log("mark5")
-// console.log( process.env.FOLDER_NAME)
-// console.log(thumbnail)
+console.log(thumbnail)
 
 const thumbnailImage = await imageUploadCloudinary(
   thumbnail,
@@ -65,23 +63,25 @@ const thumbnailImage = await imageUploadCloudinary(
   console.log("mark6")
 
     const PDFURL = await imageUploadCloudinary(pdfUrl, process.env.FOLDER_NAME);
-    console.log(PDFURL);
+    console.log("pdfUrl",PDFURL);
 
     const categorydetail = await Category.findById({ _id: category });
+
+    console.log(categorydetail)
 
     const newbook = await Books.create({
       bookName,
       bookAuthor,
       bookSummary,
       price,
-      thumbnail: thumbnailImage.secure_url,
-      pdfUrl: PDFURL.secure_url,
-      category: categorydetail._id,
-      status,
-      adminUser: adminDetails._id,
-      noOfPages: PDFURL.pages,
-      bookStock,
+      thumbnail: thumbnailImage?.secure_url || '', // Use optional chaining to access secure_url property
+      pdfUrl: PDFURL?.secure_url || '', // Use optional chaining to access secure_url property
+      category: categorydetail?._id || null, // Use optional chaining to access _id property
+      adminUser: adminDetails?._id || null, // Use optional chaining to access _id property
+      noOfPages: PDFURL?.pages || null, // Use optional chaining to access pages property
     });
+    
+    console.log("mark7")
 
     // update User model
     await User.findByIdAndUpdate(
@@ -91,7 +91,7 @@ const thumbnailImage = await imageUploadCloudinary(
     );
 
     //update category model
-    console.log("mark3");
+    console.log("mark8");
     console.log(categorydetail._id);
     await Category.findByIdAndUpdate(
       { _id: categorydetail._id },
@@ -113,38 +113,85 @@ const thumbnailImage = await imageUploadCloudinary(
   }
 };
 
-// show all ebooks
+// // show all ebooks
+// exports.showAllEbooks = async (req, resp) => {
+//   try {
+//     const booksDetails = await Books.find(
+//       {},
+//       {
+//         bookName: true,
+//         bookAuthor: true,
+//         price: true,
+//         thumbnail: true,
+//         pdfUrl: true,
+//         'category.categoryName': true,
+//         customerPurchased: true,
+//         bookSummary: true,
+//         ratingAndReviews: true,
+//         bookStock: true,
+//       }
+//     )
+
+//     const modifiedBooksDetails = booksDetails.map(book => ({
+//       ...book.toObject(),
+//       categoryName: book.category.categoryName
+//     }));
+
+//     console.log(booksDetails);
+//     return resp.status(200).json({
+//       success: true,
+//       message: "all the ebooks fetched successfully",
+//       data: modifiedBooksDetails,
+//     });
+//   } catch (error) {
+//     resp.status(400).json({
+//       success: false,
+//       message: "error occured",
+//     });
+//   }
+// };
+
+// const Books = require('../models/Books'); // Import the Books model
+
 exports.showAllEbooks = async (req, resp) => {
   try {
-    const booksDetails = await Books.find(
-      {},
-      {
-        bookName: true,
-        bookAuthor: true,
-        price: true,
-        thumbnail: true,
-        pdfUrl: true,
-        category: true,
-        customerPurchased: true,
-        bookSummary: true,
-        ratingAndReviews: true,
-        bookStock: true,
-      }
-    );
+    // Fetch all books and populate the 'category' field to get categoryName
+    const booksDetails = await Books.find({}, '-__v')
+      .populate('category', 'categoryName');
 
-    console.log(booksDetails);
+    // Format the response to include categoryName directly in each book object
+    const formattedBooksDetails = booksDetails.map((book,index) => ({
+      id:index+1,
+
+      _id: book._id,
+      bookName: book.bookName,
+      bookAuthor: book.bookAuthor,
+      bookSummary: book.bookSummary,
+      price: book.price,
+      bookStock: book.bookStock,
+      ratingAndReviews: book.ratingAndReviews,
+      thumbnail: book.thumbnail,
+      categoryName: book.category ? book.category.categoryName : '', // Check if category exists
+      customerPurchased: book.customerPurchased,
+      pdfUrl: book.pdfUrl
+    }));
+
+    console.log(formattedBooksDetails);
+
     return resp.status(200).json({
       success: true,
-      message: "all the ebooks fetched successfully",
-      data: booksDetails,
+      message: "All ebooks fetched successfully",
+      data: formattedBooksDetails,
     });
   } catch (error) {
-    resp.status(400).json({
+    console.error("Error fetching ebooks:", error);
+    return resp.status(400).json({
       success: false,
-      message: "error occured",
+      message: "An error occurred while fetching ebooks",
     });
   }
 };
+
 
 exports.showBookInformation = async (req, resp) => {
   try {

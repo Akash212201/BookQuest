@@ -47,7 +47,7 @@ exports.getCategories=async (req,resp)=>{
         return resp.status(200).json({
             success: true,
             message: "category fetched successfully",
-            categories
+            data:categories
           });
 
     }catch(error){
