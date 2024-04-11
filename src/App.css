@@ -78,6 +78,11 @@ body {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: unset;
+  gap: 20px;
+}
+.hideSidebar{
+display: block;
+padding-inline: 30px;
 }
 
 .header{

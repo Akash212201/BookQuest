@@ -114,7 +114,7 @@ const AddProduct = () => {
   };
 
   return (
-    <>
+    <div>
       <h1 className='font-semibold text-2xl'>Add New Book</h1>
       <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
         <form action="" onSubmit={submitHandler}>
@@ -162,7 +162,7 @@ const AddProduct = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

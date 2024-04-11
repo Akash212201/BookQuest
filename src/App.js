@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,12 +17,16 @@ import ForgotPassword from './pages/ForgotPassword';
 import UpdatePassword from './pages/UpdatePassword';
 import VerifyEmail from './pages/VerifyEmail';
 import { useLocation } from 'react-router-dom';
+//admin
+import AdminNavbar from './Admin/components/AdminNavbar' 
+import AdminSidebar from './Admin/components/AdminSidebar' 
 import './App.css';
-const Dashboard = React.lazy(() => import('./Admin/pages/Dashboard'));
-const Products = React.lazy(() => import('./Admin/pages/AllProducts'));
-const AddProduct = React.lazy(() => import('./Admin/pages/AddProduct'));
-const AddCategory = React.lazy(() => import('./Admin/pages/AddCategory'));
-const Categories = React.lazy(() => import('./Admin/pages/Categories'));
+import Dashboard from './Admin/pages/Dashboard';
+import Products from './Admin/pages/AllProducts';
+import AddProduct from './Admin/pages/AddProduct';
+import AddCategory from './Admin/pages/AddCategory';
+import Categories from './Admin/pages/Categories';
+import ShippingInfo from './pages/ShippingInfo';
 
 
 const App = () => {
@@ -33,16 +37,23 @@ const user1=JSON.parse(user);
 console.log("app",user1?.accountType)
 const isDashboard = location.pathname.includes('/dashboard');
 
+const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const toggleSidebar = () => {
+    console.log("first4")
+    setSidebarOpen(!sidebarOpen);
+  }; 
   return (
     <div>
      {
-     !isDashboard &&
-      <Header1 />
+     !isDashboard ? (<div><Header1 /><Header /></div>): <div><AdminNavbar toggleSidebar={toggleSidebar}/></div>
      }
 
-     <Header />
-      <div className="">
+     <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hideSidebar' : 'admin'}` : ''}`}>
+      
+      {
+     isDashboard ? <AdminSidebar sidebarOpen={sidebarOpen}/> : <div></div>
+     }
       <Suspense fallback={<div>Loading...</div>}></Suspense>
         <Routes>
           <Route path='/' element={<HomePage />} />
@@ -55,13 +66,14 @@ const isDashboard = location.pathname.includes('/dashboard');
           <Route path='/books' element={<BooksPage />} />
           <Route path='/bookinfo/:id' element={<BookInfo />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/shippingInfo' element={<ShippingInfo />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
           <Route path="/update-password/:id" element={<UpdatePassword />}></Route>
           <Route path="/verify-email" element={<VerifyEmail />}></Route>
 
-          // Dashboard Routes
+           {/* Dashboard Routes */}
           <Route path='/admin/dashboard' element={<Dashboard />} />
           <Route path='/admin/dashboard/addproduct' element={<AddProduct />} />
           <Route path='/admin/dashboard/products' element={<Products />} />

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { decrementQuantity, incrementQuantity, removeFromCart } from '../Slices/cartSlice';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,9 @@ console.log("Cartitems",cartItems)
               ))}
               <span className='block border border-[#333] w-full mt-5 mb-2'></span>
               <div className='flex justify-between items-center text-xl font-bold'><p>Total Amount</p> {calculateTotalAmount()}</div>
+              <Link to="/shippingInfo">
               <button className='text-white bg-green-400 hover:bg-green-500 w-full py-3 text-lg rounded mt-6'>CheckOut</button>
+              </Link>
             </div>
           </div>
         </div>
