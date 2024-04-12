@@ -6,6 +6,7 @@ const AdminSidebar = ({ sidebarOpen }) => {
   const [productMenuOpen, setProductMenuOpen] = useState(false);
   const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
   const [orderMenuOpen, setOrderMenuOpen] = useState(false);
+  const [usersMenuOpen, setUsersMenuOpen] = useState(false); 
 
   return (
     <div className={`bg-white w-full z-10 overflow-y-hidden ${sidebarOpen ? 'hidden' : ''} `}>
@@ -70,9 +71,23 @@ const AdminSidebar = ({ sidebarOpen }) => {
             )
           }
         </li>
-        <li className='rounded-lg my-[0.5rem] px-4 py-2 cursor-pointer'
-          onClick={() => setCategoryMenuOpen(!categoryMenuOpen)}>
-          <Link to="#!">Users</Link>
+        <li className='rounded-lg my-[0.5rem] px-4 py-2 cursor-pointer nav-item'
+          onClick={() => setUsersMenuOpen(!usersMenuOpen)}>
+          <div className='flex items-center justify-between'>Users
+            {usersMenuOpen? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
+          </div>
+          {
+            usersMenuOpen && (
+              <ul className='mt-[0.5rem]'> 
+                <li className='rounded-lg my-[0.5rem] px-4 py-2'>
+                  <Link to="/admin/dashboard/authors">Authors</Link>
+                </li>
+                <li className='rounded-lg my-[0.5rem] px-4 py-2'>
+                  <Link to="/admin/dashboard/allusers">Users</Link>
+                </li>
+              </ul>
+            )
+          }
         </li>
       </ul>
     </div>
