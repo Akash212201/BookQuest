@@ -32,8 +32,10 @@ import ShippingInfo from './pages/ShippingInfo';
 const App = () => {
   const location = useLocation();
 const user=localStorage.getItem("user");
+const token = localStorage.getItem('token');
 console.log("app.js",user)
 const user1=JSON.parse(user);
+
 console.log("app",user1?.accountType)
 const isDashboard = location.pathname.includes('/dashboard');
 

@@ -59,7 +59,7 @@ export const login = (email, password, navigate) => {
 
             toast.success("Login Successfully")
 
-            navigate("/home");
+            navigate("/");
 
         } catch (error) {
             console.log(error);
@@ -147,10 +147,9 @@ export const getresetpassword = (password, confirmPassword, token) => {
 
 export function logout(navigate) {
     return (dispatch) => {
-        dispatch(settoken(null));
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        navigate("/home");
+        navigate("/");
         toast.success("Logged Out");
     };
 }

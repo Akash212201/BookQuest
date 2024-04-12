@@ -7,7 +7,7 @@ const ShippingInfo = () => {
   const [email, setEmail] = useState("")
   const [mobile, setMobile] = useState("")
   const [street, setStreet] = useState("")
-  const [zipCode, setZipCode] = useState("")
+  const [pinCode, setpinCode] = useState("")
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
   const [country, setCountry] = useState("")
@@ -18,7 +18,7 @@ const ShippingInfo = () => {
       email: email,
       mobile: mobile,
       street: street,
-      zipCode: zipCode,
+      pinCode: pinCode,
       city: city,
       state: state,
       country: country,
@@ -28,7 +28,7 @@ const ShippingInfo = () => {
     setEmail("");
     setMobile("");
     setStreet("");
-    setZipCode("");
+    setpinCode("");
     setCity("");
     setState("");
     setCountry("");
@@ -74,8 +74,8 @@ const ShippingInfo = () => {
             <input type="text"
               placeholder='Zip Code'
               className='lg:w-[50%] w-full px-2 py-2 rounded outline-none mb-2 border'
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)} />
+              value={pinCode}
+              onChange={(e) => setpinCode(e.target.value)} />
             <input type="text"
               placeholder='City'
               className='lg:w-[50%] w-full px-2 py-2 rounded outline-none mb-2 border'
