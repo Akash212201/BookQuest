@@ -6,6 +6,7 @@ const AddProduct = () => {
   const [bookName, setBookName] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [price, setPrice] = useState("");
+  const [bookStock, setbookStock] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnail1, setThumbnail1] = useState("");
   const [category, setCategory] = useState(""); // State to store selected category
@@ -50,6 +51,13 @@ const AddProduct = () => {
       placeHolder: "Book Value",
       value: price,
       onChange: (e) => setPrice(e.target.value),
+    },
+    {
+      Label: "Book Stock",
+      type: "number",
+      placeHolder: "Book Stock Value",
+      value: bookStock,
+      onChange: (e) => setbookStock(e.target.value),
     },
     {
       Label: "Book Thumbnail",
@@ -97,6 +105,7 @@ const AddProduct = () => {
     formData.append("bookSummary", bookSummary);
     formData.append("category", category); // Use the selected category
     formData.append("price", price);
+    formData.append("bookStock", bookStock);
     formData.append("thumbnail", thumbnail);
     formData.append("pdfUrl", pdfUrl);
     console.log(formData);
@@ -111,6 +120,7 @@ const AddProduct = () => {
     setPrice("");
     setThumbnail1("");
     setpdf1("");
+    setbookStock("")
   };
 
   return (
@@ -144,18 +154,20 @@ const AddProduct = () => {
                 </div>
               ))}
 
-              <select
-                value={category} // Set the value of the select to the selected category
-                onChange={handleCategoryChange} // Handle category change
-                className="form-style w-full"
-              >
-                <option value="">Choose a Category</option>
-                {category1.map((item, index) => (
-                  <option key={index} value={item?._id}>{item?.categoryName}</option>
-                ))}
-              </select>
+           
             </div>
+            
           ))}
+          <select
+          value={category} // Set the value of the select to the selected category
+          onChange={handleCategoryChange} // Handle category change
+          className="lg:w-1/2 w-full pr-2 mb-2 text-lg input outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] "
+        >
+          <option value="">Choose a Category</option>
+          {category1.map((item, index) => (
+            <option key={index} value={item?._id}>{item?.categoryName}</option>
+          ))}
+        </select>
           <button type="submit"
             className="block px-[1.75rem] py-2 rounded-lg bg-[#7DA0FA] hover:bg-[#7978E9] text-white text-xl">
             Add Book

@@ -1,18 +1,31 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { Link ,useNavigate} from 'react-router-dom';
+import { useSelector ,useDispatch} from 'react-redux';
 import { LuShoppingBag } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
 import Search from './Search';
 import Sidebar from './Sidebar'
+import { logout } from '../services/operations/authapi';
 
 const Header1 = () => {
-    //temp user and id
-    const user = { _id: "123", role: "admin" };
+ 
+ 
+    const navigate=useNavigate();
     const [showSidebar, setSidebar] = useState(false);
     const data = useSelector((state) => state.cart)
+    // const {token}=useSelector((state)=> state.auth);
+
+    const token = localStorage.getItem('token');
+    console.log(token)
     console.log("data", data)
+    const dispatch = useDispatch()
+    
+
+    function logouthandler(){
+        dispatch(logout(navigate));
+    }
+
 
     const hideSidebar = () => {
         setSidebar(false);
@@ -35,26 +48,34 @@ const Header1 = () => {
 
                 <div className="flex justify-between items-center lg:w-[15vw] w-[30vw] lg:text-3xl">
                     {
-                        user?._id ? (
+                     
                             <div className="flex items-center cursor-pointer lg:mr-0 mr-5 relative">
                                 <FiUser className="mr-2 " />
                                 <div className=' absolute z-10 top-9 -left-8 bg-[#f0f4f9] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
                                     <div className='text-lg px-2 text-center'>
-                                        <Link to="/admin/dashboard">DashBoard</Link>
+                                    {
+                                        token && <Link to="/admin/dashboard">DashBoard</Link>
+                                    }
                                     </div>
-                                    <div className='text-lg px-2 text-center'>Logout</div>
+                                    {
+                                       token &&  <div className='text-lg px-2 text-center' onClick={logouthandler}>Logout</div>
+                                       
+                                    }
+                                    {
+                                        !token &&    <Link to="/login">
+                                        <div className="text-lg px-2 text-center">
+                                           Login
+                                        </div>
+                                    </Link>
+                                    }
                                 </div>
                                 {/* User is available*/}
                             </div>
 
 
-                        ) : (
-                            <Link to="/login">
-                                <div className="flex items-center cursor-pointer lg:mr-0 mr-5">
-                                    <FiUser className="mr-2" />
-                                </div>
-                            </Link>
-                        )
+                     
+                        
+                     
                     }
                     <Link to="/cart" >
                         <div className="flex items-center cursor-pointer relative">
