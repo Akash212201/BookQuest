@@ -1,27 +1,31 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom'
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import Alldata from '../pages/MOCK_DATA.json';
 
 import { useSortBy, useTable, usePagination } from 'react-table';
 
 const Columns = [
   {
-    accessor: 'price',
-    header: 'No',
+    accessor: 'bookName',
+    header: 'Book',
   },
   {
-    accessor: 'bookName',
-    header: 'Category',
+    accessor: 'price',
+    header: 'Tracking ID',
+  },
+  {
+    accessor: 'stock',
+    header: 'Date',
   },
   
   {
-    accessor: 'stock',
-    header: 'Description',
+    accessor: 'status',
+    header: 'Status',
+    editable: true,
   },
 ];
-const Categories = () => {
+
+const AllProducts = () => {
   const columns = useMemo(() => Columns, []);
   const data = useMemo(() => Alldata, []);
 
@@ -60,14 +64,17 @@ const Categories = () => {
       setInputPage("");
     }
   };
+
+
+
+
+
+
   return (
-    <div className='me-6 my-8 bg-white p-6 rounded shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
-      <div className='flex justify-between items-center'>
-      <h1 className='text-2xl font-semibold tracking-wide'>Category Lists </h1>
-        <Link to="/admin/dashboard/addcategory" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Category</Link>
-      </div>
-        <table {...getTableProps()} className='border border-black w-full mt-8'>
-          <thead className='w-full border border-black'>
+    <div className='pb-6'>
+      <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
+        <table {...getTableProps()} className='border border-red-500 w-full'>
+          <thead className='w-full border border-red-900'>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()} className='text-center '>
                 {headerGroup.headers.map((column) => (
@@ -89,16 +96,16 @@ const Categories = () => {
                     </div>
                   </th>
                 ))}
-                <th>Action</th>
+                <th>Edit/Update</th>
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()} className='w-full '>
+          <tbody {...getTableBodyProps()} className='w-full border border-red-900'>
             {page.map((row, rowIndex) => {
               prepareRow(row);
               
               return (
-                <tr {...row.getRowProps()} className='mt-1 text-center border border-black'>
+                <tr {...row.getRowProps()} className='text-center'>
                   {row.cells.map((cell, index) => (
                     <td key={index} className={` border border-black h-full`}>
                       {
@@ -106,17 +113,20 @@ const Categories = () => {
                       } 
                     </td>
                   ))}
-                  <td>
-                  <div className='flex justify-center items-center my-2'>
-                  <RiDeleteBin6Line className='text-lg cursor-pointer hover:text-red-600'/>
-                  </div>
+                  <td className=''>
+                    
+                      <button
+                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
+                        Details
+                      </button>
+                    
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-      
+      </div>
       <div className="flex justify-between items-center mt-4">
         <div>
           <label htmlFor="pageSize">Results per page: </label>
@@ -165,8 +175,8 @@ const Categories = () => {
           </button>
         </div>
       </div>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Categories
+export default AllProducts;

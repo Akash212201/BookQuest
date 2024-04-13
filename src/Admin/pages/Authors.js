@@ -12,8 +12,13 @@ const Columns = [
     header: 'No',
   },
   {
+    accessor: 'thumbnail',
+    header: 'Profile',
+  },
+  {
     accessor: 'bookName',
-    header: 'Category',
+    header: 'Name',
+    canSort: true,
   },
   
   {
@@ -21,7 +26,7 @@ const Columns = [
     header: 'Description',
   },
 ];
-const Categories = () => {
+const Authors = () => {
   const columns = useMemo(() => Columns, []);
   const data = useMemo(() => Alldata, []);
 
@@ -63,8 +68,8 @@ const Categories = () => {
   return (
     <div className='me-6 my-8 bg-white p-6 rounded shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
       <div className='flex justify-between items-center'>
-      <h1 className='text-2xl font-semibold tracking-wide'>Category Lists </h1>
-        <Link to="/admin/dashboard/addcategory" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Category</Link>
+      <h1 className='text-2xl font-semibold tracking-wide'>Authors List </h1>
+        <Link to="/admin/dashboard/addcategory" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Author</Link>
       </div>
         <table {...getTableProps()} className='border border-black w-full mt-8'>
           <thead className='w-full border border-black'>
@@ -102,11 +107,14 @@ const Categories = () => {
                   {row.cells.map((cell, index) => (
                     <td key={index} className={` border border-black h-full`}>
                       {
+                      cell.column.accessor === 'Book Image' ? (
+                        <img src={cell.value} alt="BookImage" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                      ) : (
                         cell.render('Cell')
-                      } 
+                      )}
                     </td>
                   ))}
-                  <td>
+                  <td className=''>
                   <div className='flex justify-center items-center my-2'>
                   <RiDeleteBin6Line className='text-lg cursor-pointer hover:text-red-600'/>
                   </div>
@@ -169,4 +177,4 @@ const Categories = () => {
   )
 }
 
-export default Categories
+export default Authors
