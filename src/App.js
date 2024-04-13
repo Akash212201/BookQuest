@@ -27,6 +27,8 @@ import AddProduct from './Admin/pages/AddProduct';
 import AddCategory from './Admin/pages/AddCategory';
 import Categories from './Admin/pages/Categories';
 import ShippingInfo from './pages/ShippingInfo';
+import Authors from './Admin/pages/Authors';
+import AllUser from './Admin/pages/AllUser';
 
 
 const App = () => {
@@ -81,6 +83,8 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
           <Route path='/admin/dashboard/products' element={<Products />} />
           <Route path='/admin/dashboard/addcategory' element={<AddCategory />} />
           <Route path='/admin/dashboard/categories' element={<Categories />} />
+          <Route path='/admin/dashboard/authors' element={<Authors />} />
+          <Route path='/admin/dashboard/allusers' element={<AllUser />} />
         </Routes>
       </div>
     {
