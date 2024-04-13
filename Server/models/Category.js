@@ -7,6 +7,7 @@ const categorySchema=new mongoose.Schema({
     },
     categoryDesc:{
         type:String,
+     
     },
     eBooks:[{
         type:mongoose.Schema.Types.ObjectId,
