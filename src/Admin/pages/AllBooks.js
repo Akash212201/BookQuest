@@ -40,7 +40,7 @@ const Columns = [
 ];
 
 
-const AllProducts = () => {
+const AllBooks = () => {
   const columns = useMemo(() => Columns, []);
   const [books,setbooks]=useState([]);
   const [editingRows, setEditingRows] = useState({});
@@ -116,8 +116,8 @@ const handleEdit = (_id, columnId, value) => {
   };
 
   return (
-    <div>
-      <h1 className='font-semibold text-2xl'>Products</h1>
+    <div className='me-6 my-3 p-6 '>
+      <h1 className='text-2xl font-semibold tracking-wide'>Products</h1>
       <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
         <table {...getTableProps()} className='border border-red-500 w-full'>
           <thead className='w-full border border-red-900'>
@@ -248,4 +248,4 @@ const handleEdit = (_id, columnId, value) => {
   );
 };
 
-export default AllProducts;
+export default AllBooks;

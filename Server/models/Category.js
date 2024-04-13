@@ -5,6 +5,9 @@ const categorySchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    categoryDesc:{
+        type:String,
+    },
     eBooks:[{
         type:mongoose.Schema.Types.ObjectId,
         required:true,

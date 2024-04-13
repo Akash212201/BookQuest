@@ -22,11 +22,14 @@ import AdminNavbar from './Admin/components/AdminNavbar'
 import AdminSidebar from './Admin/components/AdminSidebar' 
 import './App.css';
 import Dashboard from './Admin/pages/Dashboard';
-import Products from './Admin/pages/AllProducts';
-import AddProduct from './Admin/pages/AddProduct';
+import AllBooks from './Admin/pages/AllBooks';
+import AddBook from './Admin/pages/AddBook';
 import AddCategory from './Admin/pages/AddCategory';
 import Categories from './Admin/pages/Categories';
-import ShippingInfo from './pages/ShippingInfo';
+import Authors from './Admin/pages/Authors';
+import AllUser from './Admin/pages/AllUser';
+import NewOrders from './Admin/pages/NewOrders';
+import AllOrders from './Admin/pages/AllOrders';
 
 
 const App = () => {
@@ -68,7 +71,6 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
           <Route path='/books' element={<BooksPage />} />
           <Route path='/bookinfo/:id' element={<BookInfo />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/shippingInfo' element={<ShippingInfo />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
@@ -77,10 +79,14 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
 
            {/* Dashboard Routes */}
           <Route path='/admin/dashboard' element={<Dashboard />} />
-          <Route path='/admin/dashboard/addproduct' element={<AddProduct />} />
-          <Route path='/admin/dashboard/products' element={<Products />} />
+          <Route path='/admin/dashboard/addbook' element={<AddBook />} />
+          <Route path='/admin/dashboard/books' element={<AllBooks />} />
           <Route path='/admin/dashboard/addcategory' element={<AddCategory />} />
           <Route path='/admin/dashboard/categories' element={<Categories />} />
+          <Route path='/admin/dashboard/new-orders' element={<NewOrders />} />
+          <Route path='/admin/dashboard/orders' element={<AllOrders />} />
+          <Route path='/admin/dashboard/authors' element={<Authors />} />
+          <Route path='/admin/dashboard/allusers' element={<AllUser />} />
         </Routes>
       </div>
     {

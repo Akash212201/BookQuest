@@ -4,16 +4,23 @@ const Books = require("../models/Books");
 
 exports.createCategory = async (req, resp) => {
   try {
-    const { categoryName } = req.body;
+    const { categoryName,categoryDesc } = req.body;
 
     if (!categoryName) {
-      resp.status(400).json({
+      return resp.status(400).json({
         success: false,
         message: "not found category name",
       });
     }
+    const existCategory = await Category.findOne({ categoryName });
+    if (!existCategory) {
+      return resp.status(400).json({
+        success: false,
+        message: "category is already exist",
+      });
+    }
 
-    const categorydetails = await Category.create({ categoryName });
+    const categorydetails = await Category.create({ categoryName,categoryDesc });
     console.log(categorydetails);
 
     return resp.status(200).json({

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { addnewbook, getcategories } from '../../services/operations/bookcategory';
 import { useSelector } from "react-redux";
 
-const AddProduct = () => {
+const AddBook = () => {
   const [bookName, setBookName] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [price, setPrice] = useState("");
@@ -19,9 +19,14 @@ const AddProduct = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const resp = await getcategories();
+      try {
+        const resp = await getcategories();
       console.log(resp.data);
       setCategory1(resp.data);
+      } catch (error) {
+        console.log(error)
+      }
+      
     }
     fetchData();
   }, []);
@@ -124,8 +129,8 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
-      <h1 className='font-semibold text-2xl'>Add New Book</h1>
+    <div className='lg:me-6 me-2 my-3 p-6 '>
+      <h1 className='text-2xl font-semibold tracking-wide'>Add New Book</h1>
       <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
         <form action="" onSubmit={submitHandler}>
           {chunkArray(Form, 2).map((row, rowIndex) => (
@@ -139,7 +144,7 @@ const AddProduct = () => {
                         placeholder={item.placeHolder}
                         value={item.value}
                         onChange={item.onChange}
-                        className="text-lg input outline-none border border-[#7da0fa] text-[#6C7383] rounded px-[10px] py-[8px] w-full mb-1 resize-none"
+                        className="text-lg outline-none border border-[#7da0fa] text-[#6C7383] rounded px-[10px] py-[8px] w-full mb-1 resize-none"
                       />
                     ) : (
                       <input
@@ -147,7 +152,7 @@ const AddProduct = () => {
                         placeholder={item.placeHolder}
                         value={item.value}
                         onChange={item.onChange}
-                        className="text-lg input outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] w-full mb-1"
+                        className="text-lg outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] w-full mb-1"
                       />
                     )
                   }
@@ -161,7 +166,7 @@ const AddProduct = () => {
           <select
           value={category} // Set the value of the select to the selected category
           onChange={handleCategoryChange} // Handle category change
-          className="lg:w-1/2 w-full pr-2 mb-2 text-lg input outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] "
+          className="lg:w-1/2 w-full pr-2 mb-2 text-lg outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] "
         >
           <option value="">Choose a Category</option>
           {category1.map((item, index) => (
@@ -178,4 +183,4 @@ const AddProduct = () => {
   );
 }
 
-export default AddProduct;
+export default AddBook;

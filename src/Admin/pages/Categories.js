@@ -61,11 +61,12 @@ const Categories = () => {
     }
   };
   return (
-    <div className='me-6 my-8 bg-white p-6 rounded shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
+    <div className='me-6 my-3 p-6 '>
       <div className='flex justify-between items-center'>
       <h1 className='text-2xl font-semibold tracking-wide'>Category Lists </h1>
         <Link to="/admin/dashboard/addcategory" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Category</Link>
       </div>
+      <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
         <table {...getTableProps()} className='border border-black w-full mt-8'>
           <thead className='w-full border border-black'>
             {headerGroups.map((headerGroup) => (
@@ -116,7 +117,7 @@ const Categories = () => {
             })}
           </tbody>
         </table>
-      
+        </div>
       <div className="flex justify-between items-center mt-4">
         <div>
           <label htmlFor="pageSize">Results per page: </label>

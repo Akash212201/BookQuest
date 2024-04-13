@@ -23,10 +23,10 @@ const AdminSidebar = ({ sidebarOpen }) => {
             productMenuOpen && (
               <ul className='mt-[0.5rem]'>
                 <li className='rounded-lg my-[0.2rem] px-4 py-2'>
-                  <Link to="/admin/dashboard/addproduct">Add New Book</Link>
+                  <Link to="/admin/dashboard/addbook">Add New Book</Link>
                 </li>
                 <li className='rounded-lg my-[0.2rem] px-4 py-2'>
-                  <Link to="/admin/dashboard/products">View All Books</Link>
+                  <Link to="/admin/dashboard/books">View All Books</Link>
                 </li>
               </ul>
             )
@@ -62,10 +62,10 @@ const AdminSidebar = ({ sidebarOpen }) => {
             orderMenuOpen && (
               <ul className='mt-[0.5rem]'>
                 <li className='rounded-lg my-[0.5rem] px-4 py-2'>
-                  <Link to="/new-orders">New Orders</Link>
+                  <Link to="/admin/dashboard/new-orders">New Orders</Link>
                 </li>
                 <li className='rounded-lg my-[0.5rem] px-4 py-2'>
-                  <Link to="#!">Previous Orders</Link>
+                  <Link to="/admin/dashboard/orders">Previous Orders</Link>
                 </li>
               </ul>
             )
