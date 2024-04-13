@@ -68,7 +68,7 @@ console.log("Cartitems",cartItems)
               ))}
               <span className='block border border-[#333] w-full mt-5 mb-2'></span>
               <div className='flex justify-between items-center text-xl font-bold'><p>Total Amount</p> {calculateTotalAmount()}</div>
-              <Link to="/shippingInfo">
+              <Link to="/payment-gateway-link">
               <button className='text-white bg-green-400 hover:bg-green-500 w-full py-3 text-lg rounded mt-6'>CheckOut</button>
               </Link>
             </div>

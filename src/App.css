@@ -19,10 +19,7 @@ body {
     width: 320px;
     height: 250px;
   }
-  .input{
-    border: 1px solid yellow;
-    display: none;
-  }
+  
   .mobile{
     display: none;
   }
@@ -78,7 +75,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: unset;
-  gap: 20px;
+  gap: 5px;
 }
 .hideSidebar{
 display: block;
@@ -89,7 +86,6 @@ padding-inline: 30px;
   box-shadow: 0 5px 21px -5px #c7d0f4;
   background-color: white;
   color: black;
-  display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;

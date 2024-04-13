@@ -3,10 +3,12 @@ import { IoIosMenu, IoIosSearch } from "react-icons/io";
 
 const AdminNavbar = ({ toggleSidebar }) => {
   return (
-    <div className="header">
-      <div className='px-[2.375rem] text-2xl w-[20%]'>Logo Here</div>
-      <div className='flex items-center text-[#6C7383] px-[2.375rem] py-1 w-[80%]'>
-        <IoIosMenu className='text-[1.25rem] cursor-pointer mr-2' onClick={toggleSidebar} />
+    <div className="header lg:flex">
+      <div className='lg:px-[2.375rem] px-[0.75rem] w-[25%] flex justify-between items-center'>
+        <h1 className='text-2xl'>BookQuest</h1>
+       <IoIosMenu className='z-10 text-[1.25rem] cursor-pointer mr-2 border border-black' onClick={toggleSidebar} />
+      </div>
+      <div className='flex items-center text-[#6C7383] px-[2.375rem] py-1 lg:w-[80%] w-[60%] border border-green-500'>
         <div className='flex justify-between items-center w-full'>
           
           <div className='flex items-center w-[300px] p-[0.5rem] ml-10'>

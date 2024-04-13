@@ -8,7 +8,7 @@ import DashBoardItems from '../components/DashBoardItems'
 
 const Dashboard = () => {
   return (
-    <div className="mt-6 me-6">
+    <div className="mt-6 mx-6">
       <DashBoardItems />
 
       <div className="flex justify-evenly items-center gap-4 mt-6">

@@ -12,14 +12,13 @@ exports.createCategory = async (req, resp) => {
         message: "not found category name",
       });
     }
-    const existcategroy=await Category.findOne({categoryName})
-    if (existcategroy) {
+    const existCategory = await Category.findOne({ categoryName });
+    if (!existCategory) {
       return resp.status(400).json({
         success: false,
         message: "category is already exist",
       });
     }
-
 
     const categorydetails = await Category.create({ categoryName,categoryDesc });
     console.log(categorydetails);
