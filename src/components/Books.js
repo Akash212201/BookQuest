@@ -1,4 +1,5 @@
 import React from 'react';
+import BookCard2 from './BookCard2';
 import BookCard from './BookCard';
 
 const Books = ({ books }) => {

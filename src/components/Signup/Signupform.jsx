@@ -32,8 +32,12 @@ const Signupform = () => {
     });
   }
 
-  function submithandler(e) {
+  const submithandler = (e) =>{
     e.preventDefault();
+    if(!email){
+      toast.error("Email cannot be blank");
+      return;
+    }
     if(password.length<5){
       toast.error("Password length at least 5")
       return ;

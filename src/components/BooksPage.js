@@ -34,12 +34,8 @@ const BooksPage = () => {
     }, [location.pathname]) // change depends upon location.pathname
 
     console.log("books",books)
-
-    
-    
-
     return (
-        <>
+        <div className="border border-black bookPage">
         <div className='relative h-12'>
             <div className='absolute top-0 right-0 bg-slate-300 p-2 font-bold rounded-b-lg'>
                 Sort By:
@@ -53,12 +49,13 @@ const BooksPage = () => {
         </div>
         <div className="flex">
             <div className=" w-[20%] bg-red-500 mobile">
+              
             </div>
             <div className="lg:w-[80%] w-[100%] relative py-4 px-2">
                 <Books books={books} />
             </div>
         </div>
-    </>
+    </div>
 
     )
 }

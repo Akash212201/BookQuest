@@ -2,25 +2,24 @@ import React, { Suspense, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  useLocation
 } from 'react-router-dom';
 import Header1 from './components/Header1';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import BookInfo from './components/BookInfo';
-import Cart from './components/Cart';
 import BooksPage from './components/BooksPage';
+import Cart from './components/Cart';
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import ForgotPassword from './pages/ForgotPassword';
 import UpdatePassword from './pages/UpdatePassword';
 import VerifyEmail from './pages/VerifyEmail';
-import { useLocation } from 'react-router-dom';
 //admin
-import AdminNavbar from './Admin/components/AdminNavbar' 
-import AdminSidebar from './Admin/components/AdminSidebar' 
-import './App.css';
+import AdminNavbar from './Admin/components/AdminNavbar'
+import AdminSidebar from './Admin/components/AdminSidebar'
 import Dashboard from './Admin/pages/Dashboard';
 import AllBooks from './Admin/pages/AllBooks';
 import AddBook from './Admin/pages/AddBook';
@@ -30,36 +29,37 @@ import Authors from './Admin/pages/Authors';
 import AllUser from './Admin/pages/AllUser';
 import NewOrders from './Admin/pages/NewOrders';
 import AllOrders from './Admin/pages/AllOrders';
+import './App.css';
 
 
 const App = () => {
   const location = useLocation();
-const user=localStorage.getItem("user");
-const token = localStorage.getItem('token');
-console.log("app.js",user)
-const user1=JSON.parse(user);
+  const user = localStorage.getItem("user");
+  const token = localStorage.getItem('token');
+  console.log("app.js", user)
+  const user1 = JSON.parse(user);
 
-console.log("app",user1?.accountType)
-const isDashboard = location.pathname.includes('/dashboard');
+  console.log("app", user1?.accountType)
+  const isDashboard = location.pathname.includes('/dashboard');
 
-const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     console.log("first4")
     setSidebarOpen(!sidebarOpen);
-  }; 
+  };
   return (
     <div>
-     {
-     !isDashboard ? (<div><Header1 /><Header /></div>): <div><AdminNavbar toggleSidebar={toggleSidebar}/></div>
-     }
-
-     <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hideSidebar' : 'admin'}` : ''}`}>
-      
       {
-     isDashboard ? <AdminSidebar sidebarOpen={sidebarOpen}/> : <div></div>
-     }
-      <Suspense fallback={<div>Loading...</div>}></Suspense>
+        !isDashboard ? (<div><Header1 /><Header /></div>) : <div><AdminNavbar toggleSidebar={toggleSidebar} /></div>
+      }
+
+      <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hideSidebar' : 'admin'}` : ''}`}>
+
+        {
+          isDashboard ? <AdminSidebar sidebarOpen={sidebarOpen} /> : <div></div>
+        }
+        <Suspense fallback={<div>Loading...</div>}></Suspense>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/' element={<HomePage />} />
@@ -77,7 +77,7 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
           <Route path="/update-password/:id" element={<UpdatePassword />}></Route>
           <Route path="/verify-email" element={<VerifyEmail />}></Route>
 
-           {/* Dashboard Routes */}
+          {/* Dashboard Routes */}
           <Route path='/admin/dashboard' element={<Dashboard />} />
           <Route path='/admin/dashboard/addbook' element={<AddBook />} />
           <Route path='/admin/dashboard/books' element={<AllBooks />} />
@@ -89,11 +89,11 @@ const [sidebarOpen, setSidebarOpen] = useState(false);
           <Route path='/admin/dashboard/allusers' element={<AllUser />} />
         </Routes>
       </div>
-    {
-      !isDashboard && 
-      <Footer />
-    }
-  
+      {
+        !isDashboard &&
+        <Footer />
+      }
+
     </div>
   );
 }

@@ -9,23 +9,21 @@ const Search = () => {
     const [results, setResults] = useState([])
     const navigation=useNavigate();
 
-    //fetch data from dummy api
+  
     const fetchData = async (value) => {
-        // const res = await fetch('https://jsonplaceholder.typicode.com/users')
-        // const data = await res.json();
-
-        const resp=await showallbooks();
+        try {
+            const resp=await showallbooks();
         const data = resp.data;
         setResults(data)
         console.log("data",data)
-    
-
-     
         const results = data.filter((user) => {
             return value && user && user.bookName && user.bookName.toLowerCase().includes(value)
         })
-console.log("resssuuullt",results)
+        console.log("resssuuullt",results)
         return results;
+        } catch (error) {
+            console.log("resssuuullt",error)
+        }
     }
 
     //set the filtered data to render
