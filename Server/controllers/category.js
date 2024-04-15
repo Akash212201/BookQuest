@@ -6,6 +6,7 @@ exports.createCategory = async (req, resp) => {
   try {
     const { categoryName,categoryDesc } = req.body;
 
+    console.log(categoryName)
     if (!categoryName) {
       return resp.status(400).json({
         success: false,
@@ -13,7 +14,7 @@ exports.createCategory = async (req, resp) => {
       });
     }
     const existCategory = await Category.findOne({ categoryName });
-    if (!existCategory) {
+    if (existCategory) {
       return resp.status(400).json({
         success: false,
         message: "category is already exist",
@@ -42,7 +43,14 @@ exports.getCategories=async (req,resp)=>{
       // for pagination we use skip and limit 
         // const categories=(await Category.find({},null,{skip,limit}));
         // const categories=(await Category.find({}).skip(2).limit(2));
-        const categories=(await Category.find({},{categoryName:true}));
+        const categories=await Category.find({});
+        const categoriesdata=categories.map((category,ind)=>(
+          {
+            id:ind+1,
+            categoryName:category.categoryName,
+            categoryDesc:category.categoryDesc
+          }
+        ))
         if(categories.length==0){
             resp.status(400).json({
                 success: false,
@@ -54,7 +62,7 @@ exports.getCategories=async (req,resp)=>{
         return resp.status(200).json({
             success: true,
             message: "category fetched successfully",
-            data:categories
+            data:categoriesdata
           });
 
     }catch(error){

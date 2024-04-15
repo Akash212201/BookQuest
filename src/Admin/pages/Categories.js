@@ -1,29 +1,42 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Alldata from '../pages/MOCK_DATA.json';
 
 import { useSortBy, useTable, usePagination } from 'react-table';
+import { getcategories } from '../../services/operations/bookcategory';
 
 const Columns = [
   {
-    accessor: 'price',
+    accessor: 'id',
     header: 'No',
   },
   {
-    accessor: 'bookName',
+    accessor: 'categoryName',
     header: 'Category',
   },
   
   {
-    accessor: 'stock',
+    accessor: 'categoryDesc',
     header: 'Description',
   },
 ];
 const Categories = () => {
+  const [categorydet,setcategorydet]=useState([]);
   const columns = useMemo(() => Columns, []);
-  const data = useMemo(() => Alldata, []);
+  useEffect(()=>{
+    async function fetchdata(){
+const resp=await getcategories();
+console.log(resp.data);
+setcategorydet(resp.data);
+
+
+    }
+    fetchdata();
+  },[])
+  console.log(categorydet)
+  const data = useMemo(() => categorydet, [categorydet]);
 
   const table = useTable(
     {
