@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
+import { createcategory } from '../../services/operations/bookcategory'
 
 const AddCategory = () => {
-  const [category, setCategory] = useState('')
+  const [categoryName, setCategory] = useState('')
   const [categoryDesc, setCategoryDesc] = useState('')
-  const submitHandler = () => {
+  const submitHandler = async () => {
     const data = {
-      category: category,
+      categoryName: categoryName,
       categoryDesc: categoryDesc
     }
+    const resp=await createcategory(data);
+    console.log(resp);
     setCategory('');
     setCategoryDesc('');
+
     console.log(data)
   }
+
+  
   const resetHandler = () => {
     setCategory('');
     setCategoryDesc('');
@@ -25,7 +31,7 @@ const AddCategory = () => {
           <div>
             <input type="text"
               className='w-full border px-2 text-2xl py-1 rounded-lg outline-[#90bdf4]'
-              value={category}
+              value={categoryName}
               onChange={(e) => setCategory(e.target.value)}
             />
           </div>

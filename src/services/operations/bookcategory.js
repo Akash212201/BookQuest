@@ -4,7 +4,7 @@ import { category } from "../apis";
 import { toast } from "react-toastify";
 import { books } from "../apis";
 
-const { HOMEPAGE_BOOKS , GET_CATEGORY} = category;
+const { HOMEPAGE_BOOKS ,CREATE_CATEGORY, GET_CATEGORY} = category;
 const { SHOW_ALL_BOOKS, SHOW_BOOK_DETAILS,ADD_NEW_BOOK } = books;
 export const groupCategory = async () => {
   let result = [];
@@ -107,5 +107,24 @@ export const getcategories = async () => {
     } catch (error) {
       console.log(error);
       toast.error("failed to show categories");
+    }
+  };
+
+  export const createcategory = async (data) => {
+    try {
+      console.log("mark");
+      console.log(data)
+      const response = await apiconnector("POST", CREATE_CATEGORY, data);
+      console.log("show book", response);
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      toast.success("Successfully create Category ");
+      // console.log("result", result);
+return ;  
+
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to create categories");
     }
   };
