@@ -117,7 +117,7 @@ const handleEdit = (_id, columnId, value) => {
 
   return (
     <div className='me-6 my-3 p-6 '>
-      <h1 className='text-2xl font-semibold tracking-wide'>Products</h1>
+      <h1 className='text-2xl font-semibold tracking-wide'>All Books</h1>
       <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
         <table {...getTableProps()} className='border border-red-500 w-full'>
           <thead className='w-full border border-red-900'>
@@ -153,15 +153,12 @@ const handleEdit = (_id, columnId, value) => {
               return (
                 <tr {...row.getRowProps()} className='text-center'>
                   {row.cells.map((cell, index) => (
-                    <td key={index} className={` border border-black h-full`}>
-                    {
+                    <td key={index} className={`h-full ${cell.column.header === 'BookImage' ? 'flex justify-center items-center border border-black' :'border border-black'}`}>
                     
-                      console.log(cell.column)
-                    }
                       {
 
                         cell.column.header === 'BookImage' ? (
-                        <img src={cell.value} alt="BookImage" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                        <img src={cell.value} alt="BookImage" className='w-[80px]' style={{ maxWidth: '100px', maxHeight: '100px' }} />
 
                       
                       ) : cell.column.editable && isRowEditing ? (

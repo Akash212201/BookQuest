@@ -56,7 +56,7 @@ const Signupform = () => {
 
     // reset the form 
     setformdata({
-      firstName: "", lastName: "", phone: "", password: "", confirmPassword: "", email: "",accountType:""
+      firstName: "", lastName: "", password: "", confirmPassword: "", email: "",accountType:""
     })
 
   }
