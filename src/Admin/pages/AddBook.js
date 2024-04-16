@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addnewbook, getcategories } from '../../services/operations/bookcategory';
+import { addnewbook, getcategory } from '../../services/operations/bookcategory';
 import { useSelector } from "react-redux";
 
 const AddBook = () => {
@@ -20,7 +20,7 @@ const AddBook = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const resp = await getcategories();
+        const resp = await getcategory();
       console.log(resp.data);
       setCategory1(resp.data);
       } catch (error) {

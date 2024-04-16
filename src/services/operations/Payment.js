@@ -31,8 +31,12 @@ user_details,
 navigate,
 dispatch
   ){
-
+    console.log(token)
+    console.log(books)
+    console.log(user_details)
+    console.log(user_details.firstName)
 const toastid=toast.loading("Loading...")
+
 try{
 // Load the script of Razorpay Sdk
 const resp=await loadScript("https://checkout.razorpay.com/v1/checkout.js")
@@ -67,10 +71,10 @@ const options={
     name:"BookQuest",
     description:"Thankyou for the Purchasing the Book ",
     
-    prefill:{
-        name:`${user_details.firstName} ${user_details.lastName}`,
+    // prefill:{
+    //     name:`${user_details.firstName} ${user_details.lastName}`,
        
-    },
+    // },
    
     handler: function (response){
        
@@ -107,7 +111,7 @@ async function verifyPayment(bodydata,token,navigate,dispatch){
     console.log("a")
     console.log("bodydata",bodydata);
     const toastid=toast.loading("Verifying Payment");
-    dispatch(setpaymentLoading(true));
+ 
     try{
         const response=await apiconnector("POST",BOOK_VERIFY_API,bodydata,{
             

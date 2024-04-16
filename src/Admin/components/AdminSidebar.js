@@ -53,23 +53,12 @@ const AdminSidebar = ({ sidebarOpen }) => {
           }
         </li>
         <li className='rounded-lg my-[0.5rem] px-4 py-2 cursor-pointer nav-item'
-          onClick={() => setOrderMenuOpen(!orderMenuOpen)}>
-          <div className='flex items-center justify-between'>Orders
-            {orderMenuOpen ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
-          </div>
+          >
+          <Link to="/admin/dashboard/orders">Orders</Link>
+         
 
-          {
-            orderMenuOpen && (
-              <ul className='mt-[0.5rem]'>
-                <li className='rounded-lg my-[0.5rem] px-4 py-2'>
-                  <Link to="/admin/dashboard/new-orders">New Orders</Link>
-                </li>
-                <li className='rounded-lg my-[0.5rem] px-4 py-2'>
-                  <Link to="/admin/dashboard/orders">Previous Orders</Link>
-                </li>
-              </ul>
-            )
-          }
+             
+           
         </li>
         <li className='rounded-lg my-[0.5rem] px-4 py-2 cursor-pointer nav-item'
           onClick={() => setUsersMenuOpen(!usersMenuOpen)}>
