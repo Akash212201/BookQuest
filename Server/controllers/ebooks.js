@@ -20,6 +20,7 @@ exports.createBook = async (req, resp) => {
 
     } = req.body;
     const {thumbnail, pdfUrl} = req.files;
+    console.log(category)
 
     console.log("category",category)
 
@@ -77,6 +78,7 @@ const thumbnailImage = await imageUploadCloudinary(
       bookSummary,
       price,
       bookStock:bookStock,
+      status:"Published",
       thumbnail: thumbnailImage?.secure_url || '', // Use optional chaining to access secure_url property
       pdfUrl: PDFURL?.secure_url || '', // Use optional chaining to access secure_url property
       category: categorydetail?._id || null, // Use optional chaining to access _id property

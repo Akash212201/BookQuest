@@ -11,7 +11,7 @@ const { paymentSuccessEmail } = require("../Mail/Templates/paymentSuccessEmail")
 exports.capturepayment=async (req,resp)=>{
     const {books}=req.body;
     const userid=req.user.id;
-    if(courses.length===0){
+    if(books.length===0){
         return resp.json({
             success:false,
             message:"No Book id is found"
@@ -20,17 +20,17 @@ exports.capturepayment=async (req,resp)=>{
     let total_amount=0;
     for(const bookid of books){
         try{
-            // find the course with course id
-            const book=await Book.findById(courseid)
-            // if course is not found return no course found
+           
+            const book=await Book.findById(bookid)
+      
             if(!book){
                 return resp.status(200).json({
                     success:false,
-                    message:"could not found the course"
+                    message:"could not found the book"
                 })
             }
 
-            // check if user is already enrolled in the course
+            
             const uid=new mongoose.Types.ObjectId(userid)
             console.log("uid",uid);
             console.log("already",book.customerPurchased.includes(uid));
@@ -40,8 +40,8 @@ exports.capturepayment=async (req,resp)=>{
                     message:"student is already Purchased the Book"
                 })
             }
-            // add the price of the course
-            total_amount+=course.price
+         
+            total_amount+=book.price
 
         }
         catch(error){
@@ -174,7 +174,7 @@ console.log(mailresponse);
 }
 
 
-// enroll the student in the course
+
 const customerPurchase=async(books,userid,resp)=>{
     if(!books || !userid){
         return resp.status(400).json({
@@ -191,17 +191,18 @@ const customerPurchase=async(books,userid,resp)=>{
 
      for(const bookid of books){
         try{
-            // find the  course and enroll the students
+            
             const customerBook=await Book.findOneAndUpdate(
                 {_id:bookid},
                 {$push:{customerPurchased:userid}},
+               
                 {new:true}
             )
 
             if(!customerBook){
                 return resp.status(400).json({
                     success:false,
-                    message:"course not found"
+                    message:"book not found"
                 })
             }
 

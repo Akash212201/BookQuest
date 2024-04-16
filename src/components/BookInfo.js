@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { LuShoppingBag } from 'react-icons/lu';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { IoIosStar } from 'react-icons/io';
 import { showbookdetails } from '../services/operations/bookcategory';
 import { addToCart } from '../Slices/cartSlice';
+import { BuyBook } from '../services/operations/Payment';
 
 const BookInfo = () => {
     const [book, setBook] = useState({});
     const [showFullSummary, setShowFullSummary] = useState(false); // State to track whether full summary should be shown
     const location = useLocation();
     const id = location.pathname.split('/').pop();
+    // const token=localStorage.getItem('token')
+    const {token}=useSelector((state)=>state.auth)
+    const user=localStorage.getItem("user");
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
+
+    // Function to fetch book details
 
     const fetchData = async () => {
         let response = await showbookdetails(id);
@@ -22,7 +30,12 @@ const BookInfo = () => {
         fetchData();
     }, [location.pathname]);
 
-    const dispatch = useDispatch();
+ 
+    async function paymenthandler(){
+        console.log("Payment call")
+        const resp=await BuyBook(token,[id],user,navigate,dispatch);
+        console.log(resp);
+    }
 
     const addToCartHandler = () => {
         let totalPrice = 1 * book.price;
@@ -38,6 +51,8 @@ const BookInfo = () => {
     const toggleSummary = () => {
         setShowFullSummary(!showFullSummary);
     };
+
+  
 
     return (
         <>
@@ -66,7 +81,7 @@ const BookInfo = () => {
                                 </button>
                             </div>
                             <div className='my-10 flex items-center lg:text-xl'>
-                                <button className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
+                                <button onClick={paymenthandler} className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
                                     <MdOutlineShoppingCart className='mr-2' />
                                     Buy Now
                                 </button>
