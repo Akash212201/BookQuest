@@ -55,7 +55,8 @@ const passwordUpdate = (name,email) => {
     
     <body>
         <div class="container">
-       
+        <a href="https://bookquest-five.vercel.app/"><img class="logo" src="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713252161/logo-black.jpg"
+                      alt="BookQuest Logo"></a>
             <div class="message">Password Update Confirmation</div>
             <div class="body">
                 <p>hi ${name}</p>

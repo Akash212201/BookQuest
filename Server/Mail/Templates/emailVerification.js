@@ -66,7 +66,8 @@ const otpTemplate = (otp) => {
 	
 	<body>
 		<div class="container">
-			<a ><img class="logo"></a>
+			<a
+			href="https://bookquest-five.vercel.app/" ><img class="logo" src="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713252161/logo-black.jpg"></a>
 			<div class="message">OTP Verification Email</div>
 			<div class="body">
 				<p>Dear User,</p>

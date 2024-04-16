@@ -37,7 +37,7 @@ exports.capturepayment=async (req,resp)=>{
             if(book.customerPurchased.includes(uid)){
                 return resp.status(200).json({
                     success:false,
-                    message:"student is already Purchased the Book"
+                    message:"Customer is already Purchased the Book"
                 })
             }
          
@@ -149,18 +149,7 @@ exports.sendPaymentSuccessEmail=async(req,resp)=>{
  amount/100,
  orderid,
  paymentid));
-// await mailsender(
-//     enrolledStudent.email,
-//     "Payment Recieved",
-    
-//     paymentSuccessEmail(
-//         `${enrolledStudent.firstname} ${enrolledStudent.lastname}`,
-//         amount/100,
-//         orderid,
-//         paymentid
 
-//     )
-// )
 
 console.log(mailresponse);
     }catch(error){
@@ -218,7 +207,7 @@ const customerPurchase=async(books,userid,resp)=>{
 
         )
         console.log("customer purchase",customer)
-        // send an email to the enrolled student
+        
         const emailresponse=await mailSender(
             customer.email,
             `Successfully Enrolled into ${customerBook.bookName}`,

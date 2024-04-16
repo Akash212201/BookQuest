@@ -67,7 +67,7 @@ exports.Bookpurchase = (bookName,name ) => {
     
     <body>
         <div class="container">
-            <a href="#"><img class="logo" src="#"
+            <a href="https://bookquest-five.vercel.app/"><img class="logo" src="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713252161/logo-black.jpg"
                     alt="BookQuest Logo"></a>
             <div class="message">Book Purchase Confirmation</div>
             <div class="body">
