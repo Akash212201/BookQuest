@@ -67,7 +67,7 @@ exports.paymentSuccessEmail = (name, amount, orderid, paymentid) => {
       
       <body>
           <div class="container">
-              <a href="#"><img class="logo"
+              <a href="https://bookquest-five.vercel.app/"><img class="logo" src="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713252161/logo-black.jpg"
                       alt="BookQuest Logo"></a>
               <div class="message">Book Payment Confirmation</div>
               <div class="body">

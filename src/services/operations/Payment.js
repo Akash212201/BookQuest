@@ -23,7 +23,7 @@ const {
     })
   }
 
-  //Buy the Course
+ 
   export async function BuyBook(
 token,
 books,
@@ -92,7 +92,6 @@ const options={
     };
     console.log("a")
 
-    // Show the razorpay payment window
     const paymentObject=new window.Razorpay(options);
     paymentObject.open();
 
@@ -104,7 +103,7 @@ const options={
 toast.dismiss(toastid)
 
 }
-// Verify the payment 
+
 console.log("a")
 
 async function verifyPayment(bodydata,token,navigate,dispatch){
@@ -136,7 +135,7 @@ toast.error("could not verify payment");
 //    dispatch(setpaymentLoading(false))
   }
 
-  // send the payment success email
+  
   async function sendPaymentSuccessEmail(response,amount,token){
     console.log(response);
     try{
