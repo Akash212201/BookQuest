@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { useSortBy, useTable, usePagination } from 'react-table';
-import { showallbooks } from '../../services/operations/bookcategory';
+import { deletebook, showallbooks } from '../../services/operations/bookcategory';
+import { useSelector } from 'react-redux';
 
 //componet to show all product 
 //some correction are pending
@@ -45,6 +46,7 @@ const AllBooks = () => {
   const [books,setbooks]=useState([]);
   const [editingRows, setEditingRows] = useState({});
   const [dataa, setDataa] =useState();
+  const { token } = useSelector(state => state.auth);
   
   useEffect(() => {
     async function fetchBooks() {
@@ -90,6 +92,19 @@ const AllBooks = () => {
   } = table;
 
   const [inputPage, setInputPage] = useState("");
+
+  async function deletehandler(bookid){
+    try{
+await deletebook({bookid},token);
+const resp = await showallbooks();
+console.log(resp.data);
+setbooks(resp.data);
+    }
+    catch(error){
+console.log(error)
+    }
+
+  }
 
   //function to jump on page number
   const handleGoToPage = () => {
@@ -186,6 +201,18 @@ const handleEdit = (_id, columnId, value) => {
                         Edit
                       </button>
                     )}
+                  </td>
+                  <td>
+                 
+                
+                
+                  <button onClick={() =>deletehandler(row.cells[0].row.original._id)}
+                  className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
+                  {
+                    console.log("row",row)
+                  }
+                  Delete
+                </button>
                   </td>
                 </tr>
               );
