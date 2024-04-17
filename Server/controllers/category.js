@@ -117,45 +117,48 @@ exports.getCategory=async (req,resp)=>{
 exports.groupcategory = async (req, resp) => {
   try {
 
-    const categoryid = "65e22940c05eccafe3477a54";
-    const categorybooks = await Category.aggregate([
-      {
-        $match: {
-          _id: new mongoose.Types.ObjectId(categoryid)
-        }
-      }, {
-        $lookup: {
-          from: "books",
-          localField: "eBooks",
-          foreignField: "_id",
-          as: "books",
-          pipeline: [
-            {
-              $project: {
+    // const categoryid = "65e22940c05eccafe3477a54";
+    // const categorybooks = await Category.aggregate([
+    //   {
+    //     $match: {
+    //       _id: new mongoose.Types.ObjectId(categoryid)
+    //     }
+    //   }, {
+    //     $lookup: {
+    //       from: "books",
+    //       localField: "eBooks",
+    //       foreignField: "_id",
+    //       as: "books",
+    //       pipeline: [
+    //         {
+    //           $project: {
 
-                bookName: 1, bookAuthor: 1,
-                bookSummary: 1, bookStock: 1,
-                price: 1, thumbnail: 1
-              }
-            }
-          ]
-        }
-      },
-      {
-        $addFields: {
-          books: "$books"
-        }
-      },
-      {
-        $unwind: "$books" // Unwind the "books" array (optional but recommended)
-      },
-      {
-        $replaceRoot: { // Replace the root document with the "books" document
-          newRoot: "$books"
-        }
-      },
+    //             bookName: 1, bookAuthor: 1,
+    //             bookSummary: 1, bookStock: 1,
+    //             price: 1, thumbnail: 1
+    //           }
+    //         }
+    //       ]
+    //     }
+    //   },
+    //   {
+    //     $addFields: {
+    //       books: "$books"
+    //     }
+    //   },
+    //   {
+    //     $unwind: "$books" // Unwind the "books" array (optional but recommended)
+    //   },
+    //   {
+    //     $replaceRoot: { // Replace the root document with the "books" document
+    //       newRoot: "$books"
+    //     }
+    //   },
 
-    ])
+    // ])
+
+    const availableBooks = await Books.find({});
+
 
     const mostrecentbooks = await Books.find({}).sort({ createdAt: -1 })
 
@@ -172,7 +175,7 @@ exports.groupcategory = async (req, resp) => {
     return resp.status(200).json({
       success: true,
       data: {
-        categorybooks,
+        availableBooks,
         mostrecentbooks,
         mostSellingBooks
       },

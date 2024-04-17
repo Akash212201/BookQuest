@@ -41,3 +41,8 @@ export const customerEndpoints = {
   };
 
 
+export const orderEndPoints = {
+    GET_ORDERS:BASE_URL+"/user/allorders",
+    GET_USERS:BASE_URL+"/user/getallusers"
+}
+

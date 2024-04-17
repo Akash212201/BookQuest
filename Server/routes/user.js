@@ -6,7 +6,7 @@ const {contactus}=require("../controllers/contactus")
 const {resetPassword ,resetPasswordToken}=require("../controllers/ResetPassword")
 const {getCategories,groupcategory,createCategory,getCategory}=require("../controllers/category")
 const {auth,isCustomer,isAdmin}=require("../middlewares/auth")
-const {updateProfile,deleteProfile,getPurchasedBooks,updateDisplayPicture,getAllUserDetails}=require("../controllers/profile")
+const {updateProfile,deleteProfile,getPurchasedBooks,updateDisplayPicture,getAllUserDetails,getorders,getallusers}=require("../controllers/profile")
 router.post("/login",login);
 router.post("/signup",signup);
 router.post("/sendotp",sendOtp);
@@ -29,6 +29,10 @@ router.post("/updateProfile",auth,updateProfile)
 router.get("/deleteProfile",auth,deleteProfile);
 router.get("/getUserDetails",auth,getAllUserDetails)
 router.post("/updateImage",auth,updateDisplayPicture)
+router.get("/allorders",getorders);
+router.get("/getallusers",getallusers);
+
+
 
 // for customers
 router.get("/allPurchasedBooks",auth,isCustomer,getPurchasedBooks);
