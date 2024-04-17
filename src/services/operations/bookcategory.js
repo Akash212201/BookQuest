@@ -3,10 +3,12 @@ import { apiconnector } from "../apioperator";
 import { category } from "../apis";
 import { toast } from "react-toastify";
 import { books } from "../apis";
+import { orderEndPoints } from "../apis";
 // import { database } from "../../../Server/config/database";
 
 const { HOMEPAGE_BOOKS ,CREATE_CATEGORY, GET_CATEGORY,GET_CATEGORY_ID} = category;
 const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK } = books;
+const { GET_ORDERS,GET_USERS}=orderEndPoints;
 export const groupCategory = async () => {
   let result = [];
   try {
@@ -167,5 +169,43 @@ return ;
     } catch (error) {
       console.log(error);
       toast.error("failed in Deleting a Book");
+    }
+  };
+
+  export const allorders = async () => {
+    let result = [];
+    try {
+      console.log("mark");
+      const response = await apiconnector("GET", GET_ORDERS, null);
+      console.log("show book", response);
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      result = response.data;
+      console.log("result", result);
+  
+      return result;
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to show orders");
+    }
+  };
+
+  export const allusers = async () => {
+    let result = [];
+    try {
+      console.log("mark");
+      const response = await apiconnector("GET", GET_USERS, null);
+      console.log("show book", response);
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      result = response.data;
+      console.log("result", result);
+  
+      return result;
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to show Users");
     }
   };

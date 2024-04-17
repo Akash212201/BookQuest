@@ -1,5 +1,7 @@
+const { useStore } = require("react-redux");
 const Address = require("../models/Address");
 const Books = require("../models/Books");
+const Paymentinfo = require("../models/Paymentinfo");
 const User = require("../models/User");
 const { imageUploadCloudinary } = require("../utils/imageUploadCloudinary");
 
@@ -176,6 +178,76 @@ exports.getPurchasedBooks=async (req,resp)=>{
     }
 }
 
+exports.getorders=async (req,resp)=>{
+  try{
+    const allorder=await Paymentinfo.find({});
+    const orders=allorder.map((order,ind)=>({
+      id:ind+1,
+      paymentId:order.paymentId,
+      orderId:order.orderId, 
+      amount:order.amount,
+      userId:order.userId,
+    }))
+
+    if(!allorder){
+      return resp.status(400).json({
+        success:false,
+        message:"error in get orders"
+      })
+    }
+
+    return resp.status(200).json({
+      success:true,
+      data:orders,
+        message:"success in get orders"
+    })
+
+  }catch(error){
+    return resp.status(400).json({
+      success:false,
+      message:"error found"
+    })
+  }
+}
+
+
+
+
+exports.getallusers=async (req,resp)=>{
+  try{
+    const allusers=await User.find({accountType:"Customer"});
+    // console.log(allusers)
+    const users=allusers.map((user,ind)=>(
+     
+      {
+      id:ind+1,
+      firstName:user.firstName,
+       email:user.email,
+       image:user.image, 
+       purchaseBooks:user.eBooks.length
+     
+    }))
+
+    if(!allusers){
+      return resp.status(400).json({
+        success:false,
+        message:"error in get Users"
+      })
+    }
+
+    return resp.status(200).json({
+      success:true,
+      data:users,
+        message:"success in fetching users"
+    })
+
+  }catch(error){
+    return resp.status(400).json({
+      success:false,
+      message:"error found"
+    })
+  }
+}
 
 //Todo:add dashboard
 

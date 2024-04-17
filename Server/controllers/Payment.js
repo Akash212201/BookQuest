@@ -7,6 +7,7 @@ const { response } = require("express");
 const crypto = require("crypto")
 const { mongoose } = require("mongoose");
 const { paymentSuccessEmail } = require("../Mail/Templates/paymentSuccessEmail");
+const Paymentinfo = require("../models/Paymentinfo");
 // capture the payment and initiate the razorpay
 exports.capturepayment=async (req,resp)=>{
     const {books}=req.body;
@@ -149,6 +150,18 @@ exports.sendPaymentSuccessEmail=async(req,resp)=>{
  amount/100,
  orderid,
  paymentid));
+
+
+ const response=await Paymentinfo.create({
+    orderId:orderid,
+    paymentId:paymentid,
+    amount:amount/100,
+    userId:userid
+    
+    
+ })
+
+
 
 
 console.log(mailresponse);

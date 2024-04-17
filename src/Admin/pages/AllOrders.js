@@ -1,28 +1,29 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { useSortBy, useTable, usePagination } from "react-table";
+import { allorders } from "../../services/operations/bookcategory";
 
 const Columns = [
   {
-    accessor: 'idx',
+    accessor: 'id',
     header: 'No',
   },
   {
-    accessor: 'id',
+    accessor: 'userId',
     header: 'ID',
   },
   {
-    accessor: 'thumbnail', // Make sure this matches the accessor used in the data
-    header: 'BookImage',
+    accessor: 'paymentId', // Make sure this matches the accessor used in the data
+    header: 'Payment Id',
   },
   {
-    accessor: 'bookName',
-    header: 'Book Name',
+    accessor: 'orderId',
+    header: 'Order Id',
   },
   
   {
-    accessor: 'price',
-    header: 'Price',
+    accessor: 'amount',
+    header: 'Amount',
     editable: true,
   }
 ];
@@ -33,6 +34,15 @@ const AllOrders = () => {
   const [dataa, setDataa] = useState();
 
   
+  useEffect(()=>{
+async function fetchdata(){
+const resp=await allorders();
+console.log(resp.data)
+setbooks(resp.data)
+}
+
+fetchdata();
+  },[])
   const data = useMemo(() => books, [books]);
 
   console.log("object", data);
@@ -135,14 +145,7 @@ const AllOrders = () => {
                           : "border border-black"
                       }`}
                     >
-                      {cell.column.header === "BookImage" ? (
-                        <img
-                          src={cell.value}
-                          alt="BookImage"
-                          className="w-[80px]"
-                          style={{ maxWidth: "100px", maxHeight: "100px" }}
-                        />
-                      ) : cell.column.editable && isRowEditing ? (
+                      { cell.column.editable && isRowEditing ? (
                         <input
                           type="text"
                           value={cell.value}
