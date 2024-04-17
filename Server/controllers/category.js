@@ -259,3 +259,35 @@ exports.categoryPageDetails = async (req, resp) => {
 // }
 
 
+// exports.deleteCategory=async (req,resp)=>{
+//   try{
+//     const {categoryid}=req.body;
+//       const categories=await Category.findById(categoryid);
+//       const categoriesdata=categories.map((category,ind)=>(
+//         {
+//           id:ind+1,
+//           categoryName:category.categoryName,
+//           categoryDesc:category.categoryDesc
+//         }
+//       ))
+//       if(categories.length==0){
+//           resp.status(400).json({
+//               success: false,
+//               message: "no category found",
+//             });
+//       }
+
+//       console.log(categories);
+//       return resp.status(200).json({
+//           success: true,
+//           message: "category fetched successfully",
+//           data:categoriesdata
+//         });
+
+// } catch (error) {
+//   resp.status(400).json({
+//     success: false,
+//     message: "error occured",
+//   });
+// }
+// }

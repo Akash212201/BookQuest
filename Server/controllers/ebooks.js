@@ -306,29 +306,34 @@ exports.getAdminBooks = async (req, resp) => {
 exports.deleteBook = async (req, resp) => {
   try {
     const {bookid} = req.body;
-console.log(bookid)
+    console.log(bookid)
     const bookdetails = await Books.findById(bookid)
     console.log("mark1")
     if( bookdetails.customerPurchased){
-        for(const userid of bookdetails.customerPurchased) {
-            await User.findByIdAndUpdate(
-              { userid },
-              {
-                $pull: { eBooks: bookid },
-              }
-            );
+      for(const userid of bookdetails.customerPurchased) {
+        console.log(userid)
+        await User.findByIdAndUpdate(
+          userid,
+          {
+            $pull: { eBooks: bookid },
           }
+        );
+      }
+      console.log("mark2")
     }
-
+    
     await User.findByIdAndUpdate(bookdetails.adminUser,{
-        $pull:{eBooks:bookid}
+      $pull:{eBooks:bookid}
     })
+    console.log("mark3")
     await Category.findByIdAndUpdate(bookdetails.category, {
       $pull: { eBooks: bookid },
     });
-
+    console.log("mark4")
+    
     await Books.findByIdAndDelete(bookid);
-
+    console.log("mark5")
+    
     return resp.status(200).json({
       success: true,
       message: "Successfully deleted the Book",

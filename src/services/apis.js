@@ -29,7 +29,8 @@ export const category={
 export const books={
 SHOW_ALL_BOOKS:BASE_URL+"/books/showAllBooks",
 SHOW_BOOK_DETAILS:BASE_URL+"/books/showBookDetails",
-ADD_NEW_BOOK:BASE_URL+"/books/createBook"
+ADD_NEW_BOOK:BASE_URL+"/books/createBook",
+DELETE_BOOK:BASE_URL+"/books/deleteBook"
 }
 
 // STUDENTS ENDPOINTS

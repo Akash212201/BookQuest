@@ -3,9 +3,10 @@ import { apiconnector } from "../apioperator";
 import { category } from "../apis";
 import { toast } from "react-toastify";
 import { books } from "../apis";
+// import { database } from "../../../Server/config/database";
 
 const { HOMEPAGE_BOOKS ,CREATE_CATEGORY, GET_CATEGORY,GET_CATEGORY_ID} = category;
-const { SHOW_ALL_BOOKS, SHOW_BOOK_DETAILS,ADD_NEW_BOOK } = books;
+const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK } = books;
 export const groupCategory = async () => {
   let result = [];
   try {
@@ -144,5 +145,27 @@ return ;
     } catch (error) {
       console.log(error);
       toast.error("failed to create categories");
+    }
+  };
+
+  export const deletebook = async (data,token) => {
+ 
+    try {
+      console.log("mark");
+      console.log(data)
+      console.log(token)
+      const response = await apiconnector("POST", DELETE_BOOK, data,{
+        Authorization: `Bearer ${token}`});
+      console.log("show book", response);
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+    toast.success("Successfully delete book ");
+      // console.log("result", result);
+
+      return ;
+    } catch (error) {
+      console.log(error);
+      toast.error("failed in Deleting a Book");
     }
   };

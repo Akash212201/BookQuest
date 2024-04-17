@@ -82,15 +82,7 @@ exports.signup = async (req, resp) => {
     } = req.body;
     console.log(firstName)
 
-
-
-    const numCount = (password.match(/\d/g) || []).length; // Count numbers in the password
-    if (numCount < 5) {
-      return resp.status(400).json({ error: 'Password must contain at least 5 numbers' });
-    }
-
-
-    // perform validation
+// perform validation
     if (!firstName || !email || !password || !confirmPassword || !otp) {
       return resp.status(402).json({
         success: false,
