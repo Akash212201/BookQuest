@@ -8,15 +8,16 @@ import {
 import Header1 from './components/Header1';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './components/HomePage';
+import HomePage from './pages/HomePage';
 import BookInfo from './components/BookInfo';
-import BooksPage from './components/BooksPage';
+import BooksPage from './pages/BooksPage';
 import Cart from './components/Cart';
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import ForgotPassword from './pages/ForgotPassword';
 import UpdatePassword from './pages/UpdatePassword';
 import VerifyEmail from './pages/VerifyEmail';
+import Requestbook from './pages/Requestbook';
 //admin
 import AdminNavbar from './Admin/components/AdminNavbar'
 import AdminSidebar from './Admin/components/AdminSidebar'
@@ -76,6 +77,7 @@ const App = () => {
           <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
           <Route path="/update-password/:id" element={<UpdatePassword />}></Route>
           <Route path="/verify-email" element={<VerifyEmail />}></Route>
+          <Route path="/requestbook" element={<Requestbook />}></Route>
 
           {/* Dashboard Routes */}
           <Route path='/admin/dashboard' element={<Dashboard />} />

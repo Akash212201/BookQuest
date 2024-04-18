@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Books from './Books'
+import Books from '../components/Books'
 import { useLocation } from 'react-router-dom'
 import { groupCategory } from '../services/operations/bookcategory';
 

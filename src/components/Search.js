@@ -42,21 +42,21 @@ const Search = () => {
         setInput("")
     }
     
-    // console.log("value",value)
+  
     return (
         <div className="container">
             <div>
                 <div>
                     <input type="text"
                         placeholder='search'
-                        className='w-[95%] outline-none text-xl py-1 px-2 relative input'
+                        className='w-full outline-none text-xl py-1 px-2 relative input'
                         value={input}
                         onChange={(e) => handleChange(e.target.value)}
                     />
                 </div>
 
             </div>
-            <div className='w-[50vw] z-10 absolute bg-white top-13'>
+            <div className='w-[50vw] z-10 absolute bg-white top-13  '>
                 {
                     results && results.map((result, idx) => (
                         <div key={idx} className='border mb-1 py-1 cursor-pointer' onClick={(e) => handleResult(result._id)}>{result.bookName}</div>

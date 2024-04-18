@@ -12,7 +12,7 @@ const Columns = [
     header: 'Image',
   },
   {
-    accessor: 'firstName', // Make sure this matches the accessor used in the data
+    accessor: 'firstName', 
     header: 'User Name',
   },
   {
@@ -129,7 +129,7 @@ const AllUser = () => {
       </thead>
       <tbody
         {...getTableBodyProps()}
-        className="w-full border border-red-900"
+        className="w-full"
       >
         {page.map((row, rowIndex) => {
           prepareRow(row);
@@ -141,17 +141,19 @@ const AllUser = () => {
                   key={index}
                   className={`h-full ${
                     cell.column.header === "BookImage"
-                      ? "flex justify-center items-center border border-black"
+                      ? "flex justify-center items-center border border-green-500 px-auto"
                       : "border border-black"
                   }`}
                 >
                   {cell.column.header === "Image" ? (
-                    <img
+                    <div className="my-2 w-[80px] h-[80px] rounded-full overflow-hidden flex justify-center items-center mx-auto ">
+                      <img
                       src={cell.value}
                       alt="Image"
-                      className="w-[80px]"
+                      className="w-full"
                       style={{ maxWidth: "100px", maxHeight: "100px" }}
                     />
+                    </div>
                   ) : cell.column.editable && isRowEditing ? (
                     <input
                       type="text"

@@ -43,11 +43,11 @@ const Columns = [
 
 const AllBooks = () => {
   const columns = useMemo(() => Columns, []);
-  const [books,setbooks]=useState([]);
+  const [books, setbooks] = useState([]);
   const [editingRows, setEditingRows] = useState({});
-  const [dataa, setDataa] =useState();
+  const [dataa, setDataa] = useState();
   const { token } = useSelector(state => state.auth);
-  
+
   useEffect(() => {
     async function fetchBooks() {
       try {
@@ -61,11 +61,11 @@ const AllBooks = () => {
     }
     fetchBooks();
   }, []);
-  
+
   const data = useMemo(() => books, [books]);
 
-  
-  console.log("object",data)
+
+  console.log("object", data)
   const table = useTable(
     {
       columns,
@@ -93,15 +93,15 @@ const AllBooks = () => {
 
   const [inputPage, setInputPage] = useState("");
 
-  async function deletehandler(bookid){
-    try{
-await deletebook({bookid},token);
-const resp = await showallbooks();
-console.log(resp.data);
-setbooks(resp.data);
+  async function deletehandler(bookid) {
+    try {
+      await deletebook({ bookid }, token);
+      const resp = await showallbooks();
+      console.log(resp.data);
+      setbooks(resp.data);
     }
-    catch(error){
-console.log(error)
+    catch (error) {
+      console.log(error)
     }
 
   }
@@ -116,9 +116,9 @@ console.log(error)
   };
 
   // Function to handle editing value
-const handleEdit = (_id, columnId, value) => {
-  
-};
+  const handleEdit = (_id, columnId, value) => {
+
+  };
 
 
   // Function to toggle editing state for a row
@@ -127,7 +127,7 @@ const handleEdit = (_id, columnId, value) => {
       ...prevEditingRows,
       [rowIndex]: !prevEditingRows[rowIndex],
     }));
-    
+
   };
 
   return (
@@ -168,25 +168,25 @@ const handleEdit = (_id, columnId, value) => {
               return (
                 <tr {...row.getRowProps()} className='text-center'>
                   {row.cells.map((cell, index) => (
-                    <td key={index} className={`h-full ${cell.column.header === 'BookImage' ? 'flex justify-center items-center border border-black' :'border border-black'}`}>
-                    
+                    <td key={index} className={`h-full ${cell.column.header === 'BookImage' ? 'flex justify-center items-center border border-black' : 'border border-black'}`}>
+
                       {
 
                         cell.column.header === 'BookImage' ? (
-                        <img src={cell.value} alt="BookImage" className='w-[80px]' style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                          <img src={cell.value} alt="BookImage" className='w-[80px]' style={{ maxWidth: '100px', maxHeight: '100px' }} />
 
-                      
-                      ) : cell.column.editable && isRowEditing ? (
-                        <input
-  type="text"
-  value={cell.value}
-  onChange={(e) => handleEdit(rowIndex, cell.column.id, e.target.value)}
-  className="outline-none"
-/>
 
-                      ) : (
-                        cell.render('Cell')
-                      )}
+                        ) : cell.column.editable && isRowEditing ? (
+                          <input
+                            type="text"
+                            value={cell.value}
+                            onChange={(e) => handleEdit(rowIndex, cell.column.id, e.target.value)}
+                            className="outline-none"
+                          />
+
+                        ) : (
+                          cell.render('Cell')
+                        )}
                     </td>
                   ))}
                   <td className=''>
@@ -203,16 +203,16 @@ const handleEdit = (_id, columnId, value) => {
                     )}
                   </td>
                   <td>
-                 
-                
-                
-                  <button onClick={() =>deletehandler(row.cells[0].row.original._id)}
-                  className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
-                  {
-                    console.log("row",row)
-                  }
-                  Delete
-                </button>
+
+
+
+                    <button onClick={() => deletehandler(row.cells[0].row.original._id)}
+                      className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
+                      {
+                        console.log("row", row)
+                      }
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );

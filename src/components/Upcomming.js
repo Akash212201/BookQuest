@@ -72,8 +72,8 @@ const Upcomming = ({ books, title }) => {
       </div>
 
       <div> 
-      <Slider {...settings}>
-        {books.map((book) => {
+      <Slider {...settings}> 
+        {books && books.map((book) => {
           return (
           <div key={book.id} className="px-4"> <BookCard book = {book} /> </div>
           )

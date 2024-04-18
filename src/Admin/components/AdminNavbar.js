@@ -1,11 +1,12 @@
 import React from 'react';
 import { IoIosMenu, IoIosSearch } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
 const AdminNavbar = ({ toggleSidebar }) => {
   return (
     <div className="header lg:flex">
       <div className='lg:px-[2.375rem] px-[0.75rem] w-[25%] flex justify-between items-center'>
-        <h1 className='text-2xl'>BookQuest</h1>
+       <Link to="/" className='text-4xl'><h1>BookQuest</h1></Link>
        <IoIosMenu className='z-10 text-[1.25rem] cursor-pointer mr-2 border border-black' onClick={toggleSidebar} />
       </div>
       <div className='flex items-center text-[#6C7383] px-[2.375rem] py-1 lg:w-[80%] w-[60%] border border-green-500'>
