@@ -134,7 +134,7 @@ console.log("body",body);
 exports.sendPaymentSuccessEmail=async(req,resp)=>{
     const {orderid,paymentid,amount}=req.body;
    
-   
+   console.log("order",orderid)
     const userid=req.user.id;
     
     if(!userid||!orderid||!paymentid||!amount){
@@ -151,7 +151,7 @@ exports.sendPaymentSuccessEmail=async(req,resp)=>{
  orderid,
  paymentid));
 
-
+console.log("mail",mailresponse)
  const response=await Paymentinfo.create({
     orderId:orderid,
     paymentId:paymentid,

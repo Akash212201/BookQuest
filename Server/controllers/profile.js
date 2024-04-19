@@ -251,3 +251,33 @@ exports.getallusers=async (req,resp)=>{
 
 //Todo:add dashboard
 
+exports.instructorDashboard=async (req,resp)=>{
+  try{
+     const booksDetails=await Books.find({})
+
+     const bookData=booksDetails.map((book,i)=>{
+      const totalCustomerPurchase=book.customerPurchased.length;
+      const totalAmountGenerate=totalCustomerPurchase*book.price;
+
+      const bookDataWithStats={
+     _id:book._id,
+     bookName:book.bookName,
+   
+     totalCustomerPurchase,
+     totalAmountGenerate
+      }
+
+      return bookDataWithStats;
+     })
+resp.status(200).json({
+  success:true,
+  courses:bookData
+})
+
+  }catch(error){
+      console.log(error);
+      resp.status(500).json({
+          message:"Internal server error"
+      })
+  }
+}
