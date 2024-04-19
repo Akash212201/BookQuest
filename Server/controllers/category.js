@@ -214,13 +214,13 @@ exports.categoryPageDetails = async (req, resp) => {
     }
 
     // Handle the case when there are no book
-    if (specificCategory.eBooks.length === 0) {
-      console.log("No eBooks found for the selected category.")
-      return resp.status(404).json({
-        success: false,
-        message: "No eBooks found for the selected category.",
-      })
-    }
+    // if (specificCategory.eBooks.length === 0) {
+    //   console.log("No eBooks found for the selected category.")
+    //   return resp.status(404).json({
+    //     success: false,
+    //     message: "No eBooks found for the selected category.",
+    //   })
+    // }
 
 
 
