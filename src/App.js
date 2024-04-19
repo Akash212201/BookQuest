@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import BookInfo from './components/BookInfo';
 import BooksPage from './pages/BooksPage';
+import CategoryPage from './pages/CategoryPage';
 import Cart from './components/Cart';
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
@@ -64,6 +65,7 @@ const App = () => {
           <Route path='/newarrival' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
+          <Route path='/:id' element={<CategoryPage  />} />
           <Route path='/fiction' element={<BooksPage />} />
           <Route path='/scifi' element={<BooksPage />} />
           <Route path='/books' element={<BooksPage />} />

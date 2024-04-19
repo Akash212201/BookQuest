@@ -4,7 +4,7 @@ const router=express.Router();
 const {login,signup,sendOtp,changepassword}=require("../controllers/Auth")
 const {contactus}=require("../controllers/contactus")
 const {resetPassword ,resetPasswordToken}=require("../controllers/ResetPassword")
-const {getCategories,groupcategory,createCategory,getCategory}=require("../controllers/category")
+const {getCategories,groupcategory,createCategory,getCategory,categoryPageDetails}=require("../controllers/category")
 const {auth,isCustomer,isAdmin}=require("../middlewares/auth")
 const {updateProfile,deleteProfile,getPurchasedBooks,updateDisplayPicture,getAllUserDetails,getorders,getallusers}=require("../controllers/profile")
 router.post("/login",login);
@@ -17,6 +17,7 @@ router.get("/getCategories",getCategories);
 router.get("/getCategory",getCategory);
 router.post("/createCategory",createCategory);
 router.get("/groupCategory",groupcategory)
+router.post("/categoryPageDetails",categoryPageDetails)
 // contact us
 router.post("/contactUs",contactus);
 
