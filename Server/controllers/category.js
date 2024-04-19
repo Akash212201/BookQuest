@@ -175,9 +175,9 @@ exports.groupcategory = async (req, resp) => {
     return resp.status(200).json({
       success: true,
       data: {
-        availableBooks,
         mostrecentbooks,
-        mostSellingBooks
+        mostSellingBooks,
+        availableBooks,
       },
       message: "get all the books"
     })

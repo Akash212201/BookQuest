@@ -14,8 +14,6 @@ const Header1 = () => {
     // const {token}=useSelector((state)=> state.auth);
 
     const token = localStorage.getItem('token');
-    console.log(token)
-    console.log("data", data)
     const dispatch = useDispatch()
 
     function logouthandler() {

@@ -2,12 +2,19 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { decrementQuantity, incrementQuantity, removeFromCart } from '../Slices/cartSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { BuyBook } from '../services/operations/Payment';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-console.log("Cartitems",cartItems)
+  const {token}=useSelector((state)=>state.auth)
+
+  console.log(token)
+const user=localStorage.getItem("user")
+const navigate=useNavigate();
+  console.log("Cartitems",cartItems)
+
   // Calculate total price for each item
   const calculateTotalPrice = (item) => {
     return item.quantity * item.price;
@@ -20,7 +27,14 @@ console.log("Cartitems",cartItems)
       return total + calculateTotalPrice(item);
     }, 0);
   }
-
+console.log("cartItems",cartItems)
+  async function paymenthandler(){
+    const books=cartItems.map((book) => book._id)
+    console.log(books)
+    console.log("Payment call")
+    const resp=await BuyBook(token,books,user,navigate,dispatch);
+    console.log(resp);
+}
   return (
     <div className="min-h-[500px] px-5">
       <h1 className="text-center mt-5 text-4xl mb-2">Your Bag</h1>
@@ -69,7 +83,7 @@ console.log("Cartitems",cartItems)
               <span className='block border border-[#333] w-full mt-5 mb-2'></span>
               <div className='flex justify-between items-center text-xl font-bold'><p>Total Amount</p> {calculateTotalAmount()}</div>
               <Link to="/payment-gateway-link">
-              <button className='text-white bg-green-400 hover:bg-green-500 w-full py-3 text-lg rounded mt-6'>CheckOut</button>
+              <button onClick={paymenthandler}className='text-white bg-green-400 hover:bg-green-500 w-full py-3 text-lg rounded mt-6'>CheckOut</button>
               </Link>
             </div>
           </div>

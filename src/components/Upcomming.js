@@ -28,6 +28,7 @@ const SamplePrevArrow = (props) => {
   )
 }
 const Upcomming = ({ books, title }) => {
+  console.log("title ",title,books)
   const settings = {
     dots: false,
     infinite: true,
@@ -73,9 +74,9 @@ const Upcomming = ({ books, title }) => {
 
       <div> 
       <Slider {...settings}> 
-        {books && books.map((book) => {
+        {books && books.map((book,i) => {
           return (
-          <div key={book.id} className="px-4"> <BookCard book = {book} /> </div>
+          <div key={i} className="px-4"> <BookCard book = {book} /> </div>
           )
         })}
       </Slider>

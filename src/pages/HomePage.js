@@ -16,7 +16,7 @@ const HomePage = () => {
         const resp = await groupCategory();
         console.log("resp1", resp.data);
 
-        setcategorybooks(resp.data.categorybooks)
+        setcategorybooks(resp.data.availableBooks)
         setlatestbooks(resp.data.mostrecentbooks)
         setmostSellingBooks(resp.data.mostSellingBooks)
       } catch (error) {
