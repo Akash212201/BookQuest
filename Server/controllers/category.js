@@ -49,6 +49,7 @@ exports.getCategories=async (req,resp)=>{
         const categories=await Category.find({});
         const categoriesdata=categories.map((category,ind)=>(
           {
+            _id:category._id,
             id:ind+1,
             categoryName:category.categoryName,
             categoryDesc:category.categoryDesc
@@ -192,7 +193,9 @@ exports.groupcategory = async (req, resp) => {
 
 exports.categoryPageDetails = async (req, resp) => {
   try {
+    console.log("mark category")
     const { categoryid } = req.body;
+    console.log(categoryid)
 
     const specificCategory = await Category.findById({ _id: categoryid }).populate({
       path: "eBooks",
@@ -206,7 +209,7 @@ exports.categoryPageDetails = async (req, resp) => {
     if (!specificCategory) {
       return resp.status(402).json({
         success: false,
-        message: "cannot find courses"
+        message: "cannot find books"
       })
     }
 
@@ -219,23 +222,13 @@ exports.categoryPageDetails = async (req, resp) => {
       })
     }
 
-    const allCategory = await Category.find({}).populate({
-      path: "eBooks",
-      match: { status: "Published" },
-      populate: "ratingAndReviews"
-    }).exec();
 
-    const allBooks = allCategory.flatMap((category) => category.eBooks);
-    const mostSellingBooks = allBooks.sort((a, b) => b.customerPurchased.length - a.customerPurchased.length).slice(0, 10);
 
 
     return resp.status(200).json({
       success: true,
       message: "data get successfully",
-      data: {
-        specificCategory,
-        mostSellingBooks
-      }
+      data: specificCategory
     })
 
   } catch (error) {

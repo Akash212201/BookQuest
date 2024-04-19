@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar'
+import { categoryPage } from '../services/operations/bookcategory';
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
@@ -20,7 +21,7 @@ const Header = () => {
     },
     {
       name: 'Categories',
-      path: '/',
+      path: '/:id',
       onClick: () => setIsCategoriesOpen(!isCategoriesOpen),
     },
     {
@@ -37,11 +38,13 @@ const Header = () => {
     },
   ];
 
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get('http://localhost:4000/api/v1/user/getCategories');
         setCategories(response.data.data);
+        console.log("categories",response.data.data)
       } catch (error) {
         console.error(error);
       }
@@ -55,14 +58,16 @@ const Header = () => {
       return (
         <ul className="z-10 absolute top-full bg-green-500 text-white list-none w-[350px]">
           {categories.map((category, index) => (
-            <li key={index} className="py-2 px-4 hover:bg-green-700">
+            <li key={index} className="py-2 px-4 hover:bg-green-700" >
               <Link
-                to={`/${category.categoryName}`}
+                to={`/${category._id}`}
                 onClick={() => {
                   setIsCategoriesOpen(false); 
                   setShowSidebar(false); 
                 }}
               >
+            
+             
                 {category.categoryName}
               </Link>
             </li>
@@ -78,10 +83,11 @@ const Header = () => {
       <div className="bg-green-500 text-white mobile">
         <ul className="flex justify-center items-center relative">
           {navLinks.map((link, idx) => (
-            <li key={idx} className="lg:px-6 px-2 text-xl py-3">
+            <li key={idx} className="lg:px-6 px-2 text-xl py-3">{}
               {link.onClick ? (
                 <div>
                   <button onClick={link.onClick}>{link.name}</button>
+                 
                   {renderCategories()}
                 </div>
               ) : (

@@ -22,7 +22,8 @@ export const category={
     HOMEPAGE_BOOKS:BASE_URL+"/user/groupCategory",
     GET_CATEGORY:BASE_URL+"/user/getCategories",
     GET_CATEGORY_ID:BASE_URL+"/user/getCategory",
-    CREATE_CATEGORY:BASE_URL+"/user/createCategory"
+    CREATE_CATEGORY:BASE_URL+"/user/createCategory",
+    CATEGORY_PAGE:BASE_URL+"/user/categoryPageDetails",
 
 }
 
@@ -30,7 +31,8 @@ export const books={
 SHOW_ALL_BOOKS:BASE_URL+"/books/showAllBooks",
 SHOW_BOOK_DETAILS:BASE_URL+"/books/showBookDetails",
 ADD_NEW_BOOK:BASE_URL+"/books/createBook",
-DELETE_BOOK:BASE_URL+"/books/deleteBook"
+DELETE_BOOK:BASE_URL+"/books/deleteBook",
+REQ_BOOK:BASE_URL+"/books/reqBook"
 }
 
 // STUDENTS ENDPOINTS

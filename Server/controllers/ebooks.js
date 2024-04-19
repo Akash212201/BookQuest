@@ -1,5 +1,6 @@
 const Books = require("../models/Books");
 const Category = require("../models/Category");
+const ReqBook = require("../models/ReqBook");
 const User = require("../models/User");
 const { imageUploadCloudinary } = require("../utils/imageUploadCloudinary");
 
@@ -339,9 +340,47 @@ exports.deleteBook = async (req, resp) => {
       message: "Successfully deleted the Book",
     });
   } catch (error) {
-    resp.status(400).json({
+   return  resp.status(400).json({
       success: false,
       message: "error occured",
     });
   }
 };
+
+exports.reqBook=async (req,resp)=>{
+  try{
+    const {
+      bookName,
+    bookAuthor,
+    email,
+    mobile
+    }=req.body;
+
+    console.log(bookName)
+    const bookresp=await ReqBook.create({
+  bookName,
+    bookAuthor,
+    email,
+    mobile
+    });
+
+    if(!bookresp){
+      return resp.status(400).json({
+        success: false,
+        message: "error in req book",
+      });
+    }
+
+    return resp.status(200).json({
+      success: true,
+     
+      message: "get the data",
+    });
+
+  }catch(error){
+   return  resp.status(400).json({
+      success: false,
+      message: "error occured",
+    });
+  }
+}

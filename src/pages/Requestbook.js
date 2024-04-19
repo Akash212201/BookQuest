@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
+import { reqBook } from '../services/operations/bookcategory';
 const Requestbook = () => {
     const [bookName, setBookName] = useState("");
     const [bookAuthor, setBookAuthor] = useState("");
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState();
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!bookName && !email && !bookAuthor) {
+            
+
             toast.error("Marked feild cannot be blank");
             return;
         }
@@ -17,6 +20,8 @@ const Requestbook = () => {
             mobile: mobile
         }
         console.log(data)
+        const resp=await reqBook(data);
+        console.log(resp)
         setBookName('');
         setBookAuthor('');
         setEmail('');
