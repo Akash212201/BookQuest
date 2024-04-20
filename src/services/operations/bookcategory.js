@@ -6,7 +6,7 @@ import { books } from "../apis";
 import { orderEndPoints } from "../apis";
 // import { database } from "../../../Server/config/database";
 
-const { HOMEPAGE_BOOKS ,CREATE_CATEGORY, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
+const { HOMEPAGE_BOOKS ,CATEGORY_PAGE_ID,CREATE_CATEGORY, GROUP_CATEGORY_SORT, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
 const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK } = books;
 const { GET_ORDERS,GET_USERS}=orderEndPoints;
 export const groupCategory = async () => {
@@ -26,6 +26,45 @@ export const groupCategory = async () => {
     toast.error("failed to show books");
   }
 };
+
+
+export const groupCategoryid = async (data) => {
+  let result = [];
+  try {
+    const response = await apiconnector("POST",  CATEGORY_PAGE_ID, data);
+    console.log("booksresponse", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.data;
+    console.log("result", result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    toast.error("failed to show books");
+  }
+};
+
+export const groupCategorysort = async (data) => {
+  let result = [];
+  try {
+    const response = await apiconnector("POST",  GROUP_CATEGORY_SORT, data);
+    console.log("booksresponse", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.data;
+    console.log("result", result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    toast.error("failed to show books");
+  }
+};
+
+
 export const getcategory = async () => {
   let result = [];
   try {
