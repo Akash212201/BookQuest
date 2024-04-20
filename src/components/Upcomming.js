@@ -29,6 +29,8 @@ const SamplePrevArrow = (props) => {
 }
 const Upcomming = ({ books, title }) => {
   console.log("title ",title,books)
+
+  
   const settings = {
     dots: false,
     infinite: true,

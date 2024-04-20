@@ -115,9 +115,10 @@ exports.getCategory=async (req,resp)=>{
   });
 }
 }
+
 exports.groupcategory = async (req, resp) => {
   try {
-
+const {sort}=req.body;
     // const categoryid = "65e22940c05eccafe3477a54";
     // const categorybooks = await Category.aggregate([
     //   {
@@ -163,6 +164,8 @@ exports.groupcategory = async (req, resp) => {
 
     const mostrecentbooks = await Books.find({}).sort({ createdAt: -1 })
 
+    
+
     const allCategory = await Category.find({}).populate({
       path: "eBooks",
       match: { status: "Published" },
@@ -191,11 +194,96 @@ exports.groupcategory = async (req, resp) => {
 }
 
 
+
+exports.groupcategorysort = async (req, resp) => {
+  try {
+const {sort}=req.body;
+  console.log("sort123 ",sort)
+
+    
+
+
+    const mostrecentbooks = await Books.find({}).sort({ createdAt: -1 })
+    console.log("mostrecent",mostrecentbooks)
+
+    sort===true?mostrecentbooks.sort((a, b) => a.price - b.price):
+    mostrecentbooks.sort((a, b) => b.price - a.price);
+
+    console.log("mark111")
+    const allCategory = await Category.find({}).populate({
+      path: "eBooks",
+      match: { status: "Published" },
+      populate: "ratingAndReviews"
+    }).exec();
+
+    const allBooks = allCategory.flatMap((category) => category.eBooks);
+    const mostSellingBooks = allBooks.sort((a, b) => b.customerPurchased.length - a.customerPurchased.length).slice(0, 10);
+
+    console.log("most selling",mostSellingBooks)
+    sort===true?mostSellingBooks.sort((a, b) => a.price - b.price):
+    mostSellingBooks.sort((a, b) => b.price - a.price);
+
+    console.log("mark12")
+    return resp.status(200).json({
+      success: true,
+      data: {
+        mostrecentbooks,
+        mostSellingBooks,
+      
+      },
+      message: "get all the books"
+    })
+  } catch (error) {
+    return resp.status(400).json({
+      success: false,
+      message: "error occured"
+    })
+  }
+}
+
+
+exports.groupcategoryid = async (req, resp) => {
+  try {
+
+ const {categoryid}=req.body;
+
+    
+
+
+    const mostrecentbooks = await Books.find({category:categoryid}).sort({ createdAt: -1 })
+
+    const allCategory = await Category.find({_id:categoryid}).populate({
+      path: "eBooks",
+      match: { status: "Published" },
+      populate: "ratingAndReviews"
+    }).exec();
+
+    const allBooks = allCategory.flatMap((category) => category.eBooks);
+    const mostSellingBooks = allBooks.sort((a, b) => b.customerPurchased.length - a.customerPurchased.length).slice(0, 10);
+
+
+    return resp.status(200).json({
+      success: true,
+      data: {
+        mostrecentbooks,
+        mostSellingBooks,
+    
+      },
+      message: "get all the books"
+    })
+  } catch (error) {
+    return resp.status(400).json({
+      success: false,
+      message: "error occured"
+    })
+  }
+}
 exports.categoryPageDetails = async (req, resp) => {
   try {
-    console.log("mark category")
-    const { categoryid } = req.body;
-    console.log(categoryid)
+    console.log("mark category");
+
+    const { categoryid,sort } = req.body;
+    console.log(categoryid);
 
     const specificCategory = await Category.findById({ _id: categoryid }).populate({
       path: "eBooks",
@@ -203,42 +291,35 @@ exports.categoryPageDetails = async (req, resp) => {
       populate: "ratingAndReviews"
     }).exec();
 
-    console.log(specificCategory)
+    console.log(specificCategory);
 
-    // all categories
     if (!specificCategory) {
       return resp.status(402).json({
         success: false,
         message: "cannot find books"
-      })
+      });
     }
 
-    // Handle the case when there are no book
-    // if (specificCategory.eBooks.length === 0) {
-    //   console.log("No eBooks found for the selected category.")
-    //   return resp.status(404).json({
-    //     success: false,
-    //     message: "No eBooks found for the selected category.",
-    //   })
-    // }
+    // Sort ebooks by price in ascending order (Mongoose approach)
+    sort===true?specificCategory.eBooks.sort((a, b) => a.price - b.price):
+    specificCategory.eBooks.sort((a, b) => b.price - a.price);
 
-
-
+    // OR (using JavaScript array sort)
+    // const sortedEbooks = specificCategory.eBooks.sort((a, b) => a.price - b.price);
+    // specificCategory.eBooks = sortedEbooks;
 
     return resp.status(200).json({
       success: true,
       message: "data get successfully",
       data: specificCategory
-    })
-
+    });
   } catch (error) {
     resp.status(400).json({
       success: false,
       message: "error occured",
-
-    })
+    });
   }
-}
+};
 
 // exports.getAllCategories = async (req, resp) =>{
 //   try {
