@@ -23,7 +23,7 @@ const CategoryPage = () => {
   
          
         } catch (error) {
-          console.error(error); // Use console.error for errors
+          console.error(error); 
         }
       };
     
@@ -31,7 +31,7 @@ const CategoryPage = () => {
   
     }, [location.pathname]) // change depends upon location.pathname
 
-    // console.log("books",books)
+  
     return (
         <div className="border border-black bookPage">
         <div className='relative h-12'>

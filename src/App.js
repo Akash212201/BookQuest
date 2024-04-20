@@ -32,6 +32,7 @@ import AllUser from './Admin/pages/AllUser';
 import NewOrders from './Admin/pages/NewOrders';
 import AllOrders from './Admin/pages/AllOrders';
 import './App.css';
+import Profile from './User/Profile';
 
 
 const App = () => {
@@ -88,6 +89,9 @@ const App = () => {
           <Route path='/admin/dashboard/orders' element={<AllOrders />} />
           <Route path='/admin/dashboard/authors' element={<Authors />} />
           <Route path='/admin/dashboard/allusers' element={<AllUser />} />
+
+          {/* User */}
+          <Route path='/user/dashboard/profile' element={<Profile />} />
         </Routes>
       </div>
       {

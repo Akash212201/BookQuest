@@ -20,10 +20,10 @@ exports.createBook = async (req, resp) => {
       bookStock
 
     } = req.body;
-    const {thumbnail, pdfUrl} = req.files;
+    const { thumbnail, pdfUrl } = req.files;
     console.log(category)
 
-    console.log("category",category)
+    console.log("category", category)
 
     // console.log("pdfurl",pdfUrl);
 
@@ -33,9 +33,9 @@ exports.createBook = async (req, resp) => {
       !bookSummary ||
       !price ||
       !category ||
-    
+
       !thumbnail ||
-    
+
       !pdfUrl
     ) {
       resp.status(400).json({
@@ -56,18 +56,18 @@ exports.createBook = async (req, resp) => {
         message: "Invalid admin credentials!",
       });
     }
-console.log("mark5")
-console.log(thumbnail)
+    console.log("mark5")
+    console.log(thumbnail)
 
-const thumbnailImage = await imageUploadCloudinary(
-  thumbnail,
-  process.env.FOLDER_NAME
-  );
+    const thumbnailImage = await imageUploadCloudinary(
+      thumbnail,
+      process.env.FOLDER_NAME
+    );
 
-  console.log("mark6")
+    console.log("mark6")
 
     const PDFURL = await imageUploadCloudinary(pdfUrl, process.env.FOLDER_NAME);
-    console.log("pdfUrl",PDFURL);
+    console.log("pdfUrl", PDFURL);
 
     const categorydetail = await Category.findById({ _id: category });
 
@@ -78,15 +78,15 @@ const thumbnailImage = await imageUploadCloudinary(
       bookAuthor,
       bookSummary,
       price,
-      bookStock:bookStock,
-      status:"Published",
+      bookStock: bookStock,
+      status: "Published",
       thumbnail: thumbnailImage?.secure_url || '', // Use optional chaining to access secure_url property
       pdfUrl: PDFURL?.secure_url || '', // Use optional chaining to access secure_url property
       category: categorydetail?._id || null, // Use optional chaining to access _id property
       adminUser: adminDetails?._id || null, // Use optional chaining to access _id property
       noOfPages: PDFURL?.pages || null, // Use optional chaining to access pages property
     });
-    
+
     console.log("mark7")
 
     // update User model
@@ -166,8 +166,8 @@ exports.showAllEbooks = async (req, resp) => {
       .populate('category', 'categoryName');
 
     // Format the response to include categoryName directly in each book object
-    const formattedBooksDetails = booksDetails.map((book,index) => ({
-      id:index+1,
+    const formattedBooksDetails = booksDetails.map((book, index) => ({
+      id: index + 1,
 
       _id: book._id,
       bookName: book.bookName,
@@ -306,12 +306,12 @@ exports.getAdminBooks = async (req, resp) => {
 
 exports.deleteBook = async (req, resp) => {
   try {
-    const {bookid} = req.body;
+    const { bookid } = req.body;
     console.log(bookid)
     const bookdetails = await Books.findById(bookid)
     console.log("mark1")
-    if( bookdetails.customerPurchased){
-      for(const userid of bookdetails.customerPurchased) {
+    if (bookdetails.customerPurchased) {
+      for (const userid of bookdetails.customerPurchased) {
         console.log(userid)
         await User.findByIdAndUpdate(
           userid,
@@ -322,49 +322,49 @@ exports.deleteBook = async (req, resp) => {
       }
       console.log("mark2")
     }
-    
-    await User.findByIdAndUpdate(bookdetails.adminUser,{
-      $pull:{eBooks:bookid}
+
+    await User.findByIdAndUpdate(bookdetails.adminUser, {
+      $pull: { eBooks: bookid }
     })
     console.log("mark3")
     await Category.findByIdAndUpdate(bookdetails.category, {
       $pull: { eBooks: bookid },
     });
     console.log("mark4")
-    
+
     await Books.findByIdAndDelete(bookid);
     console.log("mark5")
-    
+
     return resp.status(200).json({
       success: true,
       message: "Successfully deleted the Book",
     });
   } catch (error) {
-   return  resp.status(400).json({
+    return resp.status(400).json({
       success: false,
       message: "error occured",
     });
   }
 };
 
-exports.reqBook=async (req,resp)=>{
-  try{
+exports.reqBook = async (req, resp) => {
+  try {
     const {
       bookName,
-    bookAuthor,
-    email,
-    mobile
-    }=req.body;
+      bookAuthor,
+      email,
+      mobile
+    } = req.body;
 
     console.log(bookName)
-    const bookresp=await ReqBook.create({
-  bookName,
-    bookAuthor,
-    email,
-    mobile
+    const bookresp = await ReqBook.create({
+      bookName,
+      bookAuthor,
+      email,
+      mobile
     });
 
-    if(!bookresp){
+    if (!bookresp) {
       return resp.status(400).json({
         success: false,
         message: "error in req book",
@@ -373,12 +373,12 @@ exports.reqBook=async (req,resp)=>{
 
     return resp.status(200).json({
       success: true,
-     
+
       message: "get the data",
     });
 
-  }catch(error){
-   return  resp.status(400).json({
+  } catch (error) {
+    return resp.status(400).json({
       success: false,
       message: "error occured",
     });

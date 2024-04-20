@@ -234,7 +234,28 @@ padding-inline: 30px;
   }
 }
 @media (max-width: 725px) {
+  .admin{
+    display: flex;
+  }
   .book-cards {
     grid-template-columns: 1fr;
   }
+}
+
+
+
+.title{
+  text-align: center;
+}
+
+.title h4{
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+
+input[type='file']{
+  display: none;
 }

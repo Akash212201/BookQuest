@@ -8,8 +8,6 @@ const Requestbook = () => {
     const [mobile, setMobile] = useState();
     const handleSubmit = async () => {
         if (!bookName && !email && !bookAuthor) {
-            
-
             toast.error("Marked feild cannot be blank");
             return;
         }
