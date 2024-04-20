@@ -6,7 +6,7 @@ import userImg from '../assests/profileImg.png'
 const Profile = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('example@gmail.com')
   const [address, setAddress] = useState('')
   const [profile, setProfile] = useState()
   const [mobile, setMobile] = useState('')
@@ -16,7 +16,6 @@ const Profile = () => {
     const data = {
       firstName: firstName,
       lastName: lastName,
-      email: email,
       mobile: mobile,
       address: address,
       profile: profile || userImg
@@ -49,8 +48,7 @@ const Profile = () => {
               placeholder="Last Name" className='lg:w-1/2 w-full border border-gray-500 outline-none p-2 rounded-lg' />
           </div>
           <div className="flex lg:flex-row flex-col justify-between items-center gap-4 my-4">
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email"
-              placeholder="Email Here" className='lg:w-1/2 w-full border border-gray-500 outline-none p-2 rounded-lg' />
+            <div className='lg:w-1/2 w-full border border-gray-500 outline-none p-2 rounded-lg bg-gray-300 text-black' >{email}</div>
             <input value={mobile} onChange={(e) => setMobile(e.target.value)} type="number"
               placeholder="Mobile Number" className='lg:w-1/2 w-full border border-gray-500 outline-none p-2 rounded-lg' />
           </div>
