@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import { Link } from 'react-router-dom';
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 
 const AdminSidebar = ({ sidebarOpen }) => {
   const [productMenuOpen, setProductMenuOpen] = useState(false);
   const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
-  const [orderMenuOpen, setOrderMenuOpen] = useState(false);
   const [usersMenuOpen, setUsersMenuOpen] = useState(false); 
 
   return (
-    <div className={`bg-white w-full z-10 overflow-y-hidden ${sidebarOpen ? 'hidden' : ''} `}>
+    <div className={`admin-sidebar bg-white ${sidebarOpen? 'lg:hidden' :'hide'}`}>
       <ul className='mt-[1rem] px-[1.45rem] mb-[60px]'>
         <li className='rounded-lg my-[0.2rem] px-4 py-2'>
           <Link to="/admin/dashboard">DashBoard</Link>

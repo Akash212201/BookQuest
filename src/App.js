@@ -54,7 +54,7 @@ const App = () => {
         !isDashboard ? (<div><Header1 /><Header /></div>) : <div><AdminNavbar toggleSidebar={toggleSidebar} /></div>
       }
 
-      <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hideSidebar' : 'admin'}` : ''}`}>
+      <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hidesidebar' : 'admin'}` : ''}`}>
 
         {
           isDashboard ? <AdminSidebar sidebarOpen={sidebarOpen} /> : <div></div>

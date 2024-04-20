@@ -116,7 +116,7 @@ const AllProducts = () => {
                   <td className=''>
                     
                       <button
-                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
+                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded mb-2">
                         Details
                       </button>
                     
@@ -127,8 +127,8 @@ const AllProducts = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-between items-center mt-4">
-        <div>
+      <div className="flex lg:flex-row flex-col justify-between items-center mt-4">
+        <div className='sm:w-full'>
           <label htmlFor="pageSize">Results per page: </label>
           <select
             id="pageSize"
@@ -145,9 +145,9 @@ const AllProducts = () => {
             ))}
           </select>
         </div>
-        <div>
+        <div className=' sm:w-full'>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mr-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded mr-4">
             Previous
           </button>
           <span className="pagination-inf">
@@ -157,11 +157,11 @@ const AllProducts = () => {
             </strong>{' '}
           </span>
           <button onClick={() => nextPage()} disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded ml-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded ml-4">
             Next
           </button>
         </div>
-        <div>
+        <div className='lg:flex justify-end items-end sm:w-full lg:pe-14'>
           <input
             type="text"
             value={inputPage}
@@ -170,7 +170,7 @@ const AllProducts = () => {
             placeholder="Jump Page Number"
           />
           <button onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded">
             Jump
           </button>
         </div>

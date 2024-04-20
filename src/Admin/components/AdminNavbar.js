@@ -1,25 +1,22 @@
-import React from 'react';
-import { IoIosMenu, IoIosSearch } from "react-icons/io";
+import React,{ useState } from 'react';
+import { IoIosMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import ProfileCard from '../../components/ProfileCard';
 
 const AdminNavbar = ({ toggleSidebar }) => {
+  const [isVisible,setIsVisible] = useState(false);
   return (
-    <div className="header lg:flex">
+    <div className="header flex">
       <div className='lg:px-[2.375rem] px-[0.75rem] w-[25%] flex justify-between items-center'>
-       <Link to="/" className='text-4xl'><h1>BookQuest</h1></Link>
-       <IoIosMenu className='z-10 text-[1.25rem] cursor-pointer mr-2 border border-black' onClick={toggleSidebar} />
+       <Link to="/" className='lg:text-4xl text-2xl'><h1>BookQuest</h1></Link>
       </div>
-      <div className='flex items-center text-[#6C7383] px-[2.375rem] py-1 lg:w-[80%] w-[60%] border border-green-500'>
-        <div className='flex justify-between items-center w-full'>
-          
-          <div className='flex items-center w-[300px] p-[0.5rem] ml-10'>
-            <IoIosSearch className='text-[2.25rem] cursor-pointer ' />
-            <input type="text" className='w-full outline-none text-[#6c7383] px-2 py-1' placeholder='Search Now' />
-          </div>
-          <div className='flex items-center justify-center rounded-[50%] overflow-hidden border w-[50px] h-[50px]'>
+      <div className='flex justify-between items-center text-[#6C7383] px-[0.5rem] py-1 lg:w-[80%] w-[60%]'>
+       <IoIosMenu className='z-10 text-[1.25rem] cursor-pointer mr-2' onClick={toggleSidebar} />
+        <div className='flex items-center justify-center rounded-[50%] overflow-hidden border w-[50px] h-[50px] relative cursor-pointer' 
+        onClick={() => setIsVisible(!isVisible)}>
             <img src="./1.jpg" alt="" className='w-full h-full object-cover' />
           </div>
-        </div>
+           { isVisible && <ProfileCard/> }
       </div>
     </div>
   );
