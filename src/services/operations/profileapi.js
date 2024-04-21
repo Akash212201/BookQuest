@@ -3,7 +3,7 @@ import { contact,userprofile } from "../apis";
 import { toast } from 'react-toastify';
 
 const { CONTACT_DETAILS } = contact;
-const {UPDATE_PROFILE}=userprofile
+const {UPDATE_PROFILE,UPDATE_IMAGE}=userprofile
 
 export const createcontact = (formdata) => {
     return async (dispatch) => {
@@ -49,3 +49,29 @@ export const updateProfile = async (formdata,token) => {
 
 
 }
+
+export const updateimage= async (formData,token) => {
+    const result={};
+ 
+         try {
+             console.log(formData)
+             const response = await apiconnector("POST", UPDATE_IMAGE, formData,{
+                 Authorization: `Bearer ${token}`})
+ 
+             console.log("profileresponse", response);
+             if (!response.data.success) {
+                 throw new Error(response.data.message);
+             }
+             localStorage.removeItem("user")
+             console.log(response.data.data)
+             localStorage.setItem("user",JSON.stringify(response.data.data));
+             toast.success("Update Profile Image Successfully .....");
+             return response.data.updateuser;
+ 
+         } catch (error) {
+             console.log(error);
+             toast.error("failed to add contact details");
+         }
+ 
+ 
+ }

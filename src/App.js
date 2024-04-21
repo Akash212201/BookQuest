@@ -38,8 +38,8 @@ import PrivateRoute from './components/Common/PrivateRoute';
 
 const App = () => {
   const location = useLocation();
-  const user = localStorage.getItem("user");
-  const user1 = user && JSON.parse(user);
+  // const user = localStorage.getItem("user");
+  // const user1 = user && JSON.parse(user);
   const token = localStorage.getItem('token');
 
   const isDashboard = location.pathname.includes('/dashboard');

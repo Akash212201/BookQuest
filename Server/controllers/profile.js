@@ -140,7 +140,7 @@ exports.updateDisplayPicture = async (req, resp) => {
     return resp.status(200).json({
       success: true,
       message: "Image has been updated Successfully",
-      data: updateuser,
+      updateuser,
     });
   } catch (error) {
     return resp.status(500).json({
