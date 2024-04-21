@@ -96,14 +96,12 @@ const BooksPage = () => {
               </select>
             </div>
         </div>
-        <div className="flex">
-            <div className=" w-[20%] bg-red-500 mobile">
-              
-            </div>
-            <div className="lg:w-[80%] w-[100%] relative py-4 px-2">
+       
+          
+            <div className=" w-[100%] relative py-4 px-6">
                 <Books books={books} />
             </div>
-        </div>
+        
     </div>
 
     )

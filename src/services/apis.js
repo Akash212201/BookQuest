@@ -51,5 +51,6 @@ export const orderEndPoints = {
 }
 
 export const userprofile = {
-    UPDATE_PROFILE:BASE_URL+"/user/updateProfile"
+    UPDATE_PROFILE:BASE_URL+"/user/updateProfile",
+    UPDATE_IMAGE:BASE_URL+"/user/updateImage"
 }
