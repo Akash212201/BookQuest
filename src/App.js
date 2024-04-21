@@ -40,8 +40,8 @@ import UserSidebar from './User/UserSidebar';
 
 const App = () => {
   const location = useLocation();
-  const user = localStorage.getItem("user");
-  const user1 = user && JSON.parse(user);
+  // const user = localStorage.getItem("user");
+  // const user1 = user && JSON.parse(user);
   const token = localStorage.getItem('token');
 
   const isDashboard = location.pathname.includes('/dashboard');
@@ -98,7 +98,6 @@ const App = () => {
           <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
         </Routes>
       </div>
-          <UserSidebar/>
       {
         !isDashboard &&
         <Footer />

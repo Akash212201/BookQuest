@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Convert from './convert'
 import userImg from '../assests/profileImg.png'
-import { updateProfile } from '../services/operations/profileapi'
+import { updateProfile, updateimage } from '../services/operations/profileapi'
 import { useSelector } from 'react-redux'
 
 
@@ -17,6 +17,14 @@ const Profile = () => {
   const [mobile, setMobile] = useState(user1.addressDetails && user1.addressDetails.mobile)
 
   const {token}=useSelector((state)=>state.auth);
+
+  const onUpload = async e => {
+
+  
+    setProfile(e.target.files[0]);
+  
+  }
+  
   const submitHandler = async () => {
    
     const formdata = {
@@ -28,9 +36,16 @@ const Profile = () => {
     }
     updatep(formdata,token);
     console.log(formdata, "new")
-   
+    if(profile!==user1.image){
+      console.log(user1.image)
+      console.log(profile)
+      console.log("inside profile")
+      const formData = new FormData();
+      formData.append("image",profile)
+      updateimg(formData,token);
+    }
 
-  }
+ }
 
   async function updatep(formdata,token){
     console.log(formdata);
@@ -38,10 +53,14 @@ const Profile = () => {
    
     console.log(resp);
   }
-  const onUpload = async e => {
-    const base64 = await Convert(e.target.files[0]);
-    setProfile(base64)
+
+  async function updateimg(formData,token){
+    const resp=await updateimage(formData,token);
+
+  console.log(resp);
+
   }
+  
   return (
     <div className="lg:me-6 my-3 p-6 w-full ">
       <div className="bg-white rounded-[20px] lg:px-[50px] px-[20px] py-[30px] lg:mt-0 mt-5  ">
