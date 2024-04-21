@@ -63,8 +63,8 @@ export const updateimage= async (formData,token) => {
                  throw new Error(response.data.message);
              }
              localStorage.removeItem("user")
-             console.log(response.data.data)
-             localStorage.setItem("user",JSON.stringify(response.data.data));
+             console.log(response.data.updateuser)
+             localStorage.setItem("user",JSON.stringify(response.data.updateuser));
              toast.success("Update Profile Image Successfully .....");
              return response.data.updateuser;
  

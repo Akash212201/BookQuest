@@ -136,7 +136,7 @@ exports.updateDisplayPicture = async (req, resp) => {
         image: imageCloudinary.secure_url,
       },
       { new: true }
-    );
+    ).populate("addressDetails").exec();
     return resp.status(200).json({
       success: true,
       message: "Image has been updated Successfully",
