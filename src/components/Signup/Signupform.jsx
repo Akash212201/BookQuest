@@ -122,7 +122,7 @@ const Signupform = () => {
                 value={accountType}
                 className=" rounded-lg border text-black px-[10px] py-[12px] w-full outline-none">
                 <option value="">Select Account Type</option>
-                <option value="Admin">Admin</option>
+             
                 <option value="Customer">Customer</option>
               </select>
             </label>

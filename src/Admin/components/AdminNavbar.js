@@ -2,8 +2,11 @@ import React,{ useState } from 'react';
 import { IoIosMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import ProfileCard from '../../components/ProfileCard';
+import userimg from "../../assests/profileImg.png"
 
 const AdminNavbar = ({ toggleSidebar }) => {
+  const user=localStorage.getItem("user")
+  const user1=user && JSON.parse(user)
   const [isVisible,setIsVisible] = useState(false);
   return (
     <div className="header flex">
@@ -14,7 +17,7 @@ const AdminNavbar = ({ toggleSidebar }) => {
        <IoIosMenu className='z-10 text-[1.25rem] cursor-pointer mr-2' onClick={toggleSidebar} />
         <div className='flex items-center justify-center rounded-[50%] overflow-hidden border w-[50px] h-[50px] relative cursor-pointer' 
         onClick={() => setIsVisible(!isVisible)}>
-            <img src="./1.jpg" alt="" className='w-full h-full object-cover' />
+            <img src={user1?.image || userimg} alt="" className='w-full h-full object-cover' />
           </div>
            { isVisible && <ProfileCard/> }
       </div>

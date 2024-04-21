@@ -1,26 +1,42 @@
 import { useState } from 'react'
 import Convert from './convert'
 import userImg from '../assests/profileImg.png'
+import { updateProfile } from '../services/operations/profileapi'
+import { useSelector } from 'react-redux'
 
 
 const Profile = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('example@gmail.com')
-  const [address, setAddress] = useState('')
-  const [profile, setProfile] = useState()
-  const [mobile, setMobile] = useState('')
+  const user=localStorage.getItem("user")
+  const user1=JSON.parse(user)
+  console.log("user123",user1.firstName)
+  const [firstName, setFirstName] = useState(user1.firstName)
+  const [lastName, setLastName] = useState(user1.lastName)
+  const [email, setEmail] = useState(user1?.email)
+  const [address, setAddress] = useState(user1.addressDetails && user1.addressDetails.address)
+  const [profile, setProfile] = useState(user1.image)
+  const [mobile, setMobile] = useState(user1.addressDetails && user1.addressDetails.mobile)
 
+  const {token}=useSelector((state)=>state.auth);
   const submitHandler = async () => {
    
-    const data = {
-      firstName: firstName,
-      lastName: lastName,
-      mobile: mobile,
-      address: address,
-      profile: profile || userImg
+    const formdata = {
+      firstName,
+      lastName,
+      mobile,
+      address,
+      // profile: profile || userImg
     }
-    console.log(data, "new")
+    updatep(formdata,token);
+    console.log(formdata, "new")
+   
+
+  }
+
+  async function updatep(formdata,token){
+    console.log(formdata);
+    const resp=await updateProfile(formdata,token);
+   
+    console.log(resp);
   }
   const onUpload = async e => {
     const base64 = await Convert(e.target.files[0]);

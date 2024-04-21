@@ -29,7 +29,7 @@ exports.resetPasswordToken = async (req, resp) => {
     console.log(updateuser);
 
     // const url = process.env.APP_URL + `/update-password/${newtoken}`;
-    const url=`http://localhost:3000/update-password/${newtoken}`
+    const url=`https://bookquest-five.vercel.app/update-password/${newtoken}`
     await mailSender(
       email,
       "password Update Link",
