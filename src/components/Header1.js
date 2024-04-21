@@ -9,10 +9,7 @@ import { logout } from '../services/operations/authapi';
 
 const Header1 = () => {
     const navigate = useNavigate();
-    const [showSidebar, setSidebar] = useState(false);
     const data = useSelector((state) => state.cart)
-    // const {token}=useSelector((state)=> state.auth);
-
     const token = localStorage.getItem('token');
     const dispatch = useDispatch()
 
@@ -20,10 +17,6 @@ const Header1 = () => {
         dispatch(logout(navigate));
     }
 
-
-    const hideSidebar = () => {
-        setSidebar(false);
-    }
     const [inputVisible, setInputVisible] = useState(false)
     return (
         <>

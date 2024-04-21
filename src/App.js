@@ -34,6 +34,8 @@ import AllOrders from './Admin/pages/AllOrders';
 import './App.css';
 import Profile from './User/Profile';
 import PrivateRoute from './components/Common/PrivateRoute';
+import MyOrders from './User/MyOrders';
+import UserSidebar from './User/UserSidebar';
 
 
 const App = () => {
@@ -93,8 +95,10 @@ const App = () => {
 
           {/* User */}
           <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
         </Routes>
       </div>
+          <UserSidebar/>
       {
         !isDashboard &&
         <Footer />

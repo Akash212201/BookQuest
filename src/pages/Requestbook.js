@@ -29,7 +29,7 @@ const Requestbook = () => {
         <div className='lg:h-[80vh] lg:px-20 md:px-16 px-4 py-4 rounded-md'>
             <h1 className='text-3xl font-semibold'>Request a book</h1>
             <p className='lg:text-xl text-lg font-normal text-[#909596]'>Please fill up the form below to Request a Book. We will inform you as soon as the book is available.</p>
-            <div className='border lg:px-10 px-4 py-5 mt-5'>
+            <div className='lg:px-10 px-4 py-5 mt-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
                 <div className='flex lg:flex-row flex-col justify-between items-center gap-4'>
                     <div className='lg:w-1/2 w-full'>
                         <label htmlFor="bookTitle" className='relative'>Book Title <span className='text-red-500 absolute -top-1'>*</span></label>
