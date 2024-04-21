@@ -7,18 +7,18 @@ const { imageUploadCloudinary } = require("../utils/imageUploadCloudinary");
 
 exports.updateProfile = async (req, resp) => {
   try {
-    const { firstName, lastName, address, country, state, pinCode } = req.body;
+    const { firstName, lastName, address, mobile } = req.body;
     const userid = req.user.id;
     const userdetails = await User.findById(userid);
     const addressid = userdetails.addressDetails;
 
+    console.log("firstName",firstName)
     const updateaddress = await Address.findByIdAndUpdate(
       addressid,
       {
         address: address,
-        country: country,
-        state: state,
-        pinCode: pinCode,
+        mobile:mobile,
+       
       },
       { new: true }
     );
@@ -26,14 +26,14 @@ exports.updateProfile = async (req, resp) => {
     const updateuser = await User.findByIdAndUpdate(userid, {
       firstName: firstName,
       lastName: lastName,
-    })
+    },{new:true})
       .populate("addressDetails")
       .exec();
     return resp
       .status(200)
       .json({
         message: "profile updated  successfully",
-        data: updateuser,
+        updateuser,
         success: true,
       });
   } catch (error) {

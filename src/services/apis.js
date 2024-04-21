@@ -50,3 +50,6 @@ export const orderEndPoints = {
     GET_USERS:BASE_URL+"/user/getallusers"
 }
 
+export const userprofile = {
+    UPDATE_PROFILE:BASE_URL+"/user/updateProfile"
+}

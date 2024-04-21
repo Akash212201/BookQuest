@@ -1,8 +1,9 @@
 import { apiconnector } from "../apioperator";
-import { contact } from "../apis";
+import { contact,userprofile } from "../apis";
 import { toast } from 'react-toastify';
 
 const { CONTACT_DETAILS } = contact;
+const {UPDATE_PROFILE}=userprofile
 
 export const createcontact = (formdata) => {
     return async (dispatch) => {
@@ -21,4 +22,30 @@ export const createcontact = (formdata) => {
         }
 
     }
+}
+
+export const updateProfile = async (formdata,token) => {
+   const result={};
+
+        try {
+            console.log(formdata)
+            const response = await apiconnector("POST", UPDATE_PROFILE, formdata,{
+                Authorization: `Bearer ${token}`})
+
+            console.log("profileresponse", response);
+            if (!response.data.success) {
+                throw new Error(response.data.message);
+            }
+            localStorage.removeItem("user")
+            console.log(response.data.updateuser)
+            localStorage.setItem("user",JSON.stringify(response.data.updateuser));
+            toast.success("Update Profile Successfully .....");
+            return response.data.updateuser;
+
+        } catch (error) {
+            console.log(error);
+            toast.error("failed to add contact details");
+        }
+
+
 }

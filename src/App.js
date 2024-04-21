@@ -33,13 +33,14 @@ import NewOrders from './Admin/pages/NewOrders';
 import AllOrders from './Admin/pages/AllOrders';
 import './App.css';
 import Profile from './User/Profile';
+import PrivateRoute from './components/Common/PrivateRoute';
 
 
 const App = () => {
   const location = useLocation();
   const user = localStorage.getItem("user");
+  const user1 = user && JSON.parse(user);
   const token = localStorage.getItem('token');
-  const user1 = JSON.parse(user);
 
   const isDashboard = location.pathname.includes('/dashboard');
 
@@ -57,7 +58,7 @@ const App = () => {
       <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hidesidebar' : 'admin'}` : ''}`}>
 
         {
-          isDashboard ? <AdminSidebar sidebarOpen={sidebarOpen} /> : <div></div>
+          isDashboard ?<PrivateRoute><AdminSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> : <div></div>
         }
         <Suspense fallback={<div>Loading...</div>}></Suspense>
         <Routes>
@@ -80,18 +81,18 @@ const App = () => {
           <Route path="/requestbook" element={<Requestbook />}></Route>
 
           {/* Dashboard Routes */}
-          <Route path='/admin/dashboard' element={<Dashboard />} />
-          <Route path='/admin/dashboard/addbook' element={<AddBook />} />
-          <Route path='/admin/dashboard/books' element={<AllBooks />} />
-          <Route path='/admin/dashboard/addcategory' element={<AddCategory />} />
-          <Route path='/admin/dashboard/categories' element={<Categories />} />
-          <Route path='/admin/dashboard/new-orders' element={<NewOrders />} />
-          <Route path='/admin/dashboard/orders' element={<AllOrders />} />
-          <Route path='/admin/dashboard/authors' element={<Authors />} />
-          <Route path='/admin/dashboard/allusers' element={<AllUser />} />
+          <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
+          <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
+          <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
+          <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />
+          <Route path='/admin/dashboard/new-orders' element={<PrivateRoute><NewOrders /></PrivateRoute>} />
+          <Route path='/admin/dashboard/orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
+          <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
+          <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
 
           {/* User */}
-          <Route path='/user/dashboard/profile' element={<Profile />} />
+          <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
         </Routes>
       </div>
       {

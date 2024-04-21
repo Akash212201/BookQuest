@@ -15,6 +15,10 @@ const addressSchema=new mongoose.Schema({
     pinCode:{
         type:Number,
         trim:true
+    },
+    mobile:{
+        type:Number,
+        trim:true
     }
 });
 

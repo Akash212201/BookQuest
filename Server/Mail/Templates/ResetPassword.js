@@ -60,7 +60,7 @@ const ResetPassword = (url) => {
             <div class="message">Password Update Link</div>
             <div class="body">
                
-           <a>Password Update Link-   ${url}</a>
+           <a >${url}</a>
                 <p>If you did not request this password change, please contact us immediately to secure your account.</p>
             </div>
             <div class="support">If you have any questions or need further assistance, please feel free to reach out to us
