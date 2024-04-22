@@ -73,7 +73,7 @@ const Profile = () => {
           <label htmlFor="Profile">
             <img src={profile || userImg} alt="" className='border-[4px] border-[#a2a2a2b0] w-[135px] rounded-[50%]'/>
           </label>
-          <input type="file" id="Profile" name="Profile" onChange={onUpload} />
+          <input type="file" id="Profile" name="Profile" onChange={onUpload} className='hidden' />
         </div>
         <div className="">
           <div className="flex lg:flex-row flex-col justify-between items-center gap-4">
