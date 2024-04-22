@@ -64,7 +64,7 @@ const Header1 = () => {
                         </div>
                     }
                   {
-                    user1.accountType==="Customer" &&   
+                   user1 && user1.accountType==="Customer" &&   
                     <Link to="/cart" >
                     <div className="flex items-center cursor-pointer relative">
                         <LuShoppingBag className="lg:mr-2 mr-5" />
