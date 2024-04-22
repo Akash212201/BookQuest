@@ -282,3 +282,42 @@ resp.status(200).json({
       })
   }
 }
+
+exports.instructorStats=async (req,resp)=>{
+  try{
+const orderdetails=await Paymentinfo.find({});
+const users=await User.find({accountType:"Customer"});
+const books=await Books.find({});
+console.log(users)
+
+let totalorders=0;
+let totalsale=0;
+for(let val of orderdetails){
+totalorders+=1;
+totalsale+=val.amount;
+
+}
+
+let totalusers=0;
+for(let val of users){
+  totalusers+=1;
+}
+
+let totalbooks=0;
+for(let val of books){
+  totalbooks+=1;
+}
+
+return resp.status(200).json({
+  success:true,
+  data:{
+    totalorders,
+    totalsale,
+    totalusers,
+    totalbooks
+  }
+})
+  }catch(error){
+
+  }
+}
