@@ -27,7 +27,7 @@ const SamplePrevArrow = (props) => {
     </div>
   )
 }
-const Upcomming = ({ books, title }) => {
+const Upcomming = ({ books,url, title }) => {
   console.log("title ",title,books)
 
   
@@ -71,7 +71,7 @@ const Upcomming = ({ books, title }) => {
       <div className='mb-5'>
       <div className='flex justify-between items-center px-3 mb-14'>
         <h1 className="font-medium text-3xl">{title}</h1>
-        <Link to="/books" className="text-[#e50813] font-medium">View All</Link>
+        <Link to={`/${url}`} className="text-[#e50813] font-medium">View All</Link>
       </div>
 
       <div> 

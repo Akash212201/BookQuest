@@ -94,6 +94,9 @@ const App = () => {
           <Route path='/admin/dashboard/orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
           <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
           <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
+          <Route path='/admin/dashboard/bookinfo/:id' element={<BookInfo />} />
+
+
 
           {/* User */}
           <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
