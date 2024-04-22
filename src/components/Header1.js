@@ -12,6 +12,9 @@ const Header1 = () => {
     const data = useSelector((state) => state.cart)
     const token = localStorage.getItem('token');
     const dispatch = useDispatch()
+    const user=localStorage.getItem("user")
+    const user1=JSON.parse(user)
+    console.log(user1)
 
     function logouthandler() {
         dispatch(logout(navigate));
@@ -60,12 +63,15 @@ const Header1 = () => {
                             {/* User is available*/}
                         </div>
                     }
+                  {
+                    user1.accountType==="Customer" &&   
                     <Link to="/cart" >
-                        <div className="flex items-center cursor-pointer relative">
-                            <LuShoppingBag className="lg:mr-2 mr-5" />
-                            <span className=' absolute -top-3 right-[2px] text-sm bg-green-500 text-white px-1 rounded-[50%]'>{data.cartItems.length}</span>
-                        </div>
-                    </Link>
+                    <div className="flex items-center cursor-pointer relative">
+                        <LuShoppingBag className="lg:mr-2 mr-5" />
+                        <span className=' absolute -top-3 right-[2px] text-sm bg-green-500 text-white px-1 rounded-[50%]'>{data.cartItems.length}</span>
+                    </div>
+                </Link>
+                  }
                     <div className="lg:hidden md:hidden cursor-pointer relative" >
                         <div className='w-[30px] h-[5px] mb-1 naviline1'></div>
                         <div className='w-[30px] h-[5px] mb-1 naviline2'></div>

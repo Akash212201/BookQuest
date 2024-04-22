@@ -1,34 +1,50 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
-import Alldata from '../pages/MOCK_DATA.json';
 
 import { useSortBy, useTable, usePagination } from 'react-table';
+import { showallbooks } from '../../services/operations/bookcategory';
+import { Link } from 'react-router-dom';
 
 const Columns = [
+  {
+    accessor: 'id',
+    header: 'No',
+  },
   {
     accessor: 'bookName',
     header: 'Book',
   },
   {
+    accessor: 'bookAuthor',
+    header: 'Book Author',
+  },
+  {
     accessor: 'price',
-    header: 'Tracking ID',
+    header: 'Amount',
   },
-  {
-    accessor: 'stock',
-    header: 'Date',
-  },
-  
-  {
-    accessor: 'status',
-    header: 'Status',
-    editable: true,
-  },
+
+
 ];
 
 const AllProducts = () => {
   const columns = useMemo(() => Columns, []);
-  const data = useMemo(() => Alldata, []);
+  
+  
+  const [books,setbooks]=useState([]);
+  
+  useEffect(() => {
+    async function fetchdata(){
+      const resp=await showallbooks();
+      console.log(resp.data);
+      setbooks(resp.data)
+    }
+    fetchdata();
+  }, [])
 
+
+  const data = useMemo(() => books, [books]);
+  
+  
   const table = useTable(
     {
       columns,
@@ -96,7 +112,7 @@ const AllProducts = () => {
                     </div>
                   </th>
                 ))}
-                <th>Edit/Update</th>
+                <th>Book Details</th>
               </tr>
             ))}
           </thead>
@@ -115,10 +131,12 @@ const AllProducts = () => {
                   ))}
                   <td className=''>
                     
+                      <Link to={`bookinfo/${row.original._id}`} >
                       <button
-                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded mb-2">
+                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded mb-2" >
                         Details
                       </button>
+                      </Link>
                     
                   </td>
                 </tr>

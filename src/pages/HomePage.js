@@ -10,6 +10,7 @@ const HomePage = () => {
   const [categorybooks,setcategorybooks]=useState([])
   const [latestbooks,setlatestbooks]=useState([])
   const [mostSellingBooks,setmostSellingBooks]=useState([])
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,9 +34,9 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
-      <Upcomming books={categorybooks} title="Available Books" />
-      <Upcomming books={latestbooks} title="New Arrival" />
-      <Upcomming books={mostSellingBooks} title="Bestseller" />
+      <Upcomming books={categorybooks} url={"availablebooks"} title="Available Books" />
+      <Upcomming books={latestbooks} url={"newarrival"} title="New Arrival" />
+      <Upcomming books={mostSellingBooks} url={"bestseller"} title="Bestseller" />
       <Newsletter />
     </div>
   );

@@ -6,7 +6,9 @@ import RecentOrders from '../components/RecentOrders'
 import DashBoardItems from '../components/DashBoardItems'
 
 
+
 const Dashboard = () => {
+  
   return (
     <div className="mt-6 mx-6">
       <DashBoardItems />

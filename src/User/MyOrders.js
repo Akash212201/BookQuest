@@ -1,14 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { useSortBy, useTable, usePagination } from 'react-table';
-import { showallbooks } from '../services/operations/bookcategory';
+import { allpurchasedorders, showallbooks } from '../services/operations/bookcategory';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Columns = [
-  {
-    accessor: 'id',
-    header: 'No',
-  },
+
   {
     accessor: 'thumbnail', 
     header: 'BookImage',
@@ -22,7 +20,7 @@ const Columns = [
     header: 'Author',
   },
   {
-    accessor: 'categoryName',
+    accessor: 'category.categoryName',
     header: 'Category',
   },
   {
@@ -35,11 +33,13 @@ const Columns = [
 const MyOrders = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
+  const {token}=useSelector((state)=>state.auth)
+  
 
   useEffect(() => {
     async function fetchBooks() {
       try {
-        const resp = await showallbooks();
+        const resp = await allpurchasedorders(token);
         console.log(resp.data);
         setbooks(resp.data);
       } catch (error) {
@@ -105,7 +105,7 @@ const MyOrders = () => {
             ))}
           </thead>
           <tbody {...getTableBodyProps()} className='w-full border border-black'>
-            {page.map((row) => {
+            {page.map((row,i) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()} className='text-center border border-black'>
@@ -120,7 +120,7 @@ const MyOrders = () => {
                     </td>
                   ))}
                   <td>
-                    <Link to="/user/dashboard/viewbook">
+                    <Link to={`/user/dashboard/viewbook/${books[i]._id}`}>
                     <button
                       className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mb-2">
                       View Book
