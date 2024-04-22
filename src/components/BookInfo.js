@@ -82,7 +82,7 @@ const BookInfo = () => {
                                 </button>
                             </div>
                        {
-                        user.accountType==="Customer" &&      <div className='my-10 flex items-center lg:text-xl'>
+                        user1 && user1.accountType==="Customer" &&      <div className='my-10 flex items-center lg:text-xl'>
                         <button onClick={paymenthandler} className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
                             <MdOutlineShoppingCart className='mr-2' />
                             Buy Now
