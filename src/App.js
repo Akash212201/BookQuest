@@ -34,7 +34,7 @@ import AllOrders from './Admin/pages/AllOrders';
 import './App.css';
 import Profile from './User/Profile';
 import PrivateRoute from './components/Common/PrivateRoute';
-
+import PdfViewer from "./pages/PdfView"
 
 const App = () => {
   const location = useLocation();
@@ -66,6 +66,7 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/newarrival' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
+          <Route path='/pdf' element={<PdfViewer />} />
           <Route path='/bestseller' element={<BooksPage />} />
           <Route path='/:id' element={<CategoryPage  />} />
           <Route path='/fiction' element={<BooksPage />} />

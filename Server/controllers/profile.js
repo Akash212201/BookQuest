@@ -97,6 +97,7 @@ exports.getAllUserDetails = async (req, resp) => {
 
 exports.updateDisplayPicture = async (req, resp) => {
   try {
+    console.log("mark")
     console.log("request",req)
     //   cookies: {
     //     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVucnVmZmxlZGJhbnphaThAZnJlZXRoZWNvb2tpZXMuY29tIiwiaWQiOiI2NWRlZGVhODlhNWMxYjU2MmQyMjZmZWMiLCJhY2NvdW50VHlwZSI6IkFkbWluIiwiaWF0IjoxNzA5MjAxNzE4LCJleHAiOjE3MDkyODgxMTh9.sg66tw7hsvpIya3wefOF1SDOiZBBU7eOk4ghz0PDR6E'
