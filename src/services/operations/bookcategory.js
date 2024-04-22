@@ -8,7 +8,7 @@ import { orderEndPoints } from "../apis";
 
 const { HOMEPAGE_BOOKS ,CATEGORY_PAGE_ID,CREATE_CATEGORY, GROUP_CATEGORY_SORT, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
 const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK } = books;
-const { GET_ORDERS,GET_USERS, ALL_PURCHASED_BOOKS}=orderEndPoints;
+const { GET_ORDERS,GET_USERS, ALL_PURCHASED_BOOKS,DASHBOARD_STATS}=orderEndPoints;
 export const groupCategory = async () => {
   let result = [];
   try {
@@ -304,5 +304,28 @@ export const allpurchasedorders = async (token) => {
   } catch (error) {
     console.log(error);
     toast.error("failed to show orders");
+  }
+};
+
+
+
+export const dashboardstats = async (token) => {
+  let result = {};
+  try {
+    console.log("mark");
+    const response = await apiconnector("GET",DASHBOARD_STATS, null,{
+      Authorization: `Bearer ${token}`
+    });
+    console.log("show Dashboard stats", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.data;
+    console.log("result", result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    toast.error("failed to show dashboard stats");
   }
 };

@@ -48,7 +48,8 @@ export const customerEndpoints = {
 export const orderEndPoints = {
     GET_ORDERS:BASE_URL+"/user/allorders",
     GET_USERS:BASE_URL+"/user/getallusers",
-    ALL_PURCHASED_BOOKS:BASE_URL+"/user/allPurchasedBooks"
+    ALL_PURCHASED_BOOKS:BASE_URL+"/user/allPurchasedBooks",
+    DASHBOARD_STATS:BASE_URL+"/user/instructorStats",
 }
 
 export const userprofile = {
