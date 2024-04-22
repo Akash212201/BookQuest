@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from './Chart';
+import { dashboardpiechart } from '../../services/operations/bookcategory';
+import { useSelector } from 'react-redux';
 
 const PieChart = () => {
+
+  const [stats,setstats]=useState({})
+  const {token}=useSelector((state)=>state.auth)
+
+  useEffect(()=>{
+    async function fetchdata(){
+const resp=await dashboardpiechart(token);
+console.log(resp.data)
+setstats(resp.data)
+    }
+    fetchdata();
+
+  },[])
+
   const options = {
     responsive: true,
   };
 
+
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+    labels: stats.categoryname,
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2],
+        data: stats.categorybooks,
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(54, 162, 235, 0.5)',

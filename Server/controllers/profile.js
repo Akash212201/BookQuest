@@ -1,6 +1,7 @@
 
 const Address = require("../models/Address");
 const Books = require("../models/Books");
+const Category = require("../models/Category");
 const Paymentinfo = require("../models/Paymentinfo");
 const User = require("../models/User");
 const { imageUploadCloudinary } = require("../utils/imageUploadCloudinary");
@@ -318,6 +319,84 @@ return resp.status(200).json({
   }
 })
   }catch(error){
+
+  }
+}
+
+
+
+exports.piechartdashboard=async (req,resp)=>{
+  try{
+const category=await Category.find({});
+ console.log(category)
+let categoryname=[];
+let categorybooks=[];
+for(let val of category){
+categoryname.push(val.categoryName)
+categorybooks.push(val.eBooks.length)
+}
+
+return resp.status(200).json({
+  success:true,
+  data:{
+    categoryname,
+    categorybooks
+  }
+})
+
+  }
+  catch(error){
+
+  }
+}
+
+
+exports.barchartdashboard=async (req,resp)=>{
+  try{
+const books=await Books.find({});
+
+let bookname=[];
+let totalusers=[];
+for(let val of books){
+bookname.push(val.bookName)
+totalusers.push(val.customerPurchased.length)
+}
+
+return resp.status(200).json({
+  success:true,
+  data:{
+   bookname,
+   totalusers
+  }
+})
+
+  }
+  catch(error){
+
+  }
+}
+
+exports.linechartdashboard=async (req,resp)=>{
+  try{
+const books=await Books.find({});
+ 
+let bookname=[];
+let totalsale=[];
+for(let val of books){
+bookname.push(val.bookName)
+totalsale.push(val.customerPurchased.length*val.price)
+}
+
+return resp.status(200).json({
+  success:true,
+  data:{
+   bookname,
+   totalsale
+  }
+})
+
+  }
+  catch(error){
 
   }
 }

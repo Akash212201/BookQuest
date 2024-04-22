@@ -50,6 +50,9 @@ export const orderEndPoints = {
     GET_USERS:BASE_URL+"/user/getallusers",
     ALL_PURCHASED_BOOKS:BASE_URL+"/user/allPurchasedBooks",
     DASHBOARD_STATS:BASE_URL+"/user/instructorStats",
+    DASHBOARD_PIECHART:BASE_URL+"/user/piechartdashboard",
+    DASHBOARD_LINECHART:BASE_URL+"/user/linechartdashboard",
+    DASHBOARD_BARCHART:BASE_URL+"/user/barchartdashboard",
 }
 
 export const userprofile = {
