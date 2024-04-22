@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from './Chart';
+
+import { dashboardbarchart } from '../../services/operations/bookcategory';
+import { useSelector } from 'react-redux';
 
 const BarChart = () => {
     const options = {
@@ -7,11 +10,25 @@ const BarChart = () => {
         
       };
 
+      const [stats,setstats]=useState({})
+      const {token}=useSelector((state)=>state.auth)
+    
+      useEffect(()=>{
+        async function fetchdata(){
+    const resp=await dashboardbarchart(token);
+    console.log(resp.data)
+    setstats(resp.data)
+        }
+        fetchdata();
+    
+      },[])
+
   const data = {
-    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    labels:stats.bookname,
     datasets: [
       {
-        data: [7, 5, 10, 22],
+        label: 'Users',
+        data:stats.totalusers,
         backgroundColor: 'rgb(13, 214, 184)',
         barThickness: 25,
       },

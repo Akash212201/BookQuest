@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from './Chart';
+import { dashboardlinechart } from '../../services/operations/bookcategory';
+import { useSelector } from 'react-redux';
 
 const LineChart = () => {
   const options = {
@@ -15,14 +17,27 @@ const LineChart = () => {
     },
   };
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const [stats,setstats]=useState({})
+  const {token}=useSelector((state)=>state.auth)
+
+  useEffect(()=>{
+    async function fetchdata(){
+const resp=await dashboardlinechart(token);
+console.log(resp.data)
+setstats(resp.data)
+    }
+    fetchdata();
+
+  },[])
+
+  const labels = stats.bookname;
 
   const data = {
     labels,
     datasets: [
       {
-        label: 'Dataset 1',
-        data: [-10, -20, 2, 10, 50, 100],
+        label: 'Sale',
+        data: stats.totalsale,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
