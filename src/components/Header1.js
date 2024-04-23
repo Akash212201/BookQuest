@@ -45,7 +45,10 @@ const Header1 = () => {
                             <div className=' absolute z-10 top-9 -left-8 bg-[#f0f4f9] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
                                 <div className='text-lg px-2 text-center'>
                                     {
-                                        token && <Link to="/admin/dashboard">DashBoard</Link>
+                                        token &&  user1 && user1.accountType==="Admin" && <Link to="/admin/dashboard">DashBoard</Link>
+                                    }
+                                    {
+                                        token &&  user1 && user1.accountType==="Customer" && <Link to="/user/dashboard/orders">DashBoard</Link>
                                     }
                                 </div>
                                 {

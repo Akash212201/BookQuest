@@ -32,7 +32,7 @@ const PieChart = () => {
     labels: stats.categoryname,
     datasets: [
       {
-        label: '# of Votes',
+        label: 'No of Books',
         data: stats.categorybooks,
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
