@@ -75,7 +75,6 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/newarrival' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
-          <Route path='/pdf' element={<EBookView />} />
           <Route path='/bestseller' element={<BooksPage />} />
           <Route path='/:id' element={<CategoryPage  />} />
           <Route path='/fiction' element={<BooksPage />} />
@@ -107,7 +106,7 @@ const App = () => {
           {/* User */}
           <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
-          <Route path='/user/dashboard/ebook' element={<EBookView />} />
+          <Route path='/user/dashboard/viewbook/:id' element={<EBookView />} />
         </Routes>
       </div>
       {

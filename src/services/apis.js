@@ -34,7 +34,8 @@ SHOW_ALL_BOOKS:BASE_URL+"/books/showAllBooks",
 SHOW_BOOK_DETAILS:BASE_URL+"/books/showBookDetails",
 ADD_NEW_BOOK:BASE_URL+"/books/createBook",
 DELETE_BOOK:BASE_URL+"/books/deleteBook",
-REQ_BOOK:BASE_URL+"/books/reqBook"
+REQ_BOOK:BASE_URL+"/books/reqBook",
+VIEW_BOOK:BASE_URL+"/books/showBookdetails"
 }
 
 // STUDENTS ENDPOINTS
@@ -53,6 +54,7 @@ export const orderEndPoints = {
     DASHBOARD_PIECHART:BASE_URL+"/user/piechartdashboard",
     DASHBOARD_LINECHART:BASE_URL+"/user/linechartdashboard",
     DASHBOARD_BARCHART:BASE_URL+"/user/barchartdashboard",
+   
 }
 
 export const userprofile = {

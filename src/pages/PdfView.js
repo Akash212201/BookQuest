@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Document, Page } from 'react-pdf';
 import { pdfjs } from 'react-pdf';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { viewbookdetails } from '../services/operations/bookcategory';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -8,6 +11,22 @@ const EBookView = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const containerRef = useRef(null);
+  const [book,setbook]=useState({});
+  const {token}=useSelector((state)=> state.auth)
+
+  const location = useLocation();
+  const id = location.pathname.split('/').pop();
+
+  // console.log(id)
+  const fetchData = async () => {
+    let response = await viewbookdetails(id,token);
+    console.log(response.data)
+    setbook(response.data);
+};
+
+useEffect(() => {
+    fetchData();
+}, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +74,7 @@ const EBookView = () => {
       
       <div className="bg-[#2f2f2f] ebook flex justify-center overflow-y-auto border-b border-black h-[68vh]" ref={containerRef}>
         <Document
-          file="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713104339/ebookapp/aoqipxww3cfaj4erkamh.pdf"
+          file={book.pdfUrl}
           onLoadSuccess={onDocumentLoadSuccess}
         >
           {Array.from(new Array(numPages), (el, index) => (
