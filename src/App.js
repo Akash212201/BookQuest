@@ -38,13 +38,14 @@ import PrivateRoute from './components/Common/PrivateRoute';
 import MyOrders from './User/MyOrders';
 import UserSidebar from './User/UserSidebar';
 import EBookView from "./pages/PdfView"
-import UpdateBook from './Admin/pages/UpdateBook';
 import './App.css';
+import UpdateBook from './Admin/pages/UpdateBook';
 
 const App = () => {
   const location = useLocation();
   const user = localStorage.getItem("user");
   const user1 = user && JSON.parse(user);
+  console.log("my name",user)
   const token = localStorage.getItem('token');
 
   const isDashboard = location.pathname.includes('/dashboard');
@@ -63,12 +64,7 @@ const App = () => {
       <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hidesidebar' : 'admin'}` : ''}`}>
 
         {
-          isDashboard && user1  && user1.accountType==="Admin" && <PrivateRoute><AdminSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> 
-        }
-
-       
-        {
-         user1  && user1.accountType==="Customer" && <PrivateRoute><UserSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> 
+          isDashboard ? user1.accountType === "Customer" ? <UserSidebar sidebarOpen={sidebarOpen}/> : <PrivateRoute><AdminSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> : <div></div>
         }
         <Suspense fallback={<div>Loading...</div>}></Suspense>
         <Routes>
@@ -94,7 +90,7 @@ const App = () => {
           {/* Dashboard Routes */}
           <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
-          <Route path='/admin/dashboard/editbook/:id' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
+          <Route path='/admin/dashboard/addbook' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
           <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
           <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
           <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />

@@ -9,7 +9,7 @@ const AddBook = () => {
   const [bookStock, setbookStock] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnail1, setThumbnail1] = useState("");
-  const [category, setCategory] = useState(""); 
+  const [category, setCategory] = useState("");
   const [bookSummary, setBookSummary] = useState("");
   const [pdfUrl, setpdf] = useState(null);
   const [pdfUrl1, setpdf1] = useState("");
@@ -163,15 +163,15 @@ const AddBook = () => {
           ))}
           <div className='lg:w-1/2 w-full pe-[6px]'>
             <select
-            value={category} // Set the value of the select to the selected category
-            onChange={handleCategoryChange} // Handle category change
-            className="w-full pr-2 mb-2 text-lg outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] "
-          >
-            <option value="">Choose a Category</option>
-            {category1.map((item, index) => (
-              <option key={index} value={item?._id}>{item?.categoryName}</option>
-            ))}
-          </select>
+              value={category}
+              onChange={handleCategoryChange}
+              className="w-full pr-2 mb-2 text-lg outline-none border border-[#7da0fa] rounded text-[#6C7383] px-[10px] py-[8px] "
+            >
+              <option value="">Choose a Category</option>
+              {category1.map((item, index) => (
+                <option key={index} value={item?._id}>{item?.categoryName}</option>
+              ))}
+            </select>
           </div>
           <button type="submit"
             className="block px-[1.75rem] py-2 rounded-lg bg-[#7DA0FA] hover:bg-[#7978E9] text-white text-xl">
