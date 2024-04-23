@@ -4,6 +4,7 @@ import { useSortBy, useTable, usePagination } from 'react-table';
 import { deletebook, showallbooks } from '../../services/operations/bookcategory';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Link } from 'react-router-dom';
 
 const Columns = [
   {
@@ -40,14 +41,13 @@ const Columns = [
 const AllBooks = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
-  const [editingRows, setEditingRows] = useState({});
   const { token } = useSelector(state => state.auth);
 
   useEffect(() => {
     async function fetchBooks() {
       try {
         const resp = await showallbooks();
-        console.log(resp.data);
+        console.log("my data",resp.data);
         setbooks(resp.data);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -154,10 +154,12 @@ const AllBooks = () => {
                   ))}
                   <td className=''>
                     <div className='flex justify-evenly py-2 items-center'>
+                      <Link to={`/admin/dashboard/editbook/${row.cells[0].row.original._id}`}>
                       <button
                         className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
                         Edit
                       </button>
+                      </Link>
                       <button
                         className="px-4 py-1 hover:text-red-500 rounded text-xl cursor-default">
                         < RiDeleteBin6Line onClick={() => deletehandler(row.cells[0].row.original._id)}

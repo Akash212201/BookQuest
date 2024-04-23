@@ -38,6 +38,7 @@ import PrivateRoute from './components/Common/PrivateRoute';
 import MyOrders from './User/MyOrders';
 import UserSidebar from './User/UserSidebar';
 import EBookView from "./pages/PdfView"
+import UpdateBook from './Admin/pages/UpdateBook';
 import './App.css';
 
 const App = () => {
@@ -88,6 +89,7 @@ const App = () => {
           {/* Dashboard Routes */}
           <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
+          <Route path='/admin/dashboard/editbook/:id' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
           <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
           <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
           <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />
