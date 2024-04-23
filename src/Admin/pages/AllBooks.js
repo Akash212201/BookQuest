@@ -1,20 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 import { useSortBy, useTable, usePagination } from 'react-table';
 import { deletebook, showallbooks } from '../../services/operations/bookcategory';
-import { useSelector } from 'react-redux';
+import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
-//componet to show all product 
-//some correction are pending
-//table header
 const Columns = [
   {
     accessor: 'id',
     header: 'ID',
   },
   {
-    accessor: 'thumbnail', // Make sure this matches the accessor used in the data
-    header: 'BookImage',
+    accessor: 'thumbnail',
+    header: 'Book Image',
   },
   {
     accessor: 'bookName',
@@ -31,12 +29,10 @@ const Columns = [
   {
     accessor: 'price',
     header: 'Price',
-    editable: true,
   },
   {
     accessor: 'bookStock',
     header: 'Stock',
-    editable: true,
   },
 ];
 
@@ -45,7 +41,6 @@ const AllBooks = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
   const [editingRows, setEditingRows] = useState({});
-  const [dataa, setDataa] = useState();
   const { token } = useSelector(state => state.auth);
 
   useEffect(() => {
@@ -56,16 +51,12 @@ const AllBooks = () => {
         setbooks(resp.data);
       } catch (error) {
         console.error("Error fetching books:", error);
-        // Handle error here, e.g., show an error message to the user
       }
     }
     fetchBooks();
   }, []);
 
   const data = useMemo(() => books, [books]);
-
-
-  console.log("object", data)
   const table = useTable(
     {
       columns,
@@ -115,21 +106,6 @@ const AllBooks = () => {
     }
   };
 
-  // Function to handle editing value
-  const handleEdit = (_id, columnId, value) => {
-
-  };
-
-
-  // Function to toggle editing state for a row
-  const toggleRowEditing = (rowIndex) => {
-    setEditingRows(prevEditingRows => ({
-      ...prevEditingRows,
-      [rowIndex]: !prevEditingRows[rowIndex],
-    }));
-
-  };
-
   return (
     <div className='me-6 my-3 p-6 '>
       <h1 className='text-2xl font-semibold tracking-wide'>All Books</h1>
@@ -157,63 +133,40 @@ const AllBooks = () => {
                     </div>
                   </th>
                 ))}
-                <th>Edit/Update</th>
+                <th className='bg-[#f2f4ff]'>Edit/Update</th>
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()} className='w-full border border-red-900'>
-            {page.map((row, rowIndex) => {
+          <tbody {...getTableBodyProps()} className='w-full border border-black'>
+            {page.map((row) => {
               prepareRow(row);
-              const isRowEditing = editingRows[rowIndex];
               return (
-                <tr {...row.getRowProps()} className='text-center'>
+                <tr {...row.getRowProps()} className='text-center border border-black'>
                   {row.cells.map((cell, index) => (
-                    <td key={index} className={`h-full ${cell.column.header === 'BookImage' ? 'flex justify-center items-center border border-black' : 'border border-black'}`}>
-
+                    <td key={index} className={`h-full ${cell.column.header === 'Book Image' ? 'flex justify-center items-center ' : 'border border-black'}`}>
                       {
-
-                        cell.column.header === 'BookImage' ? (
+                        cell.column.header === 'Book Image' ? (
                           <img src={cell.value} alt="BookImage" className='w-[80px]' style={{ maxWidth: '100px', maxHeight: '100px' }} />
-
-
-                        ) : cell.column.editable && isRowEditing ? (
-                          <input
-                            type="text"
-                            value={cell.value}
-                            onChange={(e) => handleEdit(rowIndex, cell.column.id, e.target.value)}
-                            className="outline-none"
-                          />
-
                         ) : (
                           cell.render('Cell')
                         )}
                     </td>
                   ))}
                   <td className=''>
-                    {isRowEditing ? (
-                      <button onClick={() => toggleRowEditing(rowIndex)}
-                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
-                        Update
-                      </button>
-                    ) : (
-                      <button onClick={() => toggleRowEditing(rowIndex)}
-                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
+                    <div className='flex justify-evenly py-2 items-center'>
+                      <button
+                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
                         Edit
                       </button>
-                    )}
+                      <button
+                        className="px-4 py-1 hover:text-red-500 rounded text-xl cursor-default">
+                        < RiDeleteBin6Line onClick={() => deletehandler(row.cells[0].row.original._id)}
+                          className=' cursor-pointer z-10'
+                        />
+                      </button>
+                    </div>
                   </td>
-                  <td>
 
-
-
-                    <button onClick={() => deletehandler(row.cells[0].row.original._id)}
-                      className="px-4 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mb-2">
-                      {
-                        console.log("row", row)
-                      }
-                      Delete
-                    </button>
-                  </td>
                 </tr>
               );
             })}
@@ -240,7 +193,7 @@ const AllBooks = () => {
         </div>
         <div>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mr-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mr-4">
             Previous
           </button>
           <span className="pagination-inf">
@@ -250,7 +203,7 @@ const AllBooks = () => {
             </strong>{' '}
           </span>
           <button onClick={() => nextPage()} disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded ml-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded ml-4">
             Next
           </button>
         </div>
@@ -263,7 +216,7 @@ const AllBooks = () => {
             placeholder="Jump Page Number"
           />
           <button onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
             Jump
           </button>
         </div>

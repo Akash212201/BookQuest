@@ -5,26 +5,33 @@ import { dashboardbarchart } from '../../services/operations/bookcategory';
 import { useSelector } from 'react-redux';
 
 const BarChart = () => {
-    const options = {
-        responsive: true,
-        
-      };
+  const options = {
+    responsive: true,
 
-      const [stats,setstats]=useState({})
-      const {token}=useSelector((state)=>state.auth)
-    
-      useEffect(()=>{
-        async function fetchdata(){
-    const resp=await dashboardbarchart(token);
-    console.log(resp.data)
-    setstats(resp.data)
-        }
-        fetchdata();
-    
-      },[])
+  };
+
+  const [stats, setstats] = useState({})
+  const { token } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+
+    const fetchdata = async () => {
+      try {
+        const resp = await dashboardbarchart(token);
+        console.log(resp.data)
+        setstats(resp.data)
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+    fetchdata();
+
+
+  }, [])
 
   const data = {
-    labels:stats.bookname,
+    labels: stats.bookname,
     datasets: [
       {
         label: 'Customers',
@@ -35,7 +42,7 @@ const BarChart = () => {
     ],
   };
 
-  return <Chart type="bar" options={options} data={data}/>;
+  return <Chart type="bar" options={options} data={data} />;
 };
 
 export default BarChart;

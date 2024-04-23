@@ -66,11 +66,13 @@ const Authors = () => {
     }
   };
   return (
-    <div className='me-6 my-8 bg-white p-6 rounded shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
-      <div className='flex justify-between items-center'>
-      <h1 className='text-2xl font-semibold tracking-wide'>Authors List </h1>
-        <Link to="/admin/dashboard/addcategory" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Author</Link>
-      </div>
+    <div className='me-6 my-3 p-6 '>
+    <div className='flex justify-between items-center'>
+      <h1 className='text-2xl font-semibold tracking-wide'>Authors </h1>
+      <Link to="/admin/dashboard/newauthor" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Author</Link>
+    </div>
+    <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
+      
         <table {...getTableProps()} className='border border-black w-full mt-8'>
           <thead className='w-full border border-black'>
             {headerGroups.map((headerGroup) => (
@@ -94,7 +96,7 @@ const Authors = () => {
                     </div>
                   </th>
                 ))}
-                <th>Action</th>
+                <th className='bg-[#f2f4ff]'>Action</th>
               </tr>
             ))}
           </thead>
@@ -124,7 +126,7 @@ const Authors = () => {
             })}
           </tbody>
         </table>
-      
+        </div>
       <div className="flex justify-between items-center mt-4">
         <div>
           <label htmlFor="pageSize">Results per page: </label>
@@ -145,7 +147,7 @@ const Authors = () => {
         </div>
         <div>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mr-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mr-4">
             Previous
           </button>
           <span className="pagination-inf">
@@ -155,7 +157,7 @@ const Authors = () => {
             </strong>{' '}
           </span>
           <button onClick={() => nextPage()} disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded ml-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded ml-4">
             Next
           </button>
         </div>
@@ -168,7 +170,7 @@ const Authors = () => {
             placeholder="Jump Page Number"
           />
           <button onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
             Jump
           </button>
         </div>

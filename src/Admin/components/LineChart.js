@@ -17,18 +17,23 @@ const LineChart = () => {
     },
   };
 
-  const [stats,setstats]=useState({})
-  const {token}=useSelector((state)=>state.auth)
+  const [stats, setstats] = useState({})
+  const { token } = useSelector((state) => state.auth)
+  useEffect(() => {
+    
+      const fetchdata = async() => {
+        try {
+        const resp = await dashboardlinechart(token);
+        console.log(resp.data)
+        setstats(resp.data)
+      } catch (error) {
+        console.log(error)
+      }
+      }
+      fetchdata();
+    
 
-  useEffect(()=>{
-    async function fetchdata(){
-const resp=await dashboardlinechart(token);
-console.log(resp.data)
-setstats(resp.data)
-    }
-    fetchdata();
-
-  },[])
+  }, [])
 
   const labels = stats.bookname;
 

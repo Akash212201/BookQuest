@@ -31,13 +31,14 @@ import Authors from './Admin/pages/Authors';
 import AllUser from './Admin/pages/AllUser';
 import NewOrders from './Admin/pages/NewOrders';
 import AllOrders from './Admin/pages/AllOrders';
-import './App.css';
 import Profile from './User/Profile';
 import PrivateRoute from './components/Common/PrivateRoute';
+
+//user
 import MyOrders from './User/MyOrders';
 import UserSidebar from './User/UserSidebar';
-
-import PdfViewer from "./pages/PdfView"
+import EBookView from "./pages/PdfView"
+import './App.css';
 
 const App = () => {
   const location = useLocation();
@@ -74,7 +75,7 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/newarrival' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
-          <Route path='/pdf' element={<PdfViewer />} />
+          <Route path='/pdf' element={<EBookView />} />
           <Route path='/bestseller' element={<BooksPage />} />
           <Route path='/:id' element={<CategoryPage  />} />
           <Route path='/fiction' element={<BooksPage />} />
@@ -106,6 +107,7 @@ const App = () => {
           {/* User */}
           <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
+          <Route path='/user/dashboard/ebook' element={<EBookView />} />
         </Routes>
       </div>
       {

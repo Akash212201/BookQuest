@@ -26,15 +26,12 @@ const Columns = [
 
 ];
 
-const AllProducts = () => {
+const RecentOrders = () => {
   const columns = useMemo(() => Columns, []);
-  
-  
-  const [books,setbooks]=useState([]);
-  
+  const [books, setbooks] = useState([]);
   useEffect(() => {
-    async function fetchdata(){
-      const resp=await showallbooks();
+    async function fetchdata() {
+      const resp = await showallbooks();
       console.log(resp.data);
       setbooks(resp.data)
     }
@@ -43,8 +40,8 @@ const AllProducts = () => {
 
 
   const data = useMemo(() => books, [books]);
-  
-  
+
+
   const table = useTable(
     {
       columns,
@@ -82,17 +79,13 @@ const AllProducts = () => {
   };
 
 
-
-
-
-
   return (
     <div className='pb-6'>
       <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
-        <table {...getTableProps()} className='border border-red-500 w-full'>
-          <thead className='w-full border border-red-900'>
+        <table {...getTableProps()} className=' w-full'>
+          <thead className='w-full'>
             {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()} className='text-center '>
+              <tr {...headerGroup.getHeaderGroupProps()} className='text-center border bg-[#f2f4ff] border-black '>
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -116,28 +109,28 @@ const AllProducts = () => {
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()} className='w-full border border-red-900'>
+          <tbody {...getTableBodyProps()} className='w-full border border-black'>
             {page.map((row, rowIndex) => {
               prepareRow(row);
-              
+
               return (
                 <tr {...row.getRowProps()} className='text-center'>
                   {row.cells.map((cell, index) => (
                     <td key={index} className={` border border-black h-full`}>
                       {
                         cell.render('Cell')
-                      } 
+                      }
                     </td>
                   ))}
-                  <td className=''>
-                    
-                      <Link to={`bookinfo/${row.original._id}`} >
+                  <td className='border border-black pt-2'>
+
+                    <Link to={`bookinfo/${row.original._id}`} >
                       <button
-                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded mb-2" >
+                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mb-2" >
                         Details
                       </button>
-                      </Link>
-                    
+                    </Link>
+
                   </td>
                 </tr>
               );
@@ -165,7 +158,7 @@ const AllProducts = () => {
         </div>
         <div className=' sm:w-full'>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded mr-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mr-4">
             Previous
           </button>
           <span className="pagination-inf">
@@ -175,7 +168,7 @@ const AllProducts = () => {
             </strong>{' '}
           </span>
           <button onClick={() => nextPage()} disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded ml-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded ml-4">
             Next
           </button>
         </div>
@@ -188,7 +181,7 @@ const AllProducts = () => {
             placeholder="Jump Page Number"
           />
           <button onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-400 rounded">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
             Jump
           </button>
         </div>
@@ -197,4 +190,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default RecentOrders;

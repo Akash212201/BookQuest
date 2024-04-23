@@ -25,14 +25,14 @@ const BookCard = ({ book }) => {
 
   return (
     <div className="flex md:flex-col lg:flex-col flex-row rounded-lg overflow-hidden bg-white mb-4 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-      <div className="lg:w-[100%] w-[50%] py-2 lg:bg-[#f2f5f4] ">
+      <div className="md:w-[100%] w-[50%] py-2 lg:bg-[#f2f5f4]">
       <div className='w-full'>
       <Link to={`/bookinfo/${book._id}`}>
         <img src={book.thumbnail} alt={book.bookName} className=' w-full h-[200px] object-contain' />
       </Link>
       </div>
       </div>
-      <div className="py-2 px-4  min-h-[155px] relative ">
+      <div className="py-2 px-4  min-h-[155px] relative md:w-[100%] w-[50%] ">
       <Link to={`/bookinfo/${book._id}`}>
         <h3 className='font-semibold text-xl'>{truncateText(book.bookName, 20)}</h3>
         </Link>
