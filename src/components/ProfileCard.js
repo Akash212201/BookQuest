@@ -18,11 +18,23 @@ const ProfileCard = () => {
                         My Profile
                     </button>
                 </Link>
+              {
+                user1 && user1.accountType==="Customer" && 
                 <Link to="/user/dashboard/orders">
-                    <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
-                        My Orders
-                    </button>
-                </Link>
+                <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
+                    My Orders
+                </button>
+            </Link>
+              }
+
+              {
+                user1 && user1.accountType==="Admin" &&
+                <Link to="/admin/dashboard/orders">
+                <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
+                  Orders
+                </button>
+            </Link>
+              }
             </div>
             <Link to="/user/dashboard/profile">
                 <button className='block mt-5 px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold'>

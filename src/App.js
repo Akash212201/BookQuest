@@ -42,8 +42,8 @@ import './App.css';
 
 const App = () => {
   const location = useLocation();
-  // const user = localStorage.getItem("user");
-  // const user1 = user && JSON.parse(user);
+  const user = localStorage.getItem("user");
+  const user1 = user && JSON.parse(user);
   const token = localStorage.getItem('token');
 
   const isDashboard = location.pathname.includes('/dashboard');
@@ -62,7 +62,12 @@ const App = () => {
       <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hidesidebar' : 'admin'}` : ''}`}>
 
         {
-          isDashboard ?<PrivateRoute><AdminSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> : <div></div>
+          isDashboard && user1  && user1.accountType==="Admin" && <PrivateRoute><AdminSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> 
+        }
+
+       
+        {
+         user1  && user1.accountType==="Customer" && <PrivateRoute><UserSidebar sidebarOpen={sidebarOpen} /> </PrivateRoute> 
         }
         <Suspense fallback={<div>Loading...</div>}></Suspense>
         <Routes>

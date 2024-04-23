@@ -34,8 +34,8 @@ const BarChart = () => {
     labels: stats.bookname,
     datasets: [
       {
-        label: 'Users',
-        data: stats.totalusers,
+        label: 'Customers',
+        data:stats.totalusers,
         backgroundColor: 'rgb(13, 214, 184)',
         barThickness: 25,
       },
