@@ -308,7 +308,7 @@ export const categoryPage = async (data) => {
 
 export const allpurchasedorders = async (token) => {
   let result = [];
-  const toastid=toast.loading("Loading.......");
+  
   try {
     console.log("mark");
     const response = await apiconnector("GET", ALL_PURCHASED_BOOKS, null,{
@@ -319,7 +319,7 @@ export const allpurchasedorders = async (token) => {
       throw new Error(response.data.message);
     }
     result = response.data;
-    toast.dismiss(toastid);
+   
     console.log("result", result);
 
     return result;
