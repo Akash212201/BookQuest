@@ -27,7 +27,7 @@ const BarChart = () => {
     labels:stats.bookname,
     datasets: [
       {
-        label: 'Users',
+        label: 'Customers',
         data:stats.totalusers,
         backgroundColor: 'rgb(13, 214, 184)',
         barThickness: 25,
