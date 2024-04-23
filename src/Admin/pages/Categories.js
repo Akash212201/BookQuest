@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import Alldata from '../pages/MOCK_DATA.json';
 
 import { useSortBy, useTable, usePagination } from 'react-table';
 import { getcategories } from '../../services/operations/bookcategory';
@@ -16,25 +15,23 @@ const Columns = [
     accessor: 'categoryName',
     header: 'Category',
   },
-  
+
   {
     accessor: 'categoryDesc',
     header: 'Description',
   },
 ];
 const Categories = () => {
-  const [categorydet,setcategorydet]=useState([]);
+  const [categorydet, setcategorydet] = useState([]);
   const columns = useMemo(() => Columns, []);
-  useEffect(()=>{
-    async function fetchdata(){
-const resp=await getcategories();
-console.log(resp.data);
-setcategorydet(resp.data);
-
-
+  useEffect(() => {
+    async function fetchdata() {
+      const resp = await getcategories();
+      console.log(resp.data);
+      setcategorydet(resp.data);
     }
     fetchdata();
-  },[])
+  }, [])
   console.log(categorydet)
   const data = useMemo(() => categorydet, [categorydet]);
 
@@ -76,11 +73,11 @@ setcategorydet(resp.data);
   return (
     <div className='me-6 my-3 p-6 '>
       <div className='flex justify-between items-center'>
-      <h1 className='text-2xl font-semibold tracking-wide'>Category Lists </h1>
+        <h1 className='text-2xl font-semibold tracking-wide'>Category Lists </h1>
         <Link to="/admin/dashboard/addcategory" className='rounded-sm px-3 py-1 bg-green-500 text-white'>Add New Category</Link>
       </div>
       <div className="my-4 rounded-[10px] bg-white px-6 py-10 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
-        <table {...getTableProps()} className='border border-black w-full mt-8'>
+        <table {...getTableProps()} className='border border-black w-full'>
           <thead className='w-full border border-black'>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()} className='text-center '>
@@ -103,34 +100,34 @@ setcategorydet(resp.data);
                     </div>
                   </th>
                 ))}
-                <th>Action</th>
+                <th className='bg-[#f2f4ff] px-2'>Action</th>
               </tr>
             ))}
           </thead>
           <tbody {...getTableBodyProps()} className='w-full '>
             {page.map((row, rowIndex) => {
               prepareRow(row);
-              
+
               return (
                 <tr {...row.getRowProps()} className='mt-1 text-center border border-black'>
                   {row.cells.map((cell, index) => (
                     <td key={index} className={` border border-black h-full`}>
                       {
                         cell.render('Cell')
-                      } 
+                      }
                     </td>
                   ))}
                   <td>
-                  <div className='flex justify-center items-center my-2'>
-                  <RiDeleteBin6Line className='text-lg cursor-pointer hover:text-red-600'/>
-                  </div>
+                    <div className='flex justify-center items-center my-2'>
+                      <RiDeleteBin6Line className='text-lg cursor-pointer hover:text-red-600' />
+                    </div>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-        </div>
+      </div>
       <div className="flex justify-between items-center mt-4">
         <div>
           <label htmlFor="pageSize">Results per page: </label>
@@ -151,7 +148,7 @@ setcategorydet(resp.data);
         </div>
         <div>
           <button onClick={() => previousPage()} disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mr-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mr-4">
             Previous
           </button>
           <span className="pagination-inf">
@@ -161,7 +158,7 @@ setcategorydet(resp.data);
             </strong>{' '}
           </span>
           <button onClick={() => nextPage()} disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded ml-4">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded ml-4">
             Next
           </button>
         </div>
@@ -174,12 +171,12 @@ setcategorydet(resp.data);
             placeholder="Jump Page Number"
           />
           <button onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded">
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
             Jump
           </button>
         </div>
       </div>
-      </div>
+    </div>
   )
 }
 

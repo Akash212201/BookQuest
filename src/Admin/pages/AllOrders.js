@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { useSortBy, useTable, usePagination } from "react-table";
 import { allorders } from "../../services/operations/bookcategory";
+import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 
 const Columns = [
   {
@@ -20,7 +20,7 @@ const Columns = [
     accessor: 'orderId',
     header: 'Order Id',
   },
-  
+
   {
     accessor: 'amount',
     header: 'Amount',
@@ -31,18 +31,22 @@ const AllOrders = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
   const [editingRows, setEditingRows] = useState({});
-  const [dataa, setDataa] = useState();
 
-  
-  useEffect(()=>{
-async function fetchdata(){
-const resp=await allorders();
-console.log(resp.data)
-setbooks(resp.data)
-}
 
-fetchdata();
-  },[])
+  useEffect(() => {
+    async function fetchdata() {
+      try {
+        const resp = await allorders();
+        console.log(resp.data)
+        setbooks(resp.data)
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
+    fetchdata();
+  }, [])
   const data = useMemo(() => books, [books]);
 
   console.log("object", data);
@@ -82,16 +86,8 @@ fetchdata();
     }
   };
 
-  // Function to handle editing value
-  const handleEdit = (_id, columnId, value) => {};
 
-  // Function to toggle editing state for a row
-  const toggleRowEditing = (rowIndex) => {
-    setEditingRows((prevEditingRows) => ({
-      ...prevEditingRows,
-      [rowIndex]: !prevEditingRows[rowIndex],
-    }));
-  };
+
 
   return (
     <div className="me-6 my-3 p-6 ">
@@ -123,7 +119,7 @@ fetchdata();
                     </div>
                   </th>
                 ))}
-               
+
               </tr>
             ))}
           </thead>
@@ -131,35 +127,24 @@ fetchdata();
             {...getTableBodyProps()}
             className="w-full border border-red-900"
           >
-            {page.map((row, rowIndex) => {
+            {page.map((row) => {
               prepareRow(row);
-              const isRowEditing = editingRows[rowIndex];
               return (
                 <tr {...row.getRowProps()} className="text-center">
                   {row.cells.map((cell, index) => (
                     <td
                       key={index}
-                      className={`h-full ${
-                        cell.column.header === "BookImage"
-                          ? "flex justify-center items-center border border-black"
-                          : "border border-black"
-                      }`}
+                      className={`h-full ${cell.column.header === "BookImage"
+                        ? "flex justify-center items-center border border-black"
+                        : "border border-black"
+                        }`}
                     >
-                      { cell.column.editable && isRowEditing ? (
-                        <input
-                          type="text"
-                          value={cell.value}
-                          onChange={(e) =>
-                            handleEdit(rowIndex, cell.column.id, e.target.value)
-                          }
-                          className="outline-none"
-                        />
-                      ) : (
+                      { (
                         cell.render("Cell")
                       )}
                     </td>
                   ))}
-                  
+
                 </tr>
               );
             })}
@@ -188,7 +173,7 @@ fetchdata();
           <button
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded mr-4"
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mr-4"
           >
             Previous
           </button>
@@ -201,7 +186,7 @@ fetchdata();
           <button
             onClick={() => nextPage()}
             disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded ml-4"
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded ml-4"
           >
             Next
           </button>
@@ -216,7 +201,7 @@ fetchdata();
           />
           <button
             onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-[#f2f8] rounded"
+            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded"
           >
             Jump
           </button>

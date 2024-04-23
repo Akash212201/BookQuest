@@ -5,18 +5,23 @@ import { useSelector } from 'react-redux';
 
 const PieChart = () => {
 
-  const [stats,setstats]=useState({})
-  const {token}=useSelector((state)=>state.auth)
+  const [stats, setstats] = useState({})
+  const { token } = useSelector((state) => state.auth)
+  useEffect(() => {
+   
+      const fetchdata = async() => {
+        try {
+        const resp = await dashboardpiechart(token);
+        console.log(resp.data)
+        setstats(resp.data)
+      } catch (error) {
+        console.log(error)
+      }
+      }
+      fetchdata();
+   
 
-  useEffect(()=>{
-    async function fetchdata(){
-const resp=await dashboardpiechart(token);
-console.log(resp.data)
-setstats(resp.data)
-    }
-    fetchdata();
-
-  },[])
+  }, [])
 
   const options = {
     responsive: true,
@@ -48,7 +53,7 @@ setstats(resp.data)
     ],
   };
 
-  return <Chart type="pie" options={options} data={data} className="w-full h-full border border-black"/>;
+  return <Chart type="pie" options={options} data={data} className="w-full h-full border border-black" />;
 };
 
 export default PieChart;
