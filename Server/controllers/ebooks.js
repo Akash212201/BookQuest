@@ -230,6 +230,41 @@ exports.showBookInformation = async (req, resp) => {
   }
 };
 
+
+
+
+exports.showBookDetail = async (req, resp) => {
+  try {
+    const { bookid } = req.body;
+    console.log(bookid);
+
+    if (!bookid) {
+      return resp.json({
+        success: false,
+        message: "please provide a valid id",
+      });
+    }
+
+    console.log("mark23");
+    //Todo: Add the Populate
+    const bookdetails = await Books.findById({ _id: bookid })
+      .populate("category")
+      .exec();
+
+    console.log(bookdetails);
+    return resp.status(200).json({
+      success: true,
+      data: bookdetails,
+    });
+  } catch (error) {
+    resp.status(400).json({
+      success: false,
+      message: "error occured",
+    });
+  }
+};
+
+
 exports.editBook = async (req, resp) => {
   try {
     const { bookid } = req.body;

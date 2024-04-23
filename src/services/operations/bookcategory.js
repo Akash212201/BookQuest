@@ -7,7 +7,7 @@ import { orderEndPoints } from "../apis";
 // import { database } from "../../../Server/config/database";
 
 const { HOMEPAGE_BOOKS ,CATEGORY_PAGE_ID,CREATE_CATEGORY, GROUP_CATEGORY_SORT, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
-const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK } = books;
+const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,VIEW_BOOK} = books;
 const { GET_ORDERS,GET_USERS, ALL_PURCHASED_BOOKS,DASHBOARD_STATS,DASHBOARD_PIECHART,DASHBOARD_BARCHART,DASHBOARD_LINECHART}=orderEndPoints;
 export const groupCategory = async () => {
   let result = [];
@@ -121,6 +121,28 @@ export const showbookdetails = async (bookid) => {
   }
 };
 
+
+export const viewbookdetails = async (bookid,token) => {
+  console.log("bookid in action", bookid);
+  let result = {};
+  try {
+    console.log("mark");
+    const response = await apiconnector("POST", SHOW_BOOK_DETAILS, { bookid },{
+      Authorization: `Bearer ${token}`
+    });
+    console.log("show book", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.data;
+    console.log("result", result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    toast.error("failed to show bookdetails");
+  }
+};
 export const addnewbook = async (data,token) => {
   console.log("bookid in action", data);
   let result=null;
@@ -286,6 +308,7 @@ export const categoryPage = async (data) => {
 
 export const allpurchasedorders = async (token) => {
   let result = [];
+  
   try {
     console.log("mark");
     const response = await apiconnector("GET", ALL_PURCHASED_BOOKS, null,{
@@ -296,6 +319,7 @@ export const allpurchasedorders = async (token) => {
       throw new Error(response.data.message);
     }
     result = response.data;
+   
     console.log("result", result);
 
     return result;
@@ -303,6 +327,7 @@ export const allpurchasedorders = async (token) => {
     console.log(error);
     toast.error("failed to show orders");
   }
+  
 };
 
 

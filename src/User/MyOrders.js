@@ -105,7 +105,7 @@ const MyOrders = () => {
             ))}
           </thead>
           <tbody {...getTableBodyProps()} className='w-full border border-black'>
-            {page.map((row,i) => {
+            {books.length>0?(page.map((row,i) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()} className='text-center border border-black'>
@@ -129,7 +129,9 @@ const MyOrders = () => {
                   </td>
                 </tr>
               );
-            })}
+            })):(
+              <div> No Purchased Books Available</div>
+            )}
           </tbody>
         </table>
       </div>
