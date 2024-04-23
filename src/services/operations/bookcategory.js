@@ -27,7 +27,6 @@ export const groupCategory = async () => {
   }
 };
 
-
 export const groupCategoryid = async (data) => {
   let result = [];
   try {
@@ -63,7 +62,6 @@ export const groupCategorysort = async (data) => {
     toast.error("failed to show books");
   }
 };
-
 
 export const getcategory = async () => {
   let result = [];

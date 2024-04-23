@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useSortBy, useTable, usePagination } from 'react-table';
+import TableButton from '../components/TableButton';
 import { deletebook, showallbooks } from '../../services/operations/bookcategory';
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -40,14 +42,13 @@ const Columns = [
 const AllBooks = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
-  const [editingRows, setEditingRows] = useState({});
   const { token } = useSelector(state => state.auth);
 
   useEffect(() => {
     async function fetchBooks() {
       try {
         const resp = await showallbooks();
-        console.log(resp.data);
+        console.log("my data",resp.data);
         setbooks(resp.data);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -97,15 +98,6 @@ const AllBooks = () => {
 
   }
 
-  //function to jump on page number
-  const handleGoToPage = () => {
-    const pageNumber = parseInt(inputPage, 10);
-    if (!isNaN(pageNumber) && pageNumber > 0 && pageNumber <= table.pageCount) {
-      gotoPage(pageNumber - 1);
-      setInputPage("");
-    }
-  };
-
   return (
     <div className='me-6 my-3 p-6 '>
       <h1 className='text-2xl font-semibold tracking-wide'>All Books</h1>
@@ -133,7 +125,7 @@ const AllBooks = () => {
                     </div>
                   </th>
                 ))}
-                <th className='bg-[#f2f4ff]'>Edit/Update</th>
+                <th className='bg-[#f2f4ff]'>Update & Delete</th>
               </tr>
             ))}
           </thead>
@@ -154,10 +146,12 @@ const AllBooks = () => {
                   ))}
                   <td className=''>
                     <div className='flex justify-evenly py-2 items-center'>
+                      <Link to={`/admin/dashboard/editbook/${row.cells[0].row.original._id}`}>
                       <button
                         className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
                         Edit
                       </button>
+                      </Link>
                       <button
                         className="px-4 py-1 hover:text-red-500 rounded text-xl cursor-default">
                         < RiDeleteBin6Line onClick={() => deletehandler(row.cells[0].row.original._id)}
@@ -173,54 +167,18 @@ const AllBooks = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-between items-center mt-4">
-        <div>
-          <label htmlFor="pageSize">Results per page: </label>
-          <select
-            id="pageSize"
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-            }}
-            className='border-[2px] border-black bg-white px-1 rounded'
-          >
-            {[10, 20, 50, 100].map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded mr-4">
-            Previous
-          </button>
-          <span className="pagination-inf">
-            Page{' '}
-            <strong>
-              {pageIndex + 1} of {Math.ceil(data.length / pageSize)}
-            </strong>{' '}
-          </span>
-          <button onClick={() => nextPage()} disabled={!canNextPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded ml-4">
-            Next
-          </button>
-        </div>
-        <div>
-          <input
-            type="text"
-            value={inputPage}
-            onChange={(e) => setInputPage(e.target.value)}
-            className="page-input border outline-none border-black mr-2 rounded px-2 py-1"
-            placeholder="Jump Page Number"
-          />
-          <button onClick={handleGoToPage}
-            className="px-3 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
-            Jump
-          </button>
-        </div>
-      </div>
+      <TableButton 
+        pageIndex={pageIndex}
+        pageSize={pageSize}
+        pageCount={Math.ceil(data.length / pageSize)}
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        setPageSize={setPageSize}
+        nextPage={nextPage}
+        previousPage={previousPage}
+        gotoPage={gotoPage}
+        inputPage={inputPage}
+        setInputPage={setInputPage} />
     </div>
   );
 };
