@@ -105,6 +105,7 @@ const AddBook = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log(thumbnail)
     const formData = new FormData();
     formData.append("bookAuthor", bookAuthor);
     formData.append("bookName", bookName);

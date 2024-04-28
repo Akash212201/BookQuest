@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { showbookdetails } from '../../services/operations/bookcategory';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { editbook, showbookdetails } from '../../services/operations/bookcategory';
 import { useSelector } from "react-redux"; 
 
 const UpdateBook = () => {
@@ -18,12 +18,23 @@ const UpdateBook = () => {
   const [pdfUrl, setpdf] = useState(null);
   const [pdfUrl1, setpdf1] = useState("");
   const [loading, setloading] = useState("");
+  const navigate=useNavigate();
+  const {token}=useSelector((state)=>state.auth)
 
   useEffect(() => { 
     const fetchData = async() => {
       try {
         const resp = await showbookdetails(id);
         setBookData(resp?.data || {});
+        setBookName(resp?.data?.bookName);
+        setBookAuthor(resp?.data?.bookAuthor)
+        setBookSummary(resp?.data?.bookSummary)
+        setPrice(resp?.data?.price)
+        setThumbnail(resp?.data?.thumbnail)
+        setpdf(resp?.data?.pdfUrl)
+        
+        console.log("book data ",resp.data.thumbnail1)
+        console.log("book data1 ",resp.data)
       } catch (error) {
         console.log(error);
       }
@@ -102,24 +113,55 @@ const UpdateBook = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("bookAuthor", bookAuthor);
-    formData.append("bookName", bookName);
-    formData.append("bookSummary", bookSummary);
-    formData.append("price", price);
-    formData.append("bookStock", bookStock);
+
+    formData.append("bookid", id);
+    console.log(thumbnail)
     formData.append("thumbnail", thumbnail);
+
+
+
     formData.append("pdfUrl", pdfUrl);
+    console.log(bookData.thumbnail)
+    console.log(thumbnail)
+
+    if(bookData.bookAuthor!==bookAuthor){
+      formData.append("bookAuthor", bookAuthor);
+}
+
+if(bookData.bookName!==bookName){
+    formData.append("bookName", bookName);
+}
+
+if(bookData.bookSummary!==bookSummary){
+    formData.append("bookSummary", bookSummary);
+}
+
+if(bookData.price!==price){
+    formData.append("price", price);
+}
+
+if(bookData.bookStock!==bookStock){
+    formData.append("bookStock", bookStock);
+}
+
+
+
+
+
     console.log(formData);
-    setloading(true);
+
+    const resp=await editbook(formData,token,navigate);
+    // console.log(resp.data);
+    // setloading(true);
     
-    setloading(false);
-    setBookAuthor("");
-    setBookName("");
-    setBookSummary("");
-    setPrice("");
-    setThumbnail1("");
-    setpdf1("");
-    setbookStock("")
+    // setloading(false);
+    // setBookAuthor("");
+    // setBookName("");
+    // setBookSummary("");
+    // setPrice("");
+    // setThumbnail1("");
+    // setpdf1("");
+    // setbookStock("")
   };
 
   return (

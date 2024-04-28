@@ -189,6 +189,8 @@ exports.getorders=async (req,resp)=>{
       orderId:order.orderId, 
       amount:order.amount,
       userId:order.userId,
+      bookName:order.bookName,
+      thumbnail:order.thumbnail
     }))
 
     if(!allorder){

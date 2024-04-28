@@ -7,7 +7,7 @@ import { orderEndPoints } from "../apis";
 // import { database } from "../../../Server/config/database";
 
 const { HOMEPAGE_BOOKS ,CATEGORY_PAGE_ID,CREATE_CATEGORY, GROUP_CATEGORY_SORT, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
-const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,VIEW_BOOK} = books;
+const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,VIEW_BOOK,EDIT_BOOK} = books;
 const { GET_ORDERS,GET_USERS, ALL_PURCHASED_BOOKS,DASHBOARD_STATS,DASHBOARD_PIECHART,DASHBOARD_BARCHART,DASHBOARD_LINECHART}=orderEndPoints;
 export const groupCategory = async () => {
   let result = [];
@@ -171,6 +171,36 @@ export const addnewbook = async (data,token) => {
 
 };
 
+
+export const editbook = async (formData,token,navigate) => {
+  console.log("bookid in action", formData);
+  let result=null;
+  const toastId = toast.loading("Loading...");
+
+  try {
+    console.log("mark");
+
+    const response = await apiconnector("POST", EDIT_BOOK, formData,{
+        Authorization: `Bearer ${token}`
+    } );
+    console.log("show book", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.data;
+    console.log("result", result);
+    toast.success("Book Updated Successfully")
+    navigate("/admin/dashboard/books")
+    
+  } catch (error) {
+    console.log(error);
+    toast.error("failed to update books");
+  }
+  toast.dismiss(toastId);
+  
+  return result;
+
+};
 export const getcategories = async () => {
     let result = [];
     try {
