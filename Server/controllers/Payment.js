@@ -8,6 +8,7 @@ const crypto = require("crypto")
 const { mongoose } = require("mongoose");
 const { paymentSuccessEmail } = require("../Mail/Templates/paymentSuccessEmail");
 const Paymentinfo = require("../models/Paymentinfo");
+const Books = require("../models/Books");
 // capture the payment and initiate the razorpay
 exports.capturepayment=async (req,resp)=>{
     const {books}=req.body;
@@ -133,7 +134,10 @@ console.log("body",body);
 //send payment success email
 exports.sendPaymentSuccessEmail=async(req,resp)=>{
     const {orderid,paymentid,amount}=req.body;
-   
+    console.log(orderid)
+    const books=req.body.books;
+    
+   console.log(books)
    console.log("order",orderid)
     const userid=req.user.id;
     
@@ -152,14 +156,24 @@ exports.sendPaymentSuccessEmail=async(req,resp)=>{
  paymentid));
 
 console.log("mail",mailresponse)
- const response=await Paymentinfo.create({
-    orderId:orderid,
-    paymentId:paymentid,
-    amount:amount/100,
-    userId:userid
-    
-    
- })
+
+
+for(const bookid of books){
+    const bookinfo=await Books.findById(bookid);
+
+    const response=await Paymentinfo.create({
+        orderId:orderid,
+        paymentId:paymentid,
+        amount:amount/100,
+        userId:userid,
+        bookName:bookinfo.bookName,
+        thumbnail:bookinfo.thumbnail
+        
+        
+        
+     })
+}
+
 
 
 

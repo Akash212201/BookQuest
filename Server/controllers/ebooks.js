@@ -267,41 +267,50 @@ exports.showBookDetail = async (req, resp) => {
 
 exports.editBook = async (req, resp) => {
   try {
-    const { bookid } = req.body;
+    console.log("mark")
+    const { bookid,bookName } = req.body;
+    console.log(bookid)
+    console.log(bookName)
     const updates = req.body;
 
     const bookdetails = await Books.findById(bookid);
+console.log(bookdetails)
+console.log(updates)
 
     // Important Stepss----
-    const { thumbnail, pdfUrl } = req.files;
-    console.log(thumbnail);
-    console.log(pdfUrl);
+//     const { thumbnail, pdfUrl } = req.files;
 
-    if (thumbnail) {
-      const thumbnailImage = await imageUploadCloudinary(
-        thumbnail,
-        process.env.FOLDER_NAME
-      );
-      bookdetails.thumbnail = thumbnailImage.secure_url;
-    }
+// console.log("mark222")
+//     console.log(thumbnail);
+//     console.log(pdfUrl);
 
-    if (pdfUrl) {
-      const updatePdf = await imageUploadCloudinary(
-        pdfUrl,
-        process.env.FOLDER_NAME
-      );
-      bookdetails.pdfUrl = updatePdf.secure_url;
-    }
+//     if (thumbnail) {
+//       const thumbnailImage = await imageUploadCloudinary(
+//         thumbnail,
+//         process.env.FOLDER_NAME
+//       );
+//       bookdetails.thumbnail = thumbnailImage.secure_url;
+//     }
+
+//     if (pdfUrl) {
+//       const updatePdf = await imageUploadCloudinary(
+//         pdfUrl,
+//         process.env.FOLDER_NAME
+//       );
+//       bookdetails.pdfUrl = updatePdf.secure_url;
+//     }
 
     for (const key in updates) {
       if (updates.hasOwnProperty(key)) {
         bookdetails[key] = updates[key];
       }
     }
-
+    console.log("mark222")
+    
     await bookdetails.save();
     // Todo:update rating and reviews
-
+    
+    console.log("mark2223")
     const updatedBook = await Books.findById(bookid)
       .populate("category")
       .exec();

@@ -87,24 +87,38 @@ const App = () => {
           <Route path="/requestbook" element={<Requestbook />}></Route>
 
           {/* Dashboard Routes */}
-          <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-          <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
-          <Route path='/admin/dashboard/addbook' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
-          <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
-          <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
-          <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />
-          <Route path='/admin/dashboard/new-orders' element={<PrivateRoute><NewOrders /></PrivateRoute>} />
-          <Route path='/admin/dashboard/orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
-          <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
-          <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
-          <Route path='/admin/dashboard/bookinfo/:id' element={<BookInfo />} />
+  {
+    user1 && user1.accountType==="Admin" &&
+    <>
+    <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+    <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
+    <Route path='/admin/dashboard/updatebook/:id' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
+    <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
+    <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
+    <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />
+    <Route path='/admin/dashboard/new-orders' element={<PrivateRoute><NewOrders /></PrivateRoute>} />
+    <Route path='/admin/dashboard/orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
+    <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
+    <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
+    <Route path='/admin/dashboard/bookinfo/:id' element={<BookInfo />} />
+    </>
+
+  }
+
 
 
 
           {/* User */}
-          <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
-          <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
-          <Route path='/user/dashboard/viewbook/:id' element={<EBookView />} />
+          
+          {
+            user1 && user1.accountType==="Customer" &&
+            <>
+            <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
+            <Route path='/user/dashboard/viewbook/:id' element={<EBookView />} />
+            </>
+
+          }
         </Routes>
       </div>
       {

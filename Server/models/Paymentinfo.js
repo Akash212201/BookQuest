@@ -15,6 +15,12 @@ amount:{
 userId:{
     type:String,
     
+},
+bookName:{
+    type:String,
+},
+thumbnail:{
+    type:String,
 }
 
    
