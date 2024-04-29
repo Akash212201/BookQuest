@@ -95,6 +95,20 @@ const BookInfo = () => {
                         </button>
                     </div>
                        }
+                       {
+                        !token &&    <div className='my-10 flex items-center lg:text-xl'>
+                        <button onClick={paymenthandler} className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
+                            <MdOutlineShoppingCart className='mr-2' />
+                            Buy Now
+                        </button>
+                        <button
+                            className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition'
+                            onClick={addToCartHandler}>
+                            <LuShoppingBag className='mr-2' />
+                            Add to Cart
+                        </button>
+                    </div>
+                       }
                             <div className='flex lg:gap-16 lg:flex-row flex-col'>
                                 <div className=''>
                                     <h3 className='text-2xl font-light'>Rating and Reviews</h3>
