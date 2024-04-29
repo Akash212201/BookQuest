@@ -38,7 +38,6 @@ const Columns = [
   },
 ];
 
-
 const AllBooks = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
@@ -48,7 +47,7 @@ const AllBooks = () => {
     async function fetchBooks() {
       try {
         const resp = await showallbooks();
-        console.log("my data",resp.data);
+        console.log("my data", resp.data);
         setbooks(resp.data);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -146,11 +145,11 @@ const AllBooks = () => {
                   ))}
                   <td className=''>
                     <div className='flex justify-evenly py-2 items-center'>
-                      <Link to={`/admin/dashboard/editbook/${row.cells[0].row.original._id}`}>
-                      <button
-                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
-                        Edit
-                      </button>
+                      <Link to={`/admin/dashboard/updatebook/${row.cells[0].row.original._id}`}>
+                        <button
+                          className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
+                          Edit
+                        </button>
                       </Link>
                       <button
                         className="px-4 py-1 hover:text-red-500 rounded text-xl cursor-default">
@@ -167,7 +166,7 @@ const AllBooks = () => {
           </tbody>
         </table>
       </div>
-      <TableButton 
+      <TableButton
         pageIndex={pageIndex}
         pageSize={pageSize}
         pageCount={Math.ceil(data.length / pageSize)}

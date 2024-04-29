@@ -14,7 +14,7 @@ const Columns = [
     header: 'ID',
   },
   {
-    accessor: 'paymentId', // Make sure this matches the accessor used in the data
+    accessor: 'paymentId', 
     header: 'Payment Id',
   },
   {
@@ -31,7 +31,6 @@ const Columns = [
 const AllOrders = () => {
   const columns = useMemo(() => Columns, []);
   const [books, setbooks] = useState([]);
-  const [editingRows, setEditingRows] = useState({});
 
 
   useEffect(() => {
@@ -77,18 +76,6 @@ const AllOrders = () => {
   } = table;
 
   const [inputPage, setInputPage] = useState("");
-
-  //function to jump on page number
-  const handleGoToPage = () => {
-    const pageNumber = parseInt(inputPage, 10);
-    if (!isNaN(pageNumber) && pageNumber > 0 && pageNumber <= table.pageCount) {
-      gotoPage(pageNumber - 1);
-      setInputPage("");
-    }
-  };
-
-
-
 
   return (
     <div className="me-6 my-3 p-6 ">

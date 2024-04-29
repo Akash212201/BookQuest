@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Convert from './convert'
 import userImg from '../assests/profileImg.png'
 import { updateProfile, updateimage } from '../services/operations/profileapi'
 import { useSelector } from 'react-redux'

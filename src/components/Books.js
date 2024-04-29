@@ -9,7 +9,7 @@ const Books = ({ books }) => {
         <BookCard key={id} book={book} />
       )) : <div className='h-[80vh]'>
         <h1 className="text-center mt-5 text-4xl mb-2">Your Books</h1>
-        <h1 className='text-4xl font-bold text-center mt-20'>Loading Books</h1>
+        <h1 className='text-4xl font-bold text-center mt-20'>Loading Books...</h1>
       </div>
       }
     </div>

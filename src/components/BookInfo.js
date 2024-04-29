@@ -14,11 +14,11 @@ const BookInfo = () => {
     const location = useLocation();
     const id = location.pathname.split('/').pop();
     // const token=localStorage.getItem('token')
-    const {token}=useSelector((state)=>state.auth)
-    const user=localStorage.getItem("user");
-    const user1=JSON.parse(user)
-    const navigate=useNavigate();
-    const dispatch=useDispatch();
+    const { token } = useSelector((state) => state.auth)
+    const user = localStorage.getItem("user");
+    const user1 = JSON.parse(user)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // Function to fetch book details
 
@@ -31,10 +31,10 @@ const BookInfo = () => {
         fetchData();
     }, [location.pathname]);
 
- 
-    async function paymenthandler(){
+
+    async function paymenthandler() {
         console.log("Payment call")
-        const resp=await BuyBook(token,[id],user,navigate,dispatch);
+        const resp = await BuyBook(token, [id], user, navigate, dispatch);
         console.log(resp);
     }
 
@@ -53,11 +53,11 @@ const BookInfo = () => {
         setShowFullSummary(!showFullSummary);
     };
 
-  
+
 
     return (
         <>
-            {book && Object.keys(book).length > 0 && ( 
+            {book && Object.keys(book).length > 0 && (
                 <div className='py-10 px-7 lg:px-[10vw] flex lg:flex-row flex-col gap-4'>
                     <div className='lg:w-[30%] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] w-full h-[450px] px-2 py-4'>
                         <img src={book.thumbnail} alt='' className='w-full h-[420px] object-contain' />
@@ -81,20 +81,21 @@ const BookInfo = () => {
                                     {showFullSummary ? 'View less' : 'View more'}
                                 </button>
                             </div>
-                       {
-                        user1 && user1.accountType==="Customer" &&      <div className='my-10 flex items-center lg:text-xl'>
-                        <button onClick={paymenthandler} className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
-                            <MdOutlineShoppingCart className='mr-2' />
-                            Buy Now
-                        </button>
-                        <button
-                            className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition'
-                            onClick={addToCartHandler}>
-                            <LuShoppingBag className='mr-2' />
-                            Add to Cart
-                        </button>
-                    </div>
-                       }
+                            {
+                                user1 && user1.accountType === "Admin" ? <></>
+                                    : <div className='my-10 flex items-center lg:text-xl'>
+                                        <button onClick={paymenthandler} className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
+                                            <MdOutlineShoppingCart className='mr-2' />
+                                            Buy Now
+                                        </button>
+                                        <button
+                                            className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition'
+                                            onClick={addToCartHandler}>
+                                            <LuShoppingBag className='mr-2' />
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                            }
                             <div className='flex lg:gap-16 lg:flex-row flex-col'>
                                 <div className=''>
                                     <h3 className='text-2xl font-light'>Rating and Reviews</h3>
@@ -125,7 +126,7 @@ const BookInfo = () => {
                     </div>
                 </div>
             )
-        }
+            }
         </>
     );
 };

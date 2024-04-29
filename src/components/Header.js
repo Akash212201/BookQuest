@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './Sidebar'
-import { categoryPage } from '../services/operations/bookcategory';
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
@@ -42,7 +41,7 @@ const Header = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/v1/user/getCategories');
+        const response = await axios.get('https://bookquest.onrender.com/api/v1/user/getCategories');
         setCategories(response.data.data);
         console.log("categories",response.data.data)
       } catch (error) {

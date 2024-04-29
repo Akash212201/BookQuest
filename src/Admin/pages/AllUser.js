@@ -72,16 +72,6 @@ const AllUser = () => {
 
   const [inputPage, setInputPage] = useState("");
 
-  //function to jump on page number
-  const handleGoToPage = () => {
-    const pageNumber = parseInt(inputPage, 10);
-    if (!isNaN(pageNumber) && pageNumber > 0 && pageNumber <= table.pageCount) {
-      gotoPage(pageNumber - 1);
-      setInputPage("");
-    }
-  };
-
-
   return (
     <div className="me-6 my-3 p-6 ">
       <h1 className="text-2xl font-semibold tracking-wide">All Users</h1>

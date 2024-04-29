@@ -23,7 +23,9 @@ const UpdateBook = () => {
     const fetchData = async() => {
       try {
         const resp = await showbookdetails(id);
+        console.log("first",resp.data)
         setBookData(resp?.data || {});
+        console.log(resp?.data?.thumbnail,"mm")
       } catch (error) {
         console.log(error);
       }
@@ -134,6 +136,20 @@ const UpdateBook = () => {
                 <div key={index} className="lg:w-1/2 w-full pr-2">
                   <label htmlFor={item.Label}>{item.Label}</label>
                   {
+                    item.type === "file" ? (
+                      <div className='border border-black p-[10px]'>
+                        <input
+                          type={item.type}
+                          placeholder={item.placeHolder}
+                          value={item.value}
+                          onChange={item.onChange}
+                          style={{ display: 'none' }}
+                          className="text-lg outline-none border border-[#7da0fa] text-[#6C7383] rounded px-[10px] py-[4px] w-full mb-1 resize-none"
+                      
+                        />
+                        <label>{item.value ? item.value.name : item.placeHolder}</label>
+                      </div>
+                    ) :
                     item.Label === "Book Summary" ? (
                       <textarea
                         placeholder={item.placeHolder}

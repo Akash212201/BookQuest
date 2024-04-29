@@ -30,8 +30,6 @@ const BooksPage = () => {
     } else if (sortOption === "Newest") {
       const resp = await groupCategory();
       setbooks(resp.data.mostrecentbooks)
-
-      // No need to set sort for Newest or Popular, handle in separate calls
       return;
     }
     else if (sortOption === "Popular") {
@@ -74,7 +72,7 @@ const BooksPage = () => {
 
     fetchData();
 
-  }, [location.pathname]) // change depends upon location.pathname
+  }, [location.pathname])
 
   console.log("books", books)
   return (
@@ -96,7 +94,7 @@ const BooksPage = () => {
           </select>
         </div>
       </div>
-        <div className="w-[100%] relative py-4 px-6">
+        <div className="w-[100%] relative py-4 px-[3.5rem]">
           <Books books={books} />
         </div>
    
