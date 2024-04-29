@@ -32,10 +32,7 @@ const Columns = [
     accessor: 'price',
     header: 'Price',
   },
-  {
-    accessor: 'bookStock',
-    header: 'Stock',
-  },
+
 ];
 
 const AllBooks = () => {
@@ -146,10 +143,10 @@ const AllBooks = () => {
                   <td className=''>
                     <div className='flex justify-evenly py-2 items-center'>
                       <Link to={`/admin/dashboard/updatebook/${row.cells[0].row.original._id}`}>
-                        <button
-                          className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
-                          Edit
-                        </button>
+                      <button
+                        className="px-4 py-1 bg-[#e5e7ff] hover:bg-green-500 hover:text-white rounded">
+                        Edit
+                      </button>
                       </Link>
                       <button
                         className="px-4 py-1 hover:text-red-500 rounded text-xl cursor-default">

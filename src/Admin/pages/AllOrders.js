@@ -10,17 +10,18 @@ const Columns = [
     header: 'No',
   },
   {
-    accessor: 'userId',
-    header: 'ID',
+    accessor: 'thumbnail',
+    header: 'BookImage',
+  },
+  {
+    accessor: 'bookName',
+    header: 'Book Name',
   },
   {
     accessor: 'paymentId', 
     header: 'Payment Id',
   },
-  {
-    accessor: 'orderId',
-    header: 'Order Id',
-  },
+  
 
   {
     accessor: 'amount',
@@ -120,17 +121,14 @@ const AllOrders = () => {
               return (
                 <tr {...row.getRowProps()} className="text-center">
                   {row.cells.map((cell, index) => (
-                    <td
-                      key={index}
-                      className={`h-full ${cell.column.header === "BookImage"
-                        ? "flex justify-center items-center border border-black"
-                        : "border border-black"
-                        }`}
-                    >
-                      { (
-                        cell.render("Cell")
+                    <td key={index} className={`h-full ${cell.column.header === 'BookImage' ? 'flex justify-center items-center ' : 'border border-black'}`}>
+                    {
+                      cell.column.header === 'BookImage' ? (
+                        <img src={cell.value} alt="BookImage" className='w-[80px]' style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                      ) : (
+                        cell.render('Cell')
                       )}
-                    </td>
+                  </td>
                   ))}
 
                 </tr>

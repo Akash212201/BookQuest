@@ -79,8 +79,9 @@ const options={
     handler: function (response){
        
         sendPaymentSuccessEmail(
-            response,
+            {...response,books},
             orderResponse.data.data.amount,
+            
             token
             );
             verifyPayment({...response,books},token,navigate,dispatch);
@@ -136,12 +137,14 @@ toast.error("could not verify payment");
   }
 
   
-  async function sendPaymentSuccessEmail(response,amount,token){
-    console.log(response);
+  async function sendPaymentSuccessEmail(bookdata,amount,token){
+    console.log("payment",bookdata);
+   
     try{
 await apiconnector("POST",SEND_PAYMENT_SUCCESS_EMAIL_API,{
-    orderid:response.razorpay_order_id,
-    paymentid: response.razorpay_payment_id,
+    orderid:bookdata.razorpay_order_id,
+    paymentid: bookdata.razorpay_payment_id,
+    books:bookdata.books,
     amount
 },{
     Authorization:`Bearer ${token}`

@@ -20,7 +20,7 @@ const bookSchema=new mongoose.Schema({
     bookStock:{
         type:Number,
         default:1,
-        required:true
+      
     },
     adminUser:{
         type:mongoose.Types.ObjectId,
@@ -33,7 +33,7 @@ const bookSchema=new mongoose.Schema({
     }],
     thumbnail:{
         type:String,
-        required:true
+       
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
