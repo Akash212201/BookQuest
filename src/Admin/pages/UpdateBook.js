@@ -64,36 +64,7 @@ const UpdateBook = () => {
       value: price || bookData?.price,
       onChange: (e) => setPrice(e.target.value),
     },
-    {
-      Label: "Book Stock",
-      type: "number",
-      placeHolder: "Book Stock Value",
-      value: bookStock || bookData?.bookStock,
-      onChange: (e) => setbookStock(e.target.value),
-    },
-    {
-      Label: "Book Thumbnail",
-      type: "file",
-      placeHolder: "Book Image here",
-      value: thumbnail1 || bookData?.thumbnail1,
-      onChange: (e) => {
-        setThumbnail1(e.target.value)
-        setThumbnail(e.target.files[0]);
-      }
-    },
-    {
-      Label: "Book PDF",
-      type: "file",
-      placeHolder: "Upload Book PDF",
-      value: pdfUrl1 || bookData?.pdfUrl1,
-      onChange: (e) => {
-
-        setpdf1(e.target.value)
-        setpdf(e.target.files[0]);
-        console.log("e.target", e.target.files[0])
-      }
-    },
-    {
+   {
       Label: "Book Summary",
       type: "text",
       placeHolder: "Write Book Summary",
@@ -116,11 +87,7 @@ const UpdateBook = () => {
 
     formData.append("bookid", id);
     console.log(thumbnail)
-    formData.append("thumbnail", thumbnail);
-
-
-
-    formData.append("pdfUrl", pdfUrl);
+    
     console.log(bookData.thumbnail)
     console.log(thumbnail)
 
