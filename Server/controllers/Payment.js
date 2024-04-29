@@ -150,12 +150,7 @@ exports.sendPaymentSuccessEmail=async(req,resp)=>{
     try{
  const customerPurchase=await User.findById(userid)
  console.log("Purchase",customerPurchase);
- const mailresponse=await mailSender(customerPurchase.email,"Payment Recieved",paymentSuccessEmail(customerPurchase.firstName,
- amount/100,
- orderid,
- paymentid));
 
-console.log("mail",mailresponse)
 
 
 for(const bookid of books){
@@ -176,9 +171,16 @@ for(const bookid of books){
 
 
 
-
-
-console.log(mailresponse);
+try {
+    const mailresponse = await mailSender(customerPurchase.email, "Payment Recieved", paymentSuccessEmail(customerPurchase.firstName, amount / 100, orderid, paymentid));
+    console.log("mail", mailresponse);
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return resp.status(400).json({
+      success: false,
+      message: "Could not send email",
+    });
+  }
     }catch(error){
         console.log("error in sending mail")
         return resp.status(400).json({

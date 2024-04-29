@@ -99,7 +99,7 @@ const options={
     
 }catch(error){
     console.log("payment api error",error);
-    toast.error(error.message);
+    toast.error(error.response.data.message);
 }
 toast.dismiss(toastid)
 

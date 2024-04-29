@@ -30,7 +30,7 @@ export const signup = (firstName, lastName, email, accountType, password, confir
 
         } catch (error) {
             console.log("auth error",error);
-            toast.error(error);
+            toast.error(error.response.data.message);
 
         }
       
@@ -63,7 +63,7 @@ export const login = (email, password, navigate) => {
 
         } catch (error) {
             console.log(error);
-            toast.error("Login failed");
+            toast.error(error.response.data.message);
         }
 
        
