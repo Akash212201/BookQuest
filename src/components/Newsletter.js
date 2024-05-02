@@ -3,7 +3,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 const Newsletter = () => {
     const [email,setEmail] = useState('');
     const handleSubmit = () =>{
-        console.log(email)
+        // console.log(email)
         setEmail('');
     }
 

@@ -33,9 +33,9 @@ const BookInfo = () => {
 
 
     async function paymenthandler() {
-        console.log("Payment call")
+       
         const resp = await BuyBook(token, [id], user, navigate, dispatch);
-        console.log(resp);
+       //  console.log(resp);
     }
 
     const addToCartHandler = () => {
@@ -102,14 +102,6 @@ const BookInfo = () => {
                                     <p className='text-2xl mt-1 mb-5'>
                                         <b>5.0/5</b>
                                     </p>
-                                    <div className='flex gap-2 text-white mb-5'>
-                                        {[0, 1, 2, 3, 4].map((text, idx) => (
-                                            <IoIosStar
-                                                key={idx}
-                                                className='p-1 text-3xl bg-red-400 rounded hover:bg-red-600 transition-all'
-                                            />
-                                        ))}
-                                    </div>
                                 </div>
                                 <div className='mt-1'>
                                     {[4, 3, 2, 1, 0].map((text, idx) => (

@@ -7,12 +7,12 @@ import { BsArrowLeftShort } from "react-icons/bs"
 import { sendotp, signup } from '../services/operations/authapi';
 
 const VerifyEmail = () => {
-  console.log("mark");
+  
   const [otp, setotp] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const { signupdata, loading } = useSelector((state) => state.auth);
-  console.log(signupdata);
+  const { signupdata } = useSelector((state) => state.auth);
+  // console.log(signupdata);
 
   useEffect(() => {
     if (!signupdata) {
@@ -25,9 +25,6 @@ const VerifyEmail = () => {
     const { firstName, lastName, email
       , password, confirmPassword, accountType } = signupdata;
 
-    console.log(signupdata);
-    console.log(firstName);
-    console.log(otp);
 
     dispatch(signup(firstName, lastName, email
       , accountType, password, confirmPassword, otp, navigation));

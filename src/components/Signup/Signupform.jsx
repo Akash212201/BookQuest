@@ -47,7 +47,7 @@ const Signupform = () => {
       return;
     }
     const signupdata = { ...formdata };
-    console.log("signup val", signupdata);
+    // console.log("signup val", signupdata);
 
     // call the setsignup reducer from auth slice
     dispatch(setsignupdata(signupdata));

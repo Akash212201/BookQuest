@@ -28,12 +28,12 @@ const Categories = () => {
   useEffect(() => {
     async function fetchdata() {
       const resp = await getcategories();
-      console.log(resp.data);
+      // console.log(resp.data);
       setcategorydet(resp.data);
     }
     fetchdata();
   }, [])
-  console.log(categorydet)
+  // console.log(categorydet)
   const data = useMemo(() => categorydet, [categorydet]);
 
   const table = useTable(

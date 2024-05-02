@@ -25,7 +25,7 @@ const UpdateBook = () => {
     const fetchData = async() => {
       try {
         const resp = await showbookdetails(id);
-        console.log("first",resp.data)
+        // console.log("first",resp.data)
         setBookData(resp?.data || {});
         setBookName(resp?.data?.bookName);
         setBookAuthor(resp?.data?.bookAuthor)
@@ -33,9 +33,6 @@ const UpdateBook = () => {
         setPrice(resp?.data?.price)
         setThumbnail(resp?.data?.thumbnail)
         setpdf(resp?.data?.pdfUrl)
-        
-        console.log("book data ",resp.data.thumbnail1)
-        console.log("book data1 ",resp.data)
       } catch (error) {
         console.log(error);
       }
@@ -87,10 +84,6 @@ const UpdateBook = () => {
     const formData = new FormData();
 
     formData.append("bookid", id);
-    console.log(thumbnail)
-    
-    console.log(bookData.thumbnail)
-    console.log(thumbnail)
 
     if(bookData.bookAuthor!==bookAuthor){
       formData.append("bookAuthor", bookAuthor);
@@ -116,7 +109,7 @@ if(bookData.bookStock!==bookStock){
 
 
 
-    console.log(formData);
+    // console.log(formData);
 
     const resp=await editbook(formData,token,navigate);
     // console.log(resp.data);

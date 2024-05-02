@@ -13,15 +13,15 @@ const AddBook = () => {
   const [bookSummary, setBookSummary] = useState("");
   const [pdfUrl, setpdf] = useState(null);
   const [pdfUrl1, setpdf1] = useState("");
-  const [loading, setloading] = useState("");
   const [category1, setCategory1] = useState([]);
   const { token } = useSelector(state => state.auth);
+ // const [loading, setloading] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       try {
         const resp = await getcategory();
-        console.log(resp.data);
+        //console.log(resp.data);
         setCategory1(resp.data);
       } catch (error) {
         console.log(error)
@@ -83,7 +83,7 @@ const AddBook = () => {
 
         setpdf1(e.target.value)
         setpdf(e.target.files[0]);
-        console.log("e.target", e.target.files[0])
+        //console.log("e.target", e.target.files[0])
       }
     },
     {
@@ -105,7 +105,7 @@ const AddBook = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(thumbnail)
+   // console.log(thumbnail)
     const formData = new FormData();
     formData.append("bookAuthor", bookAuthor);
     formData.append("bookName", bookName);
@@ -115,11 +115,11 @@ const AddBook = () => {
     formData.append("bookStock", bookStock);
     formData.append("thumbnail", thumbnail);
     formData.append("pdfUrl", pdfUrl);
-    console.log(formData);
-    setloading(true);
+    //console.log(formData);
+    // setloading(true);
     const resp = await addnewbook(formData, token);
-    setloading(false);
-    console.log("response", resp);
+    // setloading(false);
+    // console.log("response", resp);
     setBookAuthor("");
     setBookName("");
     setBookSummary("");

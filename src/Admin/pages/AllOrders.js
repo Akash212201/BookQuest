@@ -38,7 +38,7 @@ const AllOrders = () => {
     async function fetchdata() {
       try {
         const resp = await allorders();
-        console.log(resp.data)
+        // console.log(resp.data)
         setbooks(resp.data)
       } catch (error) {
         console.log(error)
@@ -50,7 +50,7 @@ const AllOrders = () => {
   }, [])
   const data = useMemo(() => books, [books]);
 
-  console.log("object", data);
+  // console.log("object", data);
   const table = useTable(
     {
       columns,

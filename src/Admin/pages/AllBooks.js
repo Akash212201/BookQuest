@@ -44,7 +44,7 @@ const AllBooks = () => {
     async function fetchBooks() {
       try {
         const resp = await showallbooks();
-        console.log("my data", resp.data);
+        // console.log("my data", resp.data);
         setbooks(resp.data);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -85,7 +85,7 @@ const AllBooks = () => {
     try {
       await deletebook({ bookid }, token);
       const resp = await showallbooks();
-      console.log(resp.data);
+      //console.log(resp.data);
       setbooks(resp.data);
     }
     catch (error) {

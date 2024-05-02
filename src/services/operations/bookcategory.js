@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { apiconnector } from "../apioperator";
 import { category } from "../apis";
 import { toast } from "react-toastify";
@@ -13,12 +12,12 @@ export const groupCategory = async () => {
   let result = [];
   try {
     const response = await apiconnector("GET", HOMEPAGE_BOOKS, null);
-    console.log("booksresponse", response);
+    // console.log("booksresponse", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -31,12 +30,12 @@ export const groupCategoryid = async (data) => {
   let result = [];
   try {
     const response = await apiconnector("POST",  CATEGORY_PAGE_ID, data);
-    console.log("booksresponse", response);
+    // console.log("booksresponse", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -49,12 +48,12 @@ export const groupCategorysort = async (data) => {
   let result = [];
   try {
     const response = await apiconnector("POST",  GROUP_CATEGORY_SORT, data);
-    console.log("booksresponse", response);
+    // console.log("booksresponse", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -66,18 +65,18 @@ export const groupCategorysort = async (data) => {
 export const getcategory = async () => {
   let result = [];
   try {
-    console.log("mark");
+    
     const response = await apiconnector("GET", GET_CATEGORY_ID, null);
-    console.log("show book", response);
+    // console.log("show book", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     toast.error("failed to show categories");
   }
 };
@@ -85,7 +84,7 @@ export const getcategory = async () => {
 export const showallbooks = async () => {
   let result = [];
   try {
-    console.log("mark");
+    
     const response = await apiconnector("GET", SHOW_ALL_BOOKS, null);
     console.log("All books", response);
     if (!response.data.success) {
@@ -102,17 +101,17 @@ export const showallbooks = async () => {
 };
 
 export const showbookdetails = async (bookid) => {
-  console.log("bookid in action", bookid);
+  // console.log("bookid in action", bookid);
   let result = {};
   try {
-    console.log("mark");
+    
     const response = await apiconnector("POST", SHOW_BOOK_DETAILS, { bookid });
-    console.log("show book", response);
+   // console.log("show book", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+   // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -123,19 +122,19 @@ export const showbookdetails = async (bookid) => {
 
 
 export const viewbookdetails = async (bookid,token) => {
-  console.log("bookid in action", bookid);
+ // console.log("bookid in action", bookid);
   let result = {};
   try {
-    console.log("mark");
+    
     const response = await apiconnector("POST", SHOW_BOOK_DETAILS, { bookid },{
       Authorization: `Bearer ${token}`
     });
-    console.log("show book", response);
+   // console.log("show book", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+   // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -144,17 +143,17 @@ export const viewbookdetails = async (bookid,token) => {
   }
 };
 export const addnewbook = async (data,token) => {
-  console.log("bookid in action", data);
+  // console.log("bookid in action", data);
   let result=null;
   const toastId = toast.loading("Loading...");
 
   try {
-    console.log("mark");
+    
 
     const response = await apiconnector("POST", ADD_NEW_BOOK, data,{
         Authorization: `Bearer ${token}`
     } );
-    console.log("show book", response);
+   // console.log("show book", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -173,22 +172,22 @@ export const addnewbook = async (data,token) => {
 
 
 export const editbook = async (formData,token,navigate) => {
-  console.log("bookid in action", formData);
+  // console.log("bookid in action", formData);
   let result=null;
   const toastId = toast.loading("Loading...");
 
   try {
-    console.log("mark");
+    
 
     const response = await apiconnector("POST", EDIT_BOOK, formData,{
         Authorization: `Bearer ${token}`
     } );
-    console.log("show book", response);
+    // console.log("show book", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
     toast.success("Book Updated Successfully")
     navigate("/admin/dashboard/books")
     
@@ -204,14 +203,14 @@ export const editbook = async (formData,token,navigate) => {
 export const getcategories = async () => {
     let result = [];
     try {
-      console.log("mark");
+      
       const response = await apiconnector("GET", GET_CATEGORY, null);
-      console.log("show book", response);
+      // console.log("show book", response);
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
       result = response.data;
-      console.log("result", result);
+      // console.log("result", result);
   
       return result;
     } catch (error) {
@@ -222,10 +221,10 @@ export const getcategories = async () => {
 
   export const createcategory = async (data) => {
     try {
-      console.log("mark");
-      console.log(data)
+      
+      // console.log(data)
       const response = await apiconnector("POST", CREATE_CATEGORY, data);
-      console.log("show book", response);
+      // console.log("show book", response);
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -242,12 +241,12 @@ return ;
   export const deletebook = async (data,token) => {
  
     try {
-      console.log("mark");
-      console.log(data)
-      console.log(token)
+      
+      // console.log(data)
+      // console.log(token)
       const response = await apiconnector("POST", DELETE_BOOK, data,{
         Authorization: `Bearer ${token}`});
-      console.log("show book", response);
+      // console.log("show book", response);
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -256,7 +255,7 @@ return ;
 
       return ;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("failed in Deleting a Book");
     }
   };
@@ -264,14 +263,14 @@ return ;
   export const allorders = async () => {
     let result = [];
     try {
-      console.log("mark");
+      
       const response = await apiconnector("GET", GET_ORDERS, null);
-      console.log("show book", response);
+      // console.log("show book", response);
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
       result = response.data;
-      console.log("result", result);
+      // console.log("result", result);
   
       return result;
     } catch (error) {
@@ -283,14 +282,14 @@ return ;
   export const allusers = async () => {
     let result = [];
     try {
-      console.log("mark");
+      
       const response = await apiconnector("GET", GET_USERS, null);
-      console.log("show book", response);
+      // console.log("show book", response);
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
       result = response.data;
-      console.log("result", result);
+      // console.log("result", result);
   
       return result;
     } catch (error) {
@@ -304,9 +303,9 @@ return ;
 export const reqBook = async (data) => {
 
   try {
-    console.log("mark");
+    
     const response = await apiconnector("POST", REQ_BOOK, data);
-    console.log("All books", response);
+    // console.log("All books", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -322,12 +321,12 @@ export const categoryPage = async (data) => {
   let result = [];
   try {
     const response = await apiconnector("POST", CATEGORY_PAGE, data);
-    console.log("booksresponse", response);
+    // console.log("booksresponse", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -340,17 +339,17 @@ export const allpurchasedorders = async (token) => {
   let result = [];
   
   try {
-    console.log("mark");
+    
     const response = await apiconnector("GET", ALL_PURCHASED_BOOKS, null,{
       Authorization: `Bearer ${token}`
     });
-    console.log("show Purchased books", response);
+    // console.log("show Purchased books", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
    
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -365,16 +364,16 @@ export const allpurchasedorders = async (token) => {
 export const dashboardstats = async (token) => {
   let result = {};
   try {
-    console.log("mark");
+    
     const response = await apiconnector("GET",DASHBOARD_STATS, null,{
       Authorization: `Bearer ${token}`
     });
-    console.log("show Dashboard stats", response);
+    // console.log("show Dashboard stats", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -386,16 +385,16 @@ export const dashboardstats = async (token) => {
 export const dashboardpiechart = async (token) => {
   let result = {};
   try {
-    console.log("mark");
+    
     const response = await apiconnector("GET",DASHBOARD_PIECHART, null,{
       Authorization: `Bearer ${token}`
     });
-    console.log("show Dashboard stats", response);
+    // console.log("show Dashboard stats", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -407,16 +406,16 @@ export const dashboardpiechart = async (token) => {
 export const dashboardlinechart = async (token) => {
   let result = {};
   try {
-    console.log("mark");
+    // 
     const response = await apiconnector("GET",DASHBOARD_LINECHART, null,{
       Authorization: `Bearer ${token}`
     });
-    console.log("show Dashboard stats", response);
+    // console.log("show Dashboard stats", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {
@@ -428,16 +427,16 @@ export const dashboardlinechart = async (token) => {
 export const dashboardbarchart = async (token) => {
   let result = {};
   try {
-    console.log("mark");
+    
     const response = await apiconnector("GET",DASHBOARD_BARCHART, null,{
       Authorization: `Bearer ${token}`
     });
-    console.log("show Dashboard stats", response);
+    // console.log("show Dashboard stats", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {

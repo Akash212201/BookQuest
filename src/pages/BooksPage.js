@@ -6,18 +6,13 @@ import { groupCategory, groupCategorysort } from '../services/operations/bookcat
 const BooksPage = () => {
 
   const location = useLocation();
-  console.log("location", location)
 
-  const searchparams = location.pathname.split("/").pop();
-  console.log(searchparams)
+
   const [books, setbooks] = useState([])
-  const [selectedOption, setSelectedOption] = useState('LowtoHigh'); // Initial selected value
-
-
+  const [selectedOption, setSelectedOption] = useState('LowtoHigh'); 
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(selectedOption);
     fetchBooks(event.target.value);
   };
 
@@ -40,8 +35,6 @@ const BooksPage = () => {
 
     try {
       const resp = await groupCategorysort({ sort: apiSort });
-
-      console.log("resp.data", resp.data)
       if (location.pathname === "/newarrival")
         setbooks(resp.data.mostrecentbooks)
       else {
@@ -58,7 +51,6 @@ const BooksPage = () => {
     const fetchData = async () => {
       try {
         const resp = await groupCategory();
-        console.log("resp", resp.data);
         if (location.pathname === "/newarrival")
           setbooks(resp.data.mostrecentbooks)
         else
@@ -73,8 +65,6 @@ const BooksPage = () => {
     fetchData();
 
   }, [location.pathname])
-
-  console.log("books", books)
   return (
     <div className="bookPage">
       <div className='relative h-12'>
@@ -94,10 +84,10 @@ const BooksPage = () => {
           </select>
         </div>
       </div>
-        <div className="w-[100%] relative py-4 px-[3.5rem]">
-          <Books books={books} />
-        </div>
-   
+      <div className="w-[100%] relative py-4 px-[1.5rem] md:px-[2rem] lg::px-[3.5rem]">
+        <Books books={books} />
+      </div>
+
     </div>
 
   )

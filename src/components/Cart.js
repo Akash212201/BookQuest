@@ -10,10 +10,10 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const {token}=useSelector((state)=>state.auth)
 
-  console.log(token)
+  // console.log(token)
 const user=localStorage.getItem("user")
 const navigate=useNavigate();
-  console.log("Cartitems",cartItems)
+  // console.log("Cartitems",cartItems)
 
   // Calculate total price for each item
   const calculateTotalPrice = (item) => {
@@ -30,10 +30,9 @@ const navigate=useNavigate();
 console.log("cartItems",cartItems)
   async function paymenthandler(){
     const books=cartItems.map((book) => book._id)
-    console.log(books)
-    console.log("Payment call")
+    
     const resp=await BuyBook(token,books,user,navigate,dispatch);
-    console.log(resp);
+    // console.log(resp);
 }
   return (
     <div className="min-h-[500px] px-5">

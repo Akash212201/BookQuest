@@ -91,7 +91,7 @@ const options={
         }
         
     };
-    console.log("a")
+    
 
     const paymentObject=new window.Razorpay(options);
     paymentObject.open();
@@ -105,10 +105,10 @@ toast.dismiss(toastid)
 
 }
 
-console.log("a")
+
 
 async function verifyPayment(bodydata,token,navigate,dispatch){
-    console.log("a")
+    
     console.log("bodydata",bodydata);
     const toastid=toast.loading("Verifying Payment");
  

@@ -20,7 +20,6 @@ const EBookView = () => {
   // console.log(id)
   const fetchData = async () => {
     let response = await viewbookdetails(id,token);
-    console.log(response.data)
     setbook(response.data);
 };
 
@@ -69,7 +68,7 @@ useEffect(() => {
 
   return (
     <div className='me-6 my-3 px-6 py-2'>
-      <h1 className='text-xl mb-2'>My Book Title</h1>
+      <h1 className='text-xl mb-2'>{` ${book?.bookName} by ${book?.bookAuthor} `}</h1>
       <p className='px-2 py-2 bg-[#2f2f2f] text-white text-center text-xl'>Page {pageNumber} of {numPages}</p>
       
       <div className="bg-[#2f2f2f] ebook flex justify-center overflow-y-auto border-b border-black h-[68vh]" ref={containerRef}>

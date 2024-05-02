@@ -9,6 +9,9 @@ const UserSidebar = ({ sidebarOpen }) => {
                 <li className='rounded-lg my-[0.2rem] px-4 py-2'>
                     <Link to="/user/dashboard/orders">View All Books</Link>
                 </li>
+                <li className='rounded-lg my-[0.2rem] px-4 py-2'>
+                    <Link to="/user/dashboard/ratingreview">Rate & Review</Link>
+                </li>
             </ul>
         </div>
     );

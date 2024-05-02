@@ -2,7 +2,7 @@ import React from 'react';
 import BookCard from './BookCard';
 
 const Books = ({ books }) => {
-  console.log("books", books)
+  // console.log("books", books)
   return (
     <div className="products">
       {books.length > 0 ? books.map((book, id) => (
