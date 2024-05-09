@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const Template = ({ heading, para1, formtype, frame }) => {
   const { loading } = useSelector((state) => state.auth);
-  console.log("signupb");
+  
   return (
     <>
       {

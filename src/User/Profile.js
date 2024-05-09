@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 const Profile = () => {
   const user=localStorage.getItem("user")
   const user1=JSON.parse(user)
-  console.log("user123",user1.firstName)
   const [firstName, setFirstName] = useState(user1.firstName)
   const [lastName, setLastName] = useState(user1.lastName)
   const [email, setEmail] = useState(user1?.email)
@@ -34,11 +33,7 @@ const Profile = () => {
       // profile: profile || userImg
     }
     updatep(formdata,token);
-    console.log(formdata, "new")
     if(profile!==user1.image){
-      console.log(user1.image)
-      console.log(profile)
-      console.log("inside profile")
       const formData = new FormData();
       formData.append("image",profile)
       updateimg(formData,token);
@@ -47,17 +42,13 @@ const Profile = () => {
  }
 
   async function updatep(formdata,token){
-    console.log(formdata);
+   
     const resp=await updateProfile(formdata,token);
    
-    console.log(resp);
   }
 
   async function updateimg(formData,token){
     const resp=await updateimage(formData,token);
-
-  console.log(resp);
-
   }
   
   return (

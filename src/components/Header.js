@@ -43,7 +43,6 @@ const Header = () => {
       try {
         const response = await axios.get('https://bookquest.onrender.com/api/v1/user/getCategories');
         setCategories(response.data.data);
-        console.log("categories",response.data.data)
       } catch (error) {
         console.error(error);
       }

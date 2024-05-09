@@ -27,19 +27,6 @@ body {
   background-image: url('../public/images/news_texture.png');
 }
 
-/*---------------MovieBox-------------*/
-@media only screen and (max-width: 768px) {
-  .MovieBox {
-    width: 320px;
-    height: 250px;
-  }
-
-  .mobile {
-    display: none;
-  }
-}
-
-
 .bar:nth-child(1) {
   top: 0;
 }
@@ -102,12 +89,6 @@ body {
   box-shadow: none;
 }
 
-@media(max-width: 776px) {
-  .mobile {
-    display: none;
-  }
-}
-
 .ebook::-webkit-scrollbar {
   width: 12px;
 }
@@ -123,45 +104,9 @@ body {
   grid-gap: 20px;
 }
 
-/* Responsive CSS */
-@media (max-width: 768px) {
-  .products {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-sidebar {
-    width: 250px;
-    position: fixed;
-    left: 0;
-    top: 58px;
-    bottom: 0;
-    z-index: 1000;
-  }
-
-  .admin-sidebar.hide {
-    left: -100%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .admin {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: unset;
-    gap: 5px;
-  }
-
-  .hidesidebar {
-    display: block;
-  }
-}
-
 .main-content {
   padding-left: 250px;
 }
-
-
-
 
 .header {
   box-shadow: 0 5px 21px -5px #c7d0f4;
@@ -212,7 +157,27 @@ body {
   z-index: 2;
 }
 
+.title {
+  text-align: center;
+}
+
+.title h4 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
 /* BookCard2 */
+@media only screen and (max-width: 768px) {
+  .MovieBox {
+    width: 320px;
+    height: 250px;
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
 @media (max-width: 372px) {
   .card-content {
     padding: 20px;
@@ -229,14 +194,40 @@ body {
   }
 }
 
-
-
-.title {
-  text-align: center;
+@media(max-width: 776px) {
+  .mobile {
+    display: none;
+  }
 }
 
-.title h4 {
-  font-size: 40px;
-  font-weight: bold;
-  margin: 0;
+@media (max-width: 768px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    width: 250px;
+    position: fixed;
+    left: 0;
+    top: 58px;
+    bottom: 0;
+    z-index: 1000;
+  }
+
+  .admin-sidebar.hide {
+    left: -100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: unset;
+    gap: 5px;
+  }
+
+  .hidesidebar {
+    display: block;
+  }
 }

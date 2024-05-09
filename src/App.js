@@ -40,6 +40,7 @@ import MyOrders from './User/MyOrders';
 import UserSidebar from './User/UserSidebar';
 import EBookView from "./pages/PdfView"
 import './App.css';
+import RateAndReview from './User/RateAndReview';
 
 const App = () => {
   const location = useLocation();
@@ -57,6 +58,7 @@ const App = () => {
   };
   return (
     <div>
+      
       {
         !isDashboard ? (<div><Header1 /><Header /></div>) : <div><AdminNavbar toggleSidebar={toggleSidebar} /></div>
       }
@@ -73,7 +75,7 @@ const App = () => {
           <Route path='/newarrival' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
           <Route path='/bestseller' element={<BooksPage />} />
-          <Route path='/:id' element={<CategoryPage  />} />
+          <Route path='/:id' element={<CategoryPage />} />
           <Route path='/books' element={<BooksPage />} />
           <Route path='/bookinfo/:id' element={<BookInfo />} />
           <Route path='/cart' element={<Cart />} />
@@ -85,35 +87,32 @@ const App = () => {
           <Route path="/requestbook" element={<Requestbook />}></Route>
 
           {/* Dashboard Routes */}
-  {
-    user1 && user1.accountType==="Admin" &&
-    <>
-    <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-    <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
-    <Route path='/admin/dashboard/updatebook/:id' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
-    <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
-    <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
-    <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />
-    <Route path='/admin/dashboard/new-orders' element={<PrivateRoute><NewOrders /></PrivateRoute>} />
-    <Route path='/admin/dashboard/orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
-    <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
-    <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
-    <Route path='/admin/dashboard/bookinfo/:id' element={<BookInfo />} />
-    </>
-
-  }
-
-
-
-
-          {/* User */}
-          
           {
-            user1 && user1.accountType==="Customer" &&
+            user1 && user1.accountType === "Admin" &&
             <>
-            <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
-            <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
-            <Route path='/user/dashboard/viewbook/:id' element={<EBookView />} />
+              <Route path='/admin/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+              <Route path='/admin/dashboard/addbook' element={<PrivateRoute><AddBook /></PrivateRoute>} />
+              <Route path='/admin/dashboard/updatebook/:id' element={<PrivateRoute><UpdateBook /></PrivateRoute>} />
+              <Route path='/admin/dashboard/books' element={<PrivateRoute><AllBooks /></PrivateRoute>} />
+              <Route path='/admin/dashboard/addcategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
+              <Route path='/admin/dashboard/categories' element={<PrivateRoute><Categories /></PrivateRoute>} />
+              <Route path='/admin/dashboard/new-orders' element={<PrivateRoute><NewOrders /></PrivateRoute>} />
+              <Route path='/admin/dashboard/orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
+              <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
+              <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
+              <Route path='/admin/dashboard/bookinfo/:id' element={<BookInfo />} />
+            </>
+
+          }
+          {/* User */}
+
+          {
+            user1 && user1.accountType === "Customer" &&
+            <>
+              <Route path='/user/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+              <Route path='/user/dashboard/orders' element={<PrivateRoute><MyOrders /></PrivateRoute>} />
+              <Route path='/user/dashboard/ratingreview' element={<PrivateRoute><RateAndReview /></PrivateRoute>} />
+              <Route path='/user/dashboard/viewbook/:id' element={<EBookView />} />
             </>
 
           }

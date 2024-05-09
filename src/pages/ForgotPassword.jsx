@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { BsArrowLeftShort } from "react-icons/bs"
 import { Link } from 'react-router-dom';
 import { getResetPasswordToken } from '../services/operations/authapi';
@@ -11,11 +11,10 @@ const ForgotPassword = () => {
   const [emailsent, setemailsent] = useState(false);
   const [email, setemail] = useState("");
 
-  const { loading } = useSelector((state) => state.auth);
+  // const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   function submithandler(e) {
     e.preventDefault();
-    console.log("a");
     dispatch(getResetPasswordToken(email, setemailsent));
   }
   return (

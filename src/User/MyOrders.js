@@ -40,7 +40,6 @@ const MyOrders = () => {
     async function fetchBooks() {
       try {
         const resp = await allpurchasedorders(token);
-        console.log(resp.data);
         setbooks(resp.data);
       } catch (error) {
         console.error("Error fetching books:", error);

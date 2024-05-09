@@ -33,7 +33,7 @@ const AllUser = () => {
   useEffect(() => {
     async function fetchdata() {
       const resp = await allusers();
-      console.log(resp.data)
+      // console.log(resp.data)
       setusers(resp.data)
 
     }
@@ -44,7 +44,7 @@ const AllUser = () => {
 
   const data = useMemo(() => users, [users]);
 
-  console.log("object", data);
+  // console.log("object", data);
   const table = useTable(
     {
       columns,

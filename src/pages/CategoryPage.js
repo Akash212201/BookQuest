@@ -6,10 +6,10 @@ import { categoryPage, groupCategoryid } from '../services/operations/bookcatego
 const CategoryPage = () => {
 
   const location = useLocation();
-  console.log("location", location)
+ // console.log("location", location)
 
   const categoryid = location.pathname.split("/").pop();
-  console.log(categoryid)
+  // console.log(categoryid)
   const [books, setbooks] = useState([])
   const [selectedOption, setSelectedOption] = useState('LowtoHigh'); // Initial selected value
   const [sort, setsort] = useState(true)
@@ -17,7 +17,6 @@ const CategoryPage = () => {
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(selectedOption);
     fetchBooks(event.target.value);
   };
 
@@ -42,7 +41,7 @@ const CategoryPage = () => {
 
     try {
       const resp = await categoryPage({ categoryid, sort: apiSort });
-      console.log("resp", resp.data.eBooks);
+      // console.log("resp", resp.data.eBooks);
       setbooks(resp.data.eBooks);
     } catch (error) {
       console.error(error);
@@ -53,9 +52,9 @@ const CategoryPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(categoryid)
+        // console.log(categoryid)
         const resp = await categoryPage({ categoryid, sort });
-        console.log("resp", resp.data.eBooks);
+        // console.log("resp", resp.data.eBooks);
         setbooks(resp.data.eBooks)
 
 
@@ -88,7 +87,7 @@ const CategoryPage = () => {
           </select>
         </div>
       </div>
-      <div className="w-[100%] relative py-4 px-[3.5rem]">
+      <div className="w-[100%] relative py-4 px-[1.5rem] md:px-[2rem] lg::px-[3.5rem]">
         <Books books={books} />
       </div>
     </div>

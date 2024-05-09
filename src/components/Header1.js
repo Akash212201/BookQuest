@@ -15,7 +15,7 @@ const Header1 = () => {
     const dispatch = useDispatch()
     const user = localStorage.getItem("user")
     const user1 = JSON.parse(user)
-    console.log(user1)
+    // console.log(user1)
 
     function logouthandler() {
         dispatch(logout(navigate));
@@ -44,7 +44,7 @@ const Header1 = () => {
 
                         <div className="flex items-center cursor-pointer lg:mr-0 mr-5 relative "
                             onMouseEnter={() => setIsHovered(true)}
-                            >
+                        >
                             <FiUser className="mr-2 " />
                             <div className={`absolute z-10 top-9 -left-14 bg-[#f0f4f9] px-6 py-2 rounded ${isHovered ? 'block' : 'hidden'} shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] `}
                                 onMouseEnter={() => setIsHovered(true)}
@@ -80,7 +80,7 @@ const Header1 = () => {
                                     <span className=' absolute -top-3 right-[2px] text-sm bg-green-500 text-white px-1 rounded-[50%]'>{data.cartItems.length}</span>
                                 </div>
                             </Link> :
-                             user1?.accountType === "Customer" ?
+                            user1?.accountType === "Customer" ?
                                 <Link to="/cart" >
                                     <div className="flex items-center cursor-pointer relative">
                                         <LuShoppingBag className="lg:mr-2 mr-5" />

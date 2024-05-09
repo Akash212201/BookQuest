@@ -15,11 +15,11 @@ const Search = () => {
             const resp=await showallbooks();
         const data = resp.data;
         setResults(data)
-        console.log("data",data)
+        // console.log("data",data)
         const results = data.filter((user) => {
             return value && user && user.bookName && user.bookName.toLowerCase().includes(value)
         })
-        console.log("resssuuullt",results)
+        // console.log("resssuuullt",results)
         return results;
         } catch (error) {
             console.log("resssuuullt",error)
@@ -34,7 +34,7 @@ const Search = () => {
     }
     //set the value from filter result
     const handleResult =(val)=>{
-        console.log(val)
+       
         setvalue(val)
         navigation(`/bookinfo/${val}`)
 

@@ -8,19 +8,19 @@ const { RESETPASSWORDTOKEN_API, RESETPASSWORD_API, SENDOTP_API, SIGNUP_API, LOGI
 export const signup = (firstName, lastName, email, accountType, password, confirmPassword, otp, navigation) => {
     return async (dispatch) => {
        
-        console.log("a");
+      
     
         
         try {
-            console.log("d");
-            console.log(firstName);
-            console.log(otp);
-            console.log("accounttype",accountType)
+           // console.log("d");
+           // console.log(firstName);
+           // console.log(otp);
+           // console.log("accounttype",accountType)
 
           const  resp = await apiconnector("POST", SIGNUP_API, { firstName, lastName, email, accountType, password, confirmPassword, otp });
-            console.log("b");
-            console.log(resp);
-            console.log("c");
+            // console.log("b");
+            // console.log(resp);
+            // console.log("c");
             if (!resp.data.success) {
                 throw new Error(resp.data.message);
 
@@ -43,11 +43,11 @@ export const signup = (firstName, lastName, email, accountType, password, confir
 export const login = (email, password, navigate) => {
     return async (dispatch) => {
        
-        console.log("a");
+       // console.log("a");
 
         try {
             const response = await apiconnector("POST", LOGIN_API, { email, password });
-            console.log(response);
+          //  console.log(response);
             if (!response.data.success) {
                 throw new Error(response.data.message);
 
@@ -76,11 +76,11 @@ export const sendotp = (email, navigate) => {
         dispatch(setloading(true));
 
         try {
-            console.log("sendotp");
-            console.log(email)
-            console.log(SENDOTP_API)
+            // console.log("sendotp");
+            // console.log(email)
+            // console.log(SENDOTP_API)
             const response = await apiconnector("POST", SENDOTP_API, { email });
-            console.log(response);
+           // console.log(response);
             if (!response.data.success) {
                 throw new Error(response.data.message);
 
@@ -100,10 +100,10 @@ export const sendotp = (email, navigate) => {
 export const getResetPasswordToken = (email, setemailsent) => {
     return async (dispatch) => {
         dispatch(setloading(true));
-        console.log("b");
+       //  console.log("b");
         try {
             const response = await apiconnector("POST", RESETPASSWORDTOKEN_API, { email });
-            console.log(response);
+            // console.log(response);
             if (!response.data.success) {
                 throw new Error(response.data.message);
 
@@ -127,7 +127,7 @@ export const getresetpassword = (password, confirmPassword, token) => {
         dispatch(setloading(true));
         try {
             const response = await apiconnector("POST", RESETPASSWORD_API, { password, confirmPassword, token });
-            console.log(response);
+           // console.log(response);
             if (!response.data.success) {
                 throw new Error(response.data.message);
 

@@ -10,11 +10,9 @@ const AddCategory = () => {
       categoryDesc: categoryDesc
     }
     const resp=await createcategory(data);
-    console.log(resp);
+   
     setCategory('');
     setCategoryDesc('');
-
-    console.log(data)
   }
 
   

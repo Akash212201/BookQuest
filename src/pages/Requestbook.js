@@ -17,9 +17,9 @@ const Requestbook = () => {
             email: email,
             mobile: mobile
         }
-        console.log(data)
-        const resp=await reqBook(data);
-        console.log(resp)
+       // console.log(data)
+        const resp = await reqBook(data);
+        // console.log(resp)
         setBookName('');
         setBookAuthor('');
         setEmail('');
