@@ -36,7 +36,9 @@ ADD_NEW_BOOK:BASE_URL+"/books/createBook",
 EDIT_BOOK:BASE_URL+"/books/editBook",
 DELETE_BOOK:BASE_URL+"/books/deleteBook",
 REQ_BOOK:BASE_URL+"/books/reqBook",
-VIEW_BOOK:BASE_URL+"/books/showBookdetails"
+VIEW_BOOK:BASE_URL+"/books/showBookdetails",
+RATING_REVIEWS:BASE_URL+"/books/ratingAndReviews",
+GETRATING:BASE_URL+"/books/getAverageRating"
 }
 
 // STUDENTS ENDPOINTS

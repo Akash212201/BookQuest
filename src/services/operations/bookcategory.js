@@ -6,7 +6,7 @@ import { orderEndPoints } from "../apis";
 // import { database } from "../../../Server/config/database";
 
 const { HOMEPAGE_BOOKS ,CATEGORY_PAGE_ID,CREATE_CATEGORY, GROUP_CATEGORY_SORT, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
-const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,VIEW_BOOK,EDIT_BOOK} = books;
+const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,VIEW_BOOK,EDIT_BOOK,RATING_REVIEWS,GETRATING} = books;
 const { GET_ORDERS,GET_USERS, ALL_PURCHASED_BOOKS,DASHBOARD_STATS,DASHBOARD_PIECHART,DASHBOARD_BARCHART,DASHBOARD_LINECHART}=orderEndPoints;
 export const groupCategory = async () => {
   let result = [];
@@ -442,5 +442,46 @@ export const dashboardbarchart = async (token) => {
   } catch (error) {
     console.log(error);
     toast.error("failed to show dashboard pie chart stats");
+  }
+};
+
+
+export const ratingAndReviews = async (bookid,rating,review,token) => {
+  // console.log("bookid in action", bookid);
+   
+   try {
+     
+     const response = await apiconnector("POST", RATING_REVIEWS, { bookid ,rating ,review},{
+       Authorization: `Bearer ${token}`
+     });
+    // console.log("show book", response);
+     if (!response.data.success) {
+       throw new Error(response.data.message);
+     }
+    //  result = response.data;
+    // console.log("result", result);
+ toast.success("Successfully Rating And Review")
+    //  return result;
+   } catch (error) {
+     console.log(error);
+     toast.error("failed to rate and review");
+   }
+ };
+
+ export const getRating = async (bookid) => {
+  let result = [];
+  try {
+    const response = await apiconnector("GET", GETRATING, bookid);
+    // console.log("booksresponse", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.averageRating;
+    // console.log("result", result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+   
   }
 };

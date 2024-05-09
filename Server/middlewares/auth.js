@@ -48,6 +48,7 @@ exports.auth = async (req, resp, next) => {
 // isCustomer
 exports.isCustomer = async (req, resp, next) => {
     try {
+      
         const userdetails = await User.findOne({ email: req.user.email })
         if (userdetails.accountType !== "Customer") {
             return resp.status(400).json({

@@ -5,18 +5,22 @@ const RatingAndReviews = require("../models/RatingAndReviews");
 exports.RatingAndReviews = async (req, resp) => {
   try {
     const { rating, review, bookid } = req.body;
+    console.log(rating)
+    console.log(bookid)
     const userid = req.user.id;
 
-    if (!rating || !review || !bookid) {
+    if (!rating || !review ) {
       resp.status(400).json({
         success: false,
         message: "required fields are missing",
       });
     }
-
-    const checkpurchase = await Books.findOne(bookid, {
-      customerPurchased: { $elemMatch: { $eq: userid } },
-    });
+console.log("mark2")
+    const checkpurchase = await Books.findOneAndUpdate(
+      {_id:bookid},
+      {$push:{customerPurchased:userid}},  
+    );
+    console.log("checkpurchase",checkpurchase)
 
     if (!checkpurchase) {
       resp.status(400).json({
