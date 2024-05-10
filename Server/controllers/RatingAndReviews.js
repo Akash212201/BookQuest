@@ -4,12 +4,13 @@ const RatingAndReviews = require("../models/RatingAndReviews");
 
 exports.RatingAndReviews = async (req, resp) => {
   try {
-    const { rating, review, bookid } = req.body;
+    const { rating, bookid , review=" "} = req.body;
     console.log(rating)
     console.log(bookid)
+    console.log(review)
     const userid = req.user.id;
 
-    if (!rating || !review ) {
+    if (!rating || !bookid ) {
       resp.status(400).json({
         success: false,
         message: "required fields are missing",
@@ -40,13 +41,14 @@ console.log("mark2")
         message: "You are already rate this book",
       });
     }
-
-    const createrating = await RatingAndReviews.create({
-      user: userid,
-      rating: rating,
-      review: review,
-      eBook: bookid,
-    });
+console.log("mark23")
+const createrating = await RatingAndReviews.create({
+  user: userid,
+  rating: rating,
+  review: review,
+  eBook: bookid,
+});
+console.log("mark13")
 
     if (!createrating) {
       resp.status(400).json({
