@@ -11,7 +11,7 @@ rating:{
 },
 review:{
     type:String,
-    required:true
+   
 },
 eBook:{
     type:mongoose.Schema.Types.ObjectId,

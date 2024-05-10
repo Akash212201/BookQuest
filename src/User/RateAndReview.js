@@ -42,6 +42,7 @@ const RateAndReview = () => {
     setBookid('')
   }
 
+  
   console.log("ratings",rating)
   console.log("bookid",bookid)
   return (
