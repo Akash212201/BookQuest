@@ -4,24 +4,24 @@ const RatingAndReviews = require("../models/RatingAndReviews");
 
 exports.RatingAndReviews = async (req, resp) => {
   try {
-    const { rating, bookid , review=" "} = req.body;
+    const { rating, bookid, review = " " } = req.body;
     console.log(rating)
     console.log(bookid)
     console.log(review)
     const userid = req.user.id;
 
-    if (!rating || !bookid ) {
+    if (!rating || !bookid) {
       resp.status(400).json({
         success: false,
         message: "required fields are missing",
       });
     }
-console.log("mark2")
+    console.log("mark2")
     const checkpurchase = await Books.findOneAndUpdate(
-      {_id:bookid},
-      {$push:{customerPurchased:userid}},  
+      { _id: bookid },
+      { $push: { customerPurchased: userid } },
     );
-    console.log("checkpurchase",checkpurchase)
+    console.log("checkpurchase", checkpurchase)
 
     if (!checkpurchase) {
       resp.status(400).json({
@@ -41,14 +41,14 @@ console.log("mark2")
         message: "You are already rate this book",
       });
     }
-console.log("mark23")
-const createrating = await RatingAndReviews.create({
-  user: userid,
-  rating: rating,
-  review: review,
-  eBook: bookid,
-});
-console.log("mark13")
+    console.log("mark23")
+    const createrating = await RatingAndReviews.create({
+      user: userid,
+      rating: rating,
+      review: review,
+      eBook: bookid,
+    });
+    console.log("mark13")
 
     if (!createrating) {
       resp.status(400).json({
@@ -85,12 +85,12 @@ console.log("mark13")
 
 exports.getAverageRating = async (req, resp) => {
   try {
-    const  bookid  = req.body;
+    const bookid = req.body;
 
     const result = await RatingAndReviews.aggregate([
       {
-        $match: { 
-            eBook:new ObjectId(bookid) 
+        $match: {
+          eBook: new ObjectId(bookid)
         },
       },
       {
@@ -132,7 +132,7 @@ exports.getAllRatings = async (req, resp) => {
       .populate({
         path: "eBooks",
         select: "bookName bookSummary bookAuthor",
-        
+
       })
       .exec();
 

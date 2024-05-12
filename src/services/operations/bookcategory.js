@@ -420,7 +420,7 @@ export const dashboardlinechart = async (token) => {
     return result;
   } catch (error) {
     console.log(error);
-    toast.error("failed to show dashboard pie chart stats");
+    toast.error("failed to show dashboard line chart stats");
   }
 };
 
@@ -441,7 +441,7 @@ export const dashboardbarchart = async (token) => {
     return result;
   } catch (error) {
     console.log(error);
-    toast.error("failed to show dashboard pie chart stats");
+    toast.error("failed to show dashboard bar chart stats");
   }
 };
 
@@ -483,5 +483,28 @@ export const ratingAndReviews = async (bookid,rating,review,token) => {
   } catch (error) {
     console.log(error);
    
+  }
+};
+
+
+// new temp
+export const dashboardbarchart2 = async (token) => {
+  let result = {};
+  try {
+    
+    const response = await apiconnector("GET",DASHBOARD_BARCHART, null,{
+      Authorization: `Bearer ${token}`
+    });
+    // console.log("show Dashboard stats", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = response.data;
+    // console.log("result", result);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    toast.error("failed to show dashboard bar chart2 stats");
   }
 };

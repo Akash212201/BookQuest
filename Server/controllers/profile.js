@@ -13,13 +13,13 @@ exports.updateProfile = async (req, resp) => {
     const userdetails = await User.findById(userid);
     const addressid = userdetails.addressDetails;
 
-    console.log("firstName",firstName)
+    console.log("firstName", firstName)
     const updateaddress = await Address.findByIdAndUpdate(
       addressid,
       {
         address: address,
-        mobile:mobile,
-       
+        mobile: mobile,
+
       },
       { new: true }
     );
@@ -27,7 +27,7 @@ exports.updateProfile = async (req, resp) => {
     const updateuser = await User.findByIdAndUpdate(userid, {
       firstName: firstName,
       lastName: lastName,
-    },{new:true})
+    }, { new: true })
       .populate("addressDetails")
       .exec();
     return resp
@@ -99,7 +99,7 @@ exports.getAllUserDetails = async (req, resp) => {
 exports.updateDisplayPicture = async (req, resp) => {
   try {
     console.log("mark")
-    console.log("request",req)
+    console.log("request", req)
     //   cookies: {
     //     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVucnVmZmxlZGJhbnphaThAZnJlZXRoZWNvb2tpZXMuY29tIiwiaWQiOiI2NWRlZGVhODlhNWMxYjU2MmQyMjZmZWMiLCJhY2NvdW50VHlwZSI6IkFkbWluIiwiaWF0IjoxNzA5MjAxNzE4LCJleHAiOjE3MDkyODgxMTh9.sg66tw7hsvpIya3wefOF1SDOiZBBU7eOk4ghz0PDR6E'
     //   },
@@ -117,8 +117,8 @@ exports.updateDisplayPicture = async (req, resp) => {
     //       mv: [Function: mv]
     //     }
     //   },
-      const image = req.files.image;
-      console.log("req.files",req.files)
+    const image = req.files.image;
+    console.log("req.files", req.files)
 
 
     if (!image) {
@@ -152,64 +152,64 @@ exports.updateDisplayPicture = async (req, resp) => {
   }
 };
 
-exports.getPurchasedBooks=async (req,resp)=>{
-    try{
-        const userid=req.user.id;
-        const userdetail=await User.findById(userid);
-        const  purchasedbooks=userdetail.eBooks;
-        
-        let bookdetails=[];
-        let i=0;
-        for(const bookid of purchasedbooks){
-            bookdetails[i]=await Books.findById(bookid).populate("category").exec();
-            i++;
-        }
+exports.getPurchasedBooks = async (req, resp) => {
+  try {
+    const userid = req.user.id;
+    const userdetail = await User.findById(userid);
+    const purchasedbooks = userdetail.eBooks;
 
-      return   resp.status(200).json({
-            success:true,
-            message:"all purchased books shows",
-            data:bookdetails
-        })
-
-    }catch(error){
-        resp.status(400).json({
-            success:false,
-            message:"server error",
-        
-        })
+    let bookdetails = [];
+    let i = 0;
+    for (const bookid of purchasedbooks) {
+      bookdetails[i] = await Books.findById(bookid).populate("category").exec();
+      i++;
     }
+
+    return resp.status(200).json({
+      success: true,
+      message: "all purchased books shows",
+      data: bookdetails
+    })
+
+  } catch (error) {
+    resp.status(400).json({
+      success: false,
+      message: "server error",
+
+    })
+  }
 }
 
-exports.getorders=async (req,resp)=>{
-  try{
-    const allorder=await Paymentinfo.find({});
-    const orders=allorder.map((order,ind)=>({
-      id:ind+1,
-      paymentId:order.paymentId,
-      orderId:order.orderId, 
-      amount:order.amount,
-      userId:order.userId,
-      bookName:order.bookName,
-      thumbnail:order.thumbnail
+exports.getorders = async (req, resp) => {
+  try {
+    const allorder = await Paymentinfo.find({});
+    const orders = allorder.map((order, ind) => ({
+      id: ind + 1,
+      paymentId: order.paymentId,
+      orderId: order.orderId,
+      amount: order.amount,
+      userId: order.userId,
+      bookName: order.bookName,
+      thumbnail: order.thumbnail
     }))
 
-    if(!allorder){
+    if (!allorder) {
       return resp.status(400).json({
-        success:false,
-        message:"error in get orders"
+        success: false,
+        message: "error in get orders"
       })
     }
 
     return resp.status(200).json({
-      success:true,
-      data:orders,
-        message:"success in get orders"
+      success: true,
+      data: orders,
+      message: "success in get orders"
     })
 
-  }catch(error){
+  } catch (error) {
     return resp.status(400).json({
-      success:false,
-      message:"error found"
+      success: false,
+      message: "error found"
     })
   }
 }
@@ -217,188 +217,190 @@ exports.getorders=async (req,resp)=>{
 
 
 
-exports.getallusers=async (req,resp)=>{
-  try{
-    const allusers=await User.find({accountType:"Customer"});
+exports.getallusers = async (req, resp) => {
+  try {
+    const allusers = await User.find({ accountType: "Customer" });
     // console.log(allusers)
-    const users=allusers.map((user,ind)=>(
-     
-      {
-      id:ind+1,
-      firstName:user.firstName,
-       email:user.email,
-       image:user.image, 
-       purchaseBooks:user.eBooks.length
-     
-    }))
+    const users = allusers.map((user, ind) => (
 
-    if(!allusers){
+      {
+        id: ind + 1,
+        firstName: user.firstName,
+        email: user.email,
+        image: user.image,
+        purchaseBooks: user.eBooks.length
+
+      }))
+
+    if (!allusers) {
       return resp.status(400).json({
-        success:false,
-        message:"error in get Users"
+        success: false,
+        message: "error in get Users"
       })
     }
 
     return resp.status(200).json({
-      success:true,
-      data:users,
-        message:"success in fetching users"
+      success: true,
+      data: users,
+      message: "success in fetching users"
     })
 
-  }catch(error){
+  } catch (error) {
     return resp.status(400).json({
-      success:false,
-      message:"error found"
+      success: false,
+      message: "error found"
     })
   }
 }
 
 //Todo:add dashboard
 
-exports.instructorDashboard=async (req,resp)=>{
-  try{
-     const booksDetails=await Books.find({})
+exports.instructorDashboard = async (req, resp) => {
+  try {
+    const booksDetails = await Books.find({})
 
-     const bookData=booksDetails.map((book,i)=>{
-      const totalCustomerPurchase=book.customerPurchased.length;
-      const totalAmountGenerate=totalCustomerPurchase*book.price;
-
-      const bookDataWithStats={
-     _id:book._id,
-     bookName:book.bookName,
-   
-     totalCustomerPurchase,
-     totalAmountGenerate
+    const bookData = booksDetails.map((book, i) => {
+      const totalCustomerPurchase = book.customerPurchased.length;
+      const totalAmountGenerate = totalCustomerPurchase * book.price;
+      const bookDataWithStats = {
+        _id: book._id,
+        bookName: book.bookName,
+        
+        totalCustomerPurchase,
+        totalAmountGenerate
       }
 
       return bookDataWithStats;
-     })
-resp.status(200).json({
-  success:true,
-  courses:bookData
-})
+    })
+    resp.status(200).json({
+      success: true,
+      courses: bookData
+    })
 
-  }catch(error){
-      console.log(error);
-      resp.status(500).json({
-          message:"Internal server error"
-      })
+  } catch (error) {
+    console.log(error);
+    resp.status(500).json({
+      message: "Internal server error"
+    })
   }
 }
 
-exports.instructorStats=async (req,resp)=>{
-  try{
-const orderdetails=await Paymentinfo.find({});
-const users=await User.find({accountType:"Customer"});
-const books=await Books.find({});
-console.log(users)
+exports.instructorStats = async (req, resp) => {
+  try {
+    const orderdetails = await Paymentinfo.find({});
+    const users = await User.find({ accountType: "Customer" });
+    const books = await Books.find({});
+    console.log(users)
 
-let totalorders=0;
-let totalsale=0;
-for(let val of orderdetails){
-totalorders+=1;
-totalsale+=val.amount;
+    let totalorders = 0;
+    let totalsale = 0;
+    for (let val of orderdetails) {
+      totalorders += 1;
+      totalsale += val.amount;
 
-}
+    }
 
-let totalusers=0;
-for(let val of users){
-  totalusers+=1;
-}
+    let totalusers = 0;
+    for (let val of users) {
+      totalusers += 1;
+    }
 
-let totalbooks=0;
-for(let val of books){
-  totalbooks+=1;
-}
+    let totalbooks = 0;
+    for (let val of books) {
+      totalbooks += 1;
+    }
 
-return resp.status(200).json({
-  success:true,
-  data:{
-    totalorders,
-    totalsale,
-    totalusers,
-    totalbooks
-  }
-})
-  }catch(error){
-
-  }
-}
-
-
-
-exports.piechartdashboard=async (req,resp)=>{
-  try{
-const category=await Category.find({});
- console.log(category)
-let categoryname=[];
-let categorybooks=[];
-for(let val of category){
-categoryname.push(val.categoryName)
-categorybooks.push(val.eBooks.length)
-}
-
-return resp.status(200).json({
-  success:true,
-  data:{
-    categoryname,
-    categorybooks
-  }
-})
-
-  }
-  catch(error){
+    return resp.status(200).json({
+      success: true,
+      data: {
+        totalorders,
+        totalsale,
+        totalusers,
+        totalbooks
+      }
+    })
+  } catch (error) {
 
   }
 }
 
 
-exports.barchartdashboard=async (req,resp)=>{
-  try{
-const books=await Books.find({});
 
-let bookname=[];
-let totalusers=[];
-for(let val of books){
-bookname.push(val.bookName)
-totalusers.push(val.customerPurchased.length)
+exports.piechartdashboard = async (req, resp) => {
+  try {
+    const category = await Category.find({});
+    console.log(category)
+    let categoryname = [];
+    let categorybooks = [];
+    for (let val of category) {
+      categoryname.push(val.categoryName)
+      categorybooks.push(val.eBooks.length)
+    }
+
+    return resp.status(200).json({
+      success: true,
+      data: {
+        categoryname,
+        categorybooks
+      }
+    })
+
+  }
+  catch (error) {
+
+  }
 }
 
-return resp.status(200).json({
-  success:true,
-  data:{
-   bookname,
-   totalusers
-  }
-})
+
+exports.barchartdashboard = async (req, resp) => {
+  try {
+    const books = await Books.find({});
+    let bookname = [];
+    let totalusers = [];
+    for (let val of books) {
+      if(val.customerPurchased.length !==0){
+        bookname.push(val.bookName)
+        totalusers.push(val.customerPurchased.length)
+      }
+      
+    }
+    
+
+    return resp.status(200).json({
+      success: true,
+      data: {
+        bookname,
+        totalusers
+      }
+    })
 
   }
-  catch(error){
+  catch (error) {
 
   }
 }
 
-exports.linechartdashboard=async (req,resp)=>{
-  try{
-const books=await Books.find({});
- 
-let bookname=[];
-let totalsale=[];
-for(let val of books){
-bookname.push(val.bookName)
-totalsale.push(val.customerPurchased.length*val.price)
-}
+exports.linechartdashboard = async (req, resp) => {
+  try {
+    const books = await Books.find({});
 
-return resp.status(200).json({
-  success:true,
-  data:{
-   bookname,
-   totalsale
-  }
-})
+    let bookname = [];
+    let totalsale = [];
+    for (let val of books) {
+      bookname.push(val.bookName)
+      totalsale.push(val.customerPurchased.length * val.price)
+    }
+
+    return resp.status(200).json({
+      success: true,
+      data: {
+        bookname,
+        totalsale
+      }
+    })
 
   }
-  catch(error){
+  catch (error) {
 
   }
 }

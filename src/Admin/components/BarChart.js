@@ -18,8 +18,8 @@ const BarChart = () => {
     const fetchdata = async () => {
       try {
         const resp = await dashboardbarchart(token);
-        // console.log(resp.data)
         setstats(resp.data)
+        console.log("ff2",stats,"ff23",resp.data)
       } catch (error) {
         console.log(error)
       }
