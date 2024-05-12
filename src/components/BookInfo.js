@@ -10,7 +10,8 @@ import { BuyBook } from '../services/operations/Payment';
 
 const BookInfo = () => {
     const [book, setBook] = useState({});
-    const [showFullSummary, setShowFullSummary] = useState(false); // State to track whether full summary should be shown
+    const [showFullSummary, setShowFullSummary] = useState(false); 
+    const [ratingCount, setRatingCount] = useState(0);
     const location = useLocation();
     const id = location.pathname.split('/').pop();
     // const token=localStorage.getItem('token')
@@ -19,22 +20,33 @@ const BookInfo = () => {
     const user1 = JSON.parse(user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
 
     // Function to fetch book details
 
     const fetchData = async () => {
         let response = await showbookdetails(id);
         setBook(response.data);
+        setRatingCount(response.data.ratingAndReviews.length);
+        
+        console.log("first",response.data.ratingAndReviews.length)
         console.log(response.data)
     };
 
     useEffect(() => {
-        fetchData();
+        setTimeout(() =>{
+            fetchData();
+
+        },2000)
     }, [location.pathname]);
 
 
-    async function paymenthandler() {
-       
+    const paymenthandler = async() =>{
+       if(!token){
+        console.log("ot",token)
+        navigate('/login');
+        return;
+       }
         const resp = await BuyBook(token, [id], user, navigate, dispatch);
        //  console.log(resp);
     }
@@ -104,13 +116,10 @@ const BookInfo = () => {
                                         <b>5.0/5</b>
                                     </p>
                                 </div>
-                                <div className='mt-1'>
+                                <div className='flex items-center mt-1'>
                                     {[4, 3, 2, 1, 0].map((text, idx) => (
-                                        <div key={idx} className='flex items-center'>
-                                            {text + 1}
-                                            <IoIosStar />
-                                            <span className='border h-3 lg:w-[10vw] w-[30vw] rounded-md mx-2 bg-red-200'></span>
-                                            0
+                                        <div key={idx} className='flex items-center '>
+                                            <IoIosStar className=''/>
                                         </div>
                                     ))}
                                 </div>

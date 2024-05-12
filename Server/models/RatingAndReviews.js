@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const ratingandreviewschema=new mongoose.Schema({
+const ratingandreviewschema = new mongoose.Schema({
 user:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"User",

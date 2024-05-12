@@ -39,7 +39,7 @@ exports.capturepayment=async (req,resp)=>{
             if(book.customerPurchased.includes(uid)){
                 return resp.status(200).json({
                     success:false,
-                    message:"Customer is already Purchased the Book"
+                    message:"You have already purchased the book"
                 })
             }
          
