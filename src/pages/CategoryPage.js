@@ -87,7 +87,7 @@ const CategoryPage = () => {
           </select>
         </div>
       </div>
-      <div className="w-[100%] relative py-4 px-[1.5rem] md:px-[2rem] lg::px-[3.5rem]">
+      <div className="w-[100%] relative py-4 px-[1.5rem] md:px-[2rem] lg:px-[3.5rem]">
         <Books books={books} />
       </div>
     </div>

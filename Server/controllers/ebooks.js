@@ -214,7 +214,9 @@ exports.showBookInformation = async (req, resp) => {
     console.log("mark23");
     //Todo: Add the Populate
     const bookdetails = await Books.findById({ _id: bookid })
+
       .populate("category")
+      .populate("ratingAndReviews")
       .exec();
 
     console.log(bookdetails);

@@ -25,6 +25,7 @@ const BookInfo = () => {
     const fetchData = async () => {
         let response = await showbookdetails(id);
         setBook(response.data);
+        console.log(response.data)
     };
 
     useEffect(() => {
