@@ -26,11 +26,13 @@ const BookInfo = () => {
 
     const fetchData = async () => {
         let response = await showbookdetails(id);
-        setBook(response.data);
-        setRatingCount(response.data.ratingAndReviews.length);
+        setBook(response.data.bookDetails);
+       
+        setRatingCount(response.data.bookDetails);
         
-        console.log("first",response.data.ratingAndReviews.length)
-        console.log(response.data)
+        console.log("first",response?.data.bookDetails)
+        console.log("secnd",response?.data.ratingandreview)
+
     };
 
     useEffect(() => {

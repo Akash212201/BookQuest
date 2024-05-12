@@ -1,5 +1,6 @@
 const Books = require("../models/Books");
 const Category = require("../models/Category");
+const RatingAndReviews = require("../models/RatingAndReviews");
 const ReqBook = require("../models/ReqBook");
 const User = require("../models/User");
 const { imageUploadCloudinary } = require("../utils/imageUploadCloudinary");
@@ -199,38 +200,59 @@ exports.showAllEbooks = async (req, resp) => {
 };
 
 
-exports.showBookInformation = async (req, resp) => {
+exports.showBookInformation = async (req, res) => {
   try {
-    const { bookid } = req.body;
-    console.log(bookid);
+    const { bookid } = req.body; // Use camelCase for consistency
 
     if (!bookid) {
-      return resp.json({
+      return res.status(400).json({
         success: false,
-        message: "please provide a valid id",
+        message: "Please provide a valid book ID",
       });
     }
 
-    console.log("mark23");
-    //Todo: Add the Populate
-    const bookdetails = await Books.findById({ _id: bookid })
+    const bookDetails = await Books.findById({ _id: bookid })
+ 
 
-      .populate("category")
-      .populate("ratingAndReviews")
-      .exec();
+    const ratingandreview=[];
+    for(const rating of bookDetails.ratingAndReviews){
+      const rat=await RatingAndReviews.findById(rating._id);
+ratingandreview.push(rat);
+    }
 
-    console.log(bookdetails);
-    return resp.status(200).json({
+      // .populate({
+      //   path: 'ratingAndReviews', // Use single quotes for consistency
+      // })
+      // .populate({
+      //   path: 'category',
+      // })
+      // .exec();
+
+      console.log("book in cotroller",bookDetails)
+
+    if (!bookDetails) {
+      return res.status(404).json({
+        success: false,
+        message: "Book with the provided ID not found",
+      });
+    }
+
+    return res.status(200).json({
       success: true,
-      data: bookdetails,
+      data: {
+        bookDetails,
+        ratingandreview
+      },
     });
   } catch (error) {
-    resp.status(400).json({
+    console.error(error); // Log the actual error for debugging
+    return res.status(500).json({
       success: false,
-      message: "error occured",
+      message: "An error occurred while fetching book information",
     });
   }
 };
+
 
 
 

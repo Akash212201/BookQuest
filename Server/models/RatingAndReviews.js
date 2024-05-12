@@ -7,8 +7,8 @@ user:{
     required:true
 },
 rating:{
-    type: Number,
-    required: true
+    type:Number,
+    required:true,
 },
 review:{
     type: String,

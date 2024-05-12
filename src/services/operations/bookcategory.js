@@ -6,7 +6,7 @@ import { orderEndPoints } from "../apis";
 // import { database } from "../../../Server/config/database";
 
 const { HOMEPAGE_BOOKS ,CATEGORY_PAGE_ID,CREATE_CATEGORY, GROUP_CATEGORY_SORT, GET_CATEGORY,GET_CATEGORY_ID,CATEGORY_PAGE} = category;
-const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,VIEW_BOOK,EDIT_BOOK,RATING_REVIEWS,GETRATING} = books;
+const { SHOW_ALL_BOOKS,DELETE_BOOK, SHOW_BOOK_DETAILS,ADD_NEW_BOOK,REQ_BOOK ,EDIT_BOOK,RATING_REVIEWS,GETRATING} = books;
 const { GET_ORDERS,GET_USERS, ALL_PURCHASED_BOOKS,DASHBOARD_STATS,DASHBOARD_PIECHART,DASHBOARD_BARCHART,DASHBOARD_LINECHART}=orderEndPoints;
 export const groupCategory = async () => {
   let result = [];
@@ -111,6 +111,7 @@ export const showbookdetails = async (bookid) => {
       throw new Error(response.data.message);
     }
     result = response.data;
+    console.log(response.data)
    // console.log("result", result);
 
     return result;
