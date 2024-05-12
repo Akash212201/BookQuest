@@ -360,8 +360,11 @@ const books=await Books.find({});
 let bookname=[];
 let totalusers=[];
 for(let val of books){
-bookname.push(val.bookName)
+  if(val.customerPurchased.length>0 ){
+    bookname.push(val.bookName)
 totalusers.push(val.customerPurchased.length)
+  }
+
 }
 
 return resp.status(200).json({
@@ -385,8 +388,10 @@ const books=await Books.find({});
 let bookname=[];
 let totalsale=[];
 for(let val of books){
+  if(val.customerPurchased.length >0){
 bookname.push(val.bookName)
 totalsale.push(val.customerPurchased.length*val.price)
+  }
 }
 
 return resp.status(200).json({

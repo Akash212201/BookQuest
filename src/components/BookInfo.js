@@ -27,10 +27,12 @@ const BookInfo = () => {
     const fetchData = async () => {
         let response = await showbookdetails(id);
         setBook(response.data);
+       
         setRatingCount(response.data.ratingAndReviews.length);
         
         console.log("first",response.data.ratingAndReviews.length)
-        console.log(response.data)
+        console.log("second",response.data)
+        console.log("rating",response.data.ratingAndReviews)
     };
 
     useEffect(() => {
