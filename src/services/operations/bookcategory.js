@@ -76,7 +76,7 @@ export const getcategory = async () => {
 
     return result;
   } catch (error) {
-    // console.log(error);
+     console.log(error);
     toast.error("failed to show categories");
   }
 };
@@ -86,12 +86,12 @@ export const showallbooks = async () => {
   try {
     
     const response = await apiconnector("GET", SHOW_ALL_BOOKS, null);
-    console.log("All books", response);
+    // console.log("All books", response);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
     result = response.data;
-    console.log("result", result);
+    // console.log("result", result);
 
     return result;
   } catch (error) {

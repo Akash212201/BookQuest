@@ -1,9 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from '../services/operations/authapi';
 import userImg from '../assests/profileImg.png'
+
+
 const ProfileCard = () => {
     const user=localStorage.getItem("user")
-    const user1=JSON.parse(user)
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const user1 = JSON.parse(user)
+
+    const logouthandler = () => {
+        dispatch(logout(navigate));
+        
+    }
     return (
         <div className='min-w-[250px] duration-300 flex flex-col justify-center items-center top-16 right-6 z-10 bg-white rounded-lg p-[1rem] absolute shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
             <div className="flex justify-center items-center rounded-full w-[60px] h-[60px]">
@@ -35,12 +46,19 @@ const ProfileCard = () => {
                 </button>
             </Link>
               }
-            </div>
-            <Link to="/user/dashboard/profile">
-                <button className='block mt-5 px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold'>
+              <Link to="/user/dashboard/profile">
+              <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
                     Update Profile
                 </button>
             </Link>
+            
+            <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'
+            onClick={logouthandler}>
+                  Logout
+            </button>
+           
+            </div>
+            
         </div>
     )
 }
