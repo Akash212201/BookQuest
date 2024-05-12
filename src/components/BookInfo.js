@@ -30,8 +30,8 @@ const BookInfo = () => {
        
         setRatingCount(response.data.bookDetails);
         
-        console.log("first",response.data.bookDetails)
-        console.log("secnd",response.data.ratingandreview)
+        console.log("first",response?.data.bookDetails)
+        console.log("secnd",response?.data.ratingandreview)
 
     };
 
