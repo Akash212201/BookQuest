@@ -135,7 +135,7 @@ export const viewbookdetails = async (bookid,token) => {
       throw new Error(response.data.message);
     }
     result = response.data;
-   // console.log("result", result);
+   console.log("result", result);
 
     return result;
   } catch (error) {

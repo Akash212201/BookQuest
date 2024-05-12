@@ -20,7 +20,8 @@ const EBookView = () => {
   // console.log(id)
   const fetchData = async () => {
     let response = await viewbookdetails(id,token);
-    setbook(response.data);
+    console.log(response.data.bookDetails)
+    setbook(response.data.bookDetails);
 };
 
 useEffect(() => {
