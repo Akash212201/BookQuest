@@ -43,8 +43,8 @@ const RateAndReview = () => {
   }
 
   
-  console.log("ratings",rating)
-  console.log("bookid",bookid)
+  //console.log("ratings",rating)
+  //console.log("bookid",bookid)
   return (
     <div className='lg:me-6 me-2 my-3 p-6 '>
       <h1 className='mb-4 text-2xl font-semibold tracking-wide'>Rating and Review</h1>

@@ -27,7 +27,7 @@ ChartJS.register(
 const Chart = ({ type, options, data }) => {
   switch (type) {
     case 'bar':
-      return <Bar options={options} data={data} className=' absolute bottom-5' />;
+      return <Bar options={options} data={data} className=' absolute bottom-5 ' />;
     case 'line':
       return <Line options={options} data={data} className=' absolute bottom-5' />;
     case 'pie':

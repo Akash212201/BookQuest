@@ -33,7 +33,7 @@ const RecentOrders = () => {
   useEffect(() => {
     async function fetchdata() {
       const resp = await showallbooks();
-      console.log(resp.data);
+      // console.log(resp.data);
       setbooks(resp.data)
     }
     fetchdata();
