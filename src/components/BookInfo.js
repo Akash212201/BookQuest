@@ -30,6 +30,7 @@ const BookInfo = () => {
         setRatingCount(response.data.ratingAndReviews.length);
         
         console.log("first",response.data.ratingAndReviews.length)
+        console.log(response.data)
     };
 
     useEffect(() => {
