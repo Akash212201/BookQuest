@@ -1,5 +1,6 @@
 const Books = require("../models/Books");
 const Category = require("../models/Category");
+const RatingAndReviews = require("../models/RatingAndReviews");
 const ReqBook = require("../models/ReqBook");
 const User = require("../models/User");
 const { imageUploadCloudinary } = require("../utils/imageUploadCloudinary");
@@ -209,18 +210,23 @@ exports.showBookInformation = async (req, res) => {
         message: "Please provide a valid book ID",
       });
     }
-    const bookDetails1 = await Books.findById({ _id: bookid })
-    console.log("book detail",bookDetails1)
 
     const bookDetails = await Books.findById({ _id: bookid })
  
-      .populate({
-        path: 'ratingAndReviews', // Use single quotes for consistency
-      })
-      .populate({
-        path: 'category',
-      })
-      .exec();
+
+    const ratingandreview=[];
+    for(const rating of bookDetails.ratingAndReviews){
+      const rat=await RatingAndReviews.findById(rating._id);
+ratingandreview.push(rat);
+    }
+
+      // .populate({
+      //   path: 'ratingAndReviews', // Use single quotes for consistency
+      // })
+      // .populate({
+      //   path: 'category',
+      // })
+      // .exec();
 
       console.log("book in cotroller",bookDetails)
 
@@ -233,7 +239,10 @@ exports.showBookInformation = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      data: bookDetails,
+      data: {
+        bookDetails,
+        ratingandreview
+      },
     });
   } catch (error) {
     console.error(error); // Log the actual error for debugging
