@@ -209,8 +209,11 @@ exports.showBookInformation = async (req, res) => {
         message: "Please provide a valid book ID",
       });
     }
+    const bookDetails1 = await Books.findById({ _id: bookid })
+    console.log("book detail",bookDetails1)
 
     const bookDetails = await Books.findById({ _id: bookid })
+ 
       .populate({
         path: 'ratingAndReviews', // Use single quotes for consistency
       })
@@ -218,6 +221,8 @@ exports.showBookInformation = async (req, res) => {
         path: 'category',
       })
       .exec();
+
+      console.log("book in cotroller",bookDetails)
 
     if (!bookDetails) {
       return res.status(404).json({
