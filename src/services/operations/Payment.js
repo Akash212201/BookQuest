@@ -123,9 +123,9 @@ async function verifyPayment(bodydata,token,navigate,dispatch){
             }
             toast.success("payment successfull.")
             console.log("payment succ") 
-            // navigate("/dashboard/enrolled-courses");
+            navigate("/dashboard/enrolled-courses");
             
-            // dispatch(resetcart())
+            dispatch(resetcart())
             
             
    }catch(error){
