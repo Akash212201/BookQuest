@@ -9,7 +9,7 @@ exports.auth = async (req, resp, next) => {
         console.log("C")
 
         const token = req.body.token  || req.header("Authorization").replace("Bearer ", "");
-        console.log("token",token);
+        console.log("token11",token);
         // if token is missing then return the response
         if (token==="null") {
             return resp.status(402).json({

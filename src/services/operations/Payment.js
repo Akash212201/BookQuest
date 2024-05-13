@@ -35,7 +35,12 @@ export async function BuyBook(
     console.log(books)
     console.log(user_details)
     console.log(user_details?.firstName)
-    const toastid = toast.loading("Loading...")
+const toastid=toast.loading("Loading...")
+if(token==null){
+    toast.error("Please Login to continue");
+    navigate("/login")
+    return ;
+}
 
     try {
         // Load the script of Razorpay Sdk
@@ -107,35 +112,34 @@ export async function BuyBook(
 
 
 
-async function verifyPayment(bodydata, token, navigate, dispatch) {
-
-    console.log("bodydata", bodydata);
-    const toastid = toast.loading("Verifying Payment");
-
-    try {
-        const response = await apiconnector("POST", BOOK_VERIFY_API, bodydata, {
-
-            Authorization: `Bearer ${token}`
-        });
-        console.log("verifying payment response", response)
-        console.log(response.data.success)
-        if (!response.data.success) {
-            throw new Error(response.data.message)
-        }
-        toast.success("payment successfull.")
-        console.log("payment succ")
-        navigate("/dashboard/enrolled-courses");
-
-
-
-
-    } catch (error) {
-        console.log("payment verify error ", error);
-        toast.error("could not verify payment");
-    }
-    toast.dismiss(toastid);
-    //    dispatch(setpaymentLoading(false))
-}
+async function verifyPayment(bodydata,token,navigate,dispatch){
+    
+    console.log("bodydata",bodydata);
+    const toastid=toast.loading("Verifying Payment");
+ 
+    try{
+        const response=await apiconnector("POST",BOOK_VERIFY_API,bodydata,{
+            
+            Authorization:`Bearer ${token}`});
+            console.log("verifying payment response",response)
+            console.log(response.data.success)
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
+            toast.success("payment successfull.")
+            console.log("payment succ") 
+            navigate("/dashboard/enrolled-courses");
+            
+            
+            
+            
+   }catch(error){
+console.log("payment verify error ",error);
+toast.error("could not verify payment");
+   } 
+   toast.dismiss(toastid);
+//    dispatch(setpaymentLoading(false))
+  }
 
 
 async function sendPaymentSuccessEmail(bookdata, amount, token) {
