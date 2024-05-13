@@ -14,7 +14,8 @@ const BookInfo = () => {
     const [ratingCount, setRatingCount] = useState(0);
     const location = useLocation();
     const id = location.pathname.split('/').pop();
-    // const token=localStorage.getItem('token')
+    const token1=localStorage.getItem('token')
+
     const { token } = useSelector((state) => state.auth)
     const user = localStorage.getItem("user");
     const user1 = JSON.parse(user)
@@ -44,13 +45,13 @@ const BookInfo = () => {
 
 
     const paymenthandler = async() =>{
-       if(!token){
+       if(token1==null){
         console.log("ot",token)
         navigate('/login');
         return;
        }
         const resp = await BuyBook(token, [id], user, navigate, dispatch);
-       //  console.log(resp);
+        console.log("tokennnn",token);
     }
 
     const addToCartHandler = () => {

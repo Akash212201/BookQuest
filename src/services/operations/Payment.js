@@ -36,6 +36,11 @@ dispatch
     console.log(user_details)
     console.log(user_details?.firstName)
 const toastid=toast.loading("Loading...")
+if(token==null){
+    toast.error("Please Login to continue");
+    navigate("/login")
+    return ;
+}
 
 try{
 // Load the script of Razorpay Sdk
