@@ -67,9 +67,9 @@ const AdminSidebar = ({ sidebarOpen }) => {
           {
             usersMenuOpen && (
               <ul className='mt-[0.5rem]'> 
-                <li className='rounded-lg my-[0.5rem] px-4 py-2'>
+                {/* <li className='rounded-lg my-[0.5rem] px-4 py-2'>
                   <Link to="/admin/dashboard/authors">Authors</Link>
-                </li>
+            </li>*/}
                 <li className='rounded-lg my-[0.5rem] px-4 py-2'>
                   <Link to="/admin/dashboard/allusers">Users</Link>
                 </li>

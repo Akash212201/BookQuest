@@ -13,7 +13,7 @@ exports.RatingAndReviews = async (req, resp) => {
     if (!rating || !bookid) {
      return  resp.status(400).json({
         success: false,
-        message: "required fields are missing",
+        message: "Ratings are missing",
       });
     }
     console.log("mark2")
@@ -38,7 +38,7 @@ exports.RatingAndReviews = async (req, resp) => {
     if (checkrating) {
      return resp.status(400).json({
         success: false,
-        message: "You are already rate this book",
+        message: "You have already rated this book",
       });
     }
     console.log("mark23")
