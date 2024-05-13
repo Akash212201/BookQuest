@@ -212,6 +212,10 @@ exports.showBookInformation = async (req, res) => {
     }
 
     const bookDetails = await Books.findById({ _id: bookid })
+    .populate({
+        path: 'category',
+      })
+      .exec();
  
 
     const ratingandreview=[];
@@ -223,10 +227,7 @@ ratingandreview.push(rat);
       // .populate({
       //   path: 'ratingAndReviews', // Use single quotes for consistency
       // })
-      // .populate({
-      //   path: 'category',
-      // })
-      // .exec();
+      
 
       console.log("book in cotroller",bookDetails)
 

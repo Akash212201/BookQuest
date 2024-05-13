@@ -11,9 +11,9 @@ exports.RatingAndReviews = async (req, resp) => {
     const userid = req.user.id;
 
     if (!rating || !bookid) {
-      resp.status(400).json({
+     return  resp.status(400).json({
         success: false,
-        message: "required fields are missing",
+        message: "Ratings are missing",
       });
     }
     console.log("mark2")
@@ -24,7 +24,7 @@ exports.RatingAndReviews = async (req, resp) => {
     console.log("checkpurchase", checkpurchase)
 
     if (!checkpurchase) {
-      resp.status(400).json({
+      return resp.status(400).json({
         success: false,
         message: "You have not purchased this book.",
       });
@@ -36,9 +36,9 @@ exports.RatingAndReviews = async (req, resp) => {
     });
 
     if (checkrating) {
-      resp.status(400).json({
+     return resp.status(400).json({
         success: false,
-        message: "You are already rate this book",
+        message: "You have already rated this book",
       });
     }
     console.log("mark23")
@@ -51,7 +51,7 @@ exports.RatingAndReviews = async (req, resp) => {
     console.log("mark13")
 
     if (!createrating) {
-      resp.status(400).json({
+      return resp.status(400).json({
         success: false,
         message: "problem in creating the rating and review",
       });
@@ -62,12 +62,12 @@ exports.RatingAndReviews = async (req, resp) => {
       $push: { ratingAndReviews: createrating._id },
     });
 
-    resp.status(200).json({
+   return resp.status(200).json({
       success: true,
       message: "successfully rate and review the book",
     });
   } catch (error) {
-    resp.status(400).json({
+   return  resp.status(400).json({
       success: false,
       message: "server error occured",
     });
