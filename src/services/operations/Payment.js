@@ -6,31 +6,31 @@ const {
     BOOK_PAYMENT_API,
     BOOK_VERIFY_API,
     SEND_PAYMENT_SUCCESS_EMAIL_API,
-  } = customerEndpoints;
+} = customerEndpoints;
 
-  //Load the Razorpay SDK from the CDN
-  function loadScript(src){
-    return new Promise((resolve)=>{
-        const script=document.createElement("script")
-        script.src=src;
-        script.onload=()=>{
+//Load the Razorpay SDK from the CDN
+function loadScript(src) {
+    return new Promise((resolve) => {
+        const script = document.createElement("script")
+        script.src = src;
+        script.onload = () => {
             resolve(true)
         }
-        script.onerror=()=>{
+        script.onerror = () => {
             resolve(false)
         }
         document.body.appendChild(script)
     })
-  }
+}
 
- 
-  export async function BuyBook(
-token,
-books,
-user_details,
-navigate,
-dispatch
-  ){
+
+export async function BuyBook(
+    token,
+    books,
+    user_details,
+    navigate,
+    dispatch
+) {
     console.log(token)
     console.log(books)
     console.log(user_details)
@@ -42,71 +42,71 @@ if(token==null){
     return ;
 }
 
-try{
-// Load the script of Razorpay Sdk
-const resp=await loadScript("https://checkout.razorpay.com/v1/checkout.js")
-console.log(resp);
-if(!resp){
-    toast.error(
-        "Razorpay SDK failed to load.Check Your Internet Connection"
-    )
-    return ;
-}
-// Initiate the order in Backend
-const orderResponse=await apiconnector("POST",BOOK_PAYMENT_API,{
-    books
-},{
-    Authorization:`Bearer ${token}`
-});
-
-if(!orderResponse.data.success){
-    throw new Error(orderResponse.data.message)
-    
-}
-console.log("payment response",orderResponse.data);
-             
-
-// opening the razorpay sdk
-
-const options={
-    key:"rzp_test_v9cBsqDqUXzY8t",
-    currency:orderResponse.data.data.currency,
-    amount:orderResponse.data.data.amount,
-    order_id:orderResponse.data.data.id,
-    name:"BookQuest",
-    description:"Thankyou for the Purchasing the Book ",
-    
-    // prefill:{
-    //     name:`${user_details.firstName} ${user_details.lastName}`,
-       
-    // },
-   
-    handler: function (response){
-       
-        sendPaymentSuccessEmail(
-            {...response,books},
-            orderResponse.data.data.amount,
-            
-            token
-            );
-            verifyPayment({...response,books},token,navigate,dispatch);
-            
-            
-            
+    try {
+        // Load the script of Razorpay Sdk
+        const resp = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
+        console.log(resp);
+        if (!resp) {
+            toast.error(
+                "Razorpay SDK failed to load.Check Your Internet Connection"
+            )
+            return;
         }
-        
-    };
-    
+        // Initiate the order in Backend
+        const orderResponse = await apiconnector("POST", BOOK_PAYMENT_API, {
+            books
+        }, {
+            Authorization: `Bearer ${token}`
+        });
 
-    const paymentObject=new window.Razorpay(options);
-    paymentObject.open();
+        if (!orderResponse.data.success) {
+            throw new Error(orderResponse.data.message)
 
-    
-}catch(error){
-    console.log("payment api error",error);
-    toast.error(error.message);
-}
-toast.dismiss(toastid)
+        }
+        console.log("payment response", orderResponse.data);
+
+
+        // opening the razorpay sdk
+
+        const options = {
+            key: "rzp_test_v9cBsqDqUXzY8t",
+            currency: orderResponse.data.data.currency,
+            amount: orderResponse.data.data.amount,
+            order_id: orderResponse.data.data.id,
+            name: "BookQuest",
+            description: "Thankyou for the Purchasing the Book ",
+
+            // prefill:{
+            //     name:`${user_details.firstName} ${user_details.lastName}`,
+
+            // },
+
+            handler: function (response) {
+
+                sendPaymentSuccessEmail(
+                    { ...response, books },
+                    orderResponse.data.data.amount,
+
+                    token
+                );
+                verifyPayment({ ...response, books }, token, navigate, dispatch);
+
+
+
+            }
+
+        };
+
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+
+
+    } catch (error) {
+        console.log("payment api error", error);
+        toast.error(error.message);
+    }
+    toast.dismiss(toastid)
 
 }
 
@@ -141,21 +141,21 @@ toast.error("could not verify payment");
 //    dispatch(setpaymentLoading(false))
   }
 
-  
-  async function sendPaymentSuccessEmail(bookdata,amount,token){
-    console.log("payment",bookdata);
-   
-    try{
-await apiconnector("POST",SEND_PAYMENT_SUCCESS_EMAIL_API,{
-    orderid:bookdata.razorpay_order_id,
-    paymentid: bookdata.razorpay_payment_id,
-    books:bookdata.books,
-    amount
-},{
-    Authorization:`Bearer ${token}`
-})
-    }catch(error){
-console.log("payment success email errror",error)
+
+async function sendPaymentSuccessEmail(bookdata, amount, token) {
+    console.log("payment", bookdata);
+
+    try {
+        await apiconnector("POST", SEND_PAYMENT_SUCCESS_EMAIL_API, {
+            orderid: bookdata.razorpay_order_id,
+            paymentid: bookdata.razorpay_payment_id,
+            books: bookdata.books,
+            amount
+        }, {
+            Authorization: `Bearer ${token}`
+        })
+    } catch (error) {
+        console.log("payment success email errror", error)
 
     }
-  }
+}
