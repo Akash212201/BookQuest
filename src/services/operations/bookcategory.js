@@ -465,7 +465,7 @@ export const ratingAndReviews = async (bookid,rating,review,token) => {
     //  return result;
    } catch (error) {
      console.log(error);
-     toast.error("failed to rate and review");
+     toast.error(error.response.data.message);
    }
  };
 
