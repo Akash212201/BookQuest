@@ -125,7 +125,7 @@ async function verifyPayment(bodydata,token,navigate,dispatch){
             console.log("payment succ") 
             navigate("/dashboard/enrolled-courses");
             
-            dispatch(resetcart())
+            
             
             
    }catch(error){
