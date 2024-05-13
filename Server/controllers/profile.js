@@ -265,7 +265,7 @@ exports.instructorDashboard = async (req, resp) => {
       const bookDataWithStats = {
         _id: book._id,
         bookName: book.bookName,
-        
+
         totalCustomerPurchase,
         totalAmountGenerate
       }
@@ -352,19 +352,19 @@ exports.piechartdashboard = async (req, resp) => {
 }
 
 
-exports.barchartdashboard=async (req,resp)=>{
-  try{
-const books=await Books.find({});
+exports.barchartdashboard = async (req, resp) => {
+  try {
+    const books = await Books.find({});
 
-let bookname=[];
-let totalusers=[];
-for(let val of books){
-  if(val.customerPurchased.length>0 ){
-    bookname.push(val.bookName)
-totalusers.push(val.customerPurchased.length)
-  }
+    let bookname = [];
+    let totalusers = [];
+    for (let val of books) {
+      if (val.customerPurchased.length > 0) {
+        bookname.push(val.bookName)
+        totalusers.push(val.customerPurchased.length)
+      }
 
-}
+    }
 
     return resp.status(200).json({
       success: true,
@@ -380,18 +380,18 @@ totalusers.push(val.customerPurchased.length)
   }
 }
 
-exports.linechartdashboard=async (req,resp)=>{
-  try{
-const books=await Books.find({});
- 
-let bookname=[];
-let totalsale=[];
-for(let val of books){
-  if(val.customerPurchased.length >0){
-bookname.push(val.bookName)
-totalsale.push(val.customerPurchased.length*val.price)
-  }
-}
+exports.linechartdashboard = async (req, resp) => {
+  try {
+    const books = await Books.find({});
+
+    let bookname = [];
+    let totalsale = [];
+    for (let val of books) {
+      if (val.customerPurchased.length > 0) {
+        bookname.push(val.bookName)
+        totalsale.push(val.customerPurchased.length * val.price)
+      }
+    }
 
     return resp.status(200).json({
       success: true,

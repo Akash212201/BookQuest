@@ -9,19 +9,20 @@ import { addToCart } from '../Slices/cartSlice';
 import { BuyBook } from '../services/operations/Payment';
 
 const BookInfo = () => {
-    const [book, setBook] = useState({});
-    const [showFullSummary, setShowFullSummary] = useState(false); 
-    const [ratingCount, setRatingCount] = useState(0);
-    const location = useLocation();
-    const id = location.pathname.split('/').pop();
-    // const token=localStorage.getItem('token')
-    const { token } = useSelector((state) => state.auth)
-    const user = localStorage.getItem("user");
-    const user1 = JSON.parse(user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+    const location = useLocation();
 
+    const [book, setBook] = useState({});
+    const [showFullSummary, setShowFullSummary] = useState(false); 
+    const [ratingCount, setRatingCount] = useState([0,0,0,0,0]);
+    const [averageRating, setAverageRating] = useState(0);
+    const [totalRating, setTotalRating] = useState(0);
+    const { token } = useSelector((state) => state.auth)
+    const id = location.pathname.split('/').pop();
+    const user = localStorage.getItem("user");
+    const user1 = JSON.parse(user)
+  
     // Function to fetch book details
 
     const fetchData = async () => {
@@ -29,9 +30,11 @@ const BookInfo = () => {
         setBook(response.data.bookDetails);
        
         setRatingCount(response.data.bookDetails);
-        
-        console.log("first",response?.data.bookDetails)
-        console.log("secnd",response?.data.ratingandreview)
+        setAverageRating(calculateAverageRating(response?.data.ratingandreview))
+        setRatingCount(calculateRatingCounts(response?.data.ratingandreview))
+        setTotalRating(response?.data.ratingandreview.length);
+        // console.log("first",response?.data.bookDetails)
+        // console.log("secnd",response?.data.ratingandreview)
 
     };
 
@@ -45,12 +48,11 @@ const BookInfo = () => {
 
     const paymenthandler = async() =>{
        if(!token){
-        console.log("ot",token)
+        // console.log("ot",token)
         navigate('/login');
         return;
        }
         const resp = await BuyBook(token, [id], user, navigate, dispatch);
-       //  console.log(resp);
     }
 
     const addToCartHandler = () => {
@@ -63,12 +65,27 @@ const BookInfo = () => {
         dispatch(addToCart(tempbook));
     };
 
-    // Function to toggle full summary display
-    const toggleSummary = () => {
-        setShowFullSummary(!showFullSummary);
+    // calculate ratings count
+    const calculateRatingCounts = (reviews) => {
+        const ratingCounts = [0, 0, 0, 0, 0]; 
+        reviews.forEach(review => {
+            const rating = review.rating;
+            ratingCounts[rating - 1]++; 
+        });
+        return ratingCounts;
     };
 
-
+    // calculate the average rating
+    const calculateAverageRating = (reviews) => {
+        if(reviews.length>0){
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const averageRating = totalRating / reviews.length;
+        return averageRating;
+        }
+        else{
+            return 0;
+        }
+    };
 
     return (
         <>
@@ -92,7 +109,7 @@ const BookInfo = () => {
                                 {showFullSummary ? book.bookSummary : `${book.bookSummary.slice(0, 250)}...`}
                                 <button
                                     className='text-blue-500 hover:underline focus:outline-none'
-                                    onClick={toggleSummary}>
+                                    onClick={()=> setShowFullSummary(!showFullSummary)}>
                                     {showFullSummary ? 'View less' : 'View more'}
                                 </button>
                             </div>
@@ -115,13 +132,17 @@ const BookInfo = () => {
                                 <div className=''>
                                     <h3 className='text-2xl font-light'>Rating and Reviews</h3>
                                     <p className='text-2xl mt-1 mb-5'>
-                                        <b>5.0/5</b>
+                                        <b>{averageRating}/5</b>
+                                        
                                     </p>
+                                    <p className=' '>total Ratings: <b>{totalRating}</b></p> 
                                 </div>
-                                <div className='flex items-center mt-1'>
-                                    {[4, 3, 2, 1, 0].map((text, idx) => (
-                                        <div key={idx} className='flex items-center '>
-                                            <IoIosStar className=''/>
+                                <div className=' mt-1 w-1/5'>
+                                    {ratingCount.map((text, idx) => (
+                                        <div key={idx} className='flex items-center gap-2 '>
+                                           {idx+1} <IoIosStar className='text-xl'/>
+                                            <span className='bg-red-500 w-full rounded h-2'></span>
+                                            <span>{text}</span>
                                         </div>
                                     ))}
                                 </div>
