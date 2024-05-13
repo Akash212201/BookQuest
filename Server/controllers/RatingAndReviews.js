@@ -11,7 +11,7 @@ exports.RatingAndReviews = async (req, resp) => {
     const userid = req.user.id;
 
     if (!rating || !bookid) {
-      resp.status(400).json({
+     return  resp.status(400).json({
         success: false,
         message: "required fields are missing",
       });
