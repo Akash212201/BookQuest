@@ -71,7 +71,7 @@ const Upcomming = ({ books, url, title }) => {
           <h1 className="font-medium text-3xl">{title}</h1>
           <Link to={`/${url}`} className="text-[#e50813] font-medium">View All</Link>
         </div>
-        {books ? <div>
+        {books && books.length>0 ? <div>
           <Slider {...settings}>
             {books && books.map((book, i) => {
               return (
