@@ -24,11 +24,25 @@ const ProfileCard = () => {
             <p className='text-[1rem] font-medium tracking-wider'>{user1.email}</p>
             <span className='block border boder-black w-full mt-4 text-[a2a2a2b0]'></span>
             <div className='w-full'>
+            {
+                user1 && user1.accountType==="Customer" && 
                 <Link to="/user/dashboard/profile">
-                    <button className='mt-5 text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider block w-full'>
-                        My Profile
-                    </button>
-                </Link>
+
+                <button className='mt-5 text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider block w-full'>
+                    My Profile
+                </button>
+            </Link>
+            }
+               
+            {
+                user1 && user1.accountType==="Admin" && 
+                <Link to="/admin/dashboard/profile">
+
+                <button className='mt-5 text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider block w-full'>
+                    My Profile
+                </button>
+            </Link>
+            }
               {
                 user1 && user1.accountType==="Customer" && 
                 <Link to="/user/dashboard/orders">
@@ -46,11 +60,23 @@ const ProfileCard = () => {
                 </button>
             </Link>
               }
-              <Link to="/user/dashboard/profile">
-              <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
-                    Update Profile
-                </button>
-            </Link>
+              {
+                user1 && user1.accountType==="Customer" &&
+                <Link to="/user/dashboard/profile">
+                <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
+                      Update Profile
+                  </button>
+              </Link>
+              }
+              {
+                user1 && user1.accountType==="Admin" &&
+                <Link to="/admin/dashboard/profile">
+                <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'>
+                      Update Profile
+                  </button>
+              </Link>
+              }
+             
             
             <button className='block text-left px-4 py-2 rounded hover:bg-green-500 hover:text-white tracking-wider w-full'
             onClick={logouthandler}>

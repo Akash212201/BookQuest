@@ -101,6 +101,7 @@ const App = () => {
               <Route path='/admin/dashboard/authors' element={<PrivateRoute><Authors /></PrivateRoute>} />
               <Route path='/admin/dashboard/allusers' element={<PrivateRoute><AllUser /></PrivateRoute>} />
               <Route path='/admin/dashboard/bookinfo/:id' element={<BookInfo />} />
+              <Route path='/admin/dashboard/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
             </>
 
           }
