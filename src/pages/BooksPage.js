@@ -9,7 +9,7 @@ const BooksPage = () => {
 
 
   const [books, setbooks] = useState([])
-  const [selectedOption, setSelectedOption] = useState('LowtoHigh'); 
+  const [selectedOption, setSelectedOption] = useState('LowtoHigh');
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LuShoppingBag } from 'react-icons/lu';
-import { MdOutlineShoppingCart } from 'react-icons/md';
-import { IoIosStar } from 'react-icons/io';
 import { showbookdetails } from '../services/operations/bookcategory';
 import { addToCart } from '../Slices/cartSlice';
 import { BuyBook } from '../services/operations/Payment';
+import { toast } from 'react-toastify';
+import { LuShoppingBag } from 'react-icons/lu';
+import { IoIosStar } from 'react-icons/io';
+import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const BookInfo = () => {
     const navigate = useNavigate();
@@ -42,7 +43,8 @@ const BookInfo = () => {
         setTimeout(() =>{
             fetchData();
 
-        },2000)
+        },10000)
+        
     }, [location.pathname]);
 
 
@@ -63,6 +65,7 @@ const BookInfo = () => {
             totalPrice,
         };
         dispatch(addToCart(tempbook));
+        toast.success("Book Added to the cart")
     };
 
     // calculate ratings count
@@ -88,8 +91,8 @@ const BookInfo = () => {
     };
 
     return (
-        <>
-            {book && Object.keys(book).length > 0 && (
+        <div className=''>
+            {book && Object.keys(book).length > 0 ? (
                 <div className='py-10 px-7 lg:px-[10vw] flex lg:flex-row flex-col gap-4'>
                     <div className='lg:w-[30%] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] w-full h-[450px] px-2 py-4'>
                         <img src={book.thumbnail} alt='' className='w-full h-[420px] object-contain' />
@@ -116,12 +119,12 @@ const BookInfo = () => {
                             {
                                 user1 && user1.accountType === "Admin" ? <></>
                                     : <div className='my-10 flex items-center lg:text-xl'>
-                                        <button onClick={paymenthandler} className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition mr-5'>
+                                        <button onClick={paymenthandler} className='rounded-full flex items-center border px-6 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-400 transition mr-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
                                             <MdOutlineShoppingCart className='mr-2' />
                                             Buy Now
                                         </button>
                                         <button
-                                            className='flex items-center border px-3 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-600 transition'
+                                            className='rounded-full flex items-center border px-6 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-400 transition shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'
                                             onClick={addToCartHandler}>
                                             <LuShoppingBag className='mr-2' />
                                             Add to Cart
@@ -139,9 +142,9 @@ const BookInfo = () => {
                                 </div>
                                 <div className=' mt-1 w-1/5'>
                                     {ratingCount.map((text, idx) => (
-                                        <div key={idx} className='flex items-center gap-2 '>
-                                           {idx+1} <IoIosStar className='text-xl'/>
-                                            <span className='bg-red-500 w-full rounded h-2'></span>
+                                        <div key={idx} className='flex items-center '>
+                                           {idx+1} <IoIosStar className='text-xl text-[#fcae2a]'/>
+                                            <span className={`bg-red-500 w-full rounded h-2 mx-2`}></span>
                                             <span>{text}</span>
                                         </div>
                                     ))}
@@ -150,9 +153,12 @@ const BookInfo = () => {
                         </div>
                     </div>
                 </div>
-            )
+            ) :
+            <div className="bookPage h-[80vh] flex items-center justify-center flex-col w-full">
+                <h1 className="text-center text-[2rem] align-baseline">Loading...</h1>
+            </div>
             }
-        </>
+        </div>
     );
 };
 

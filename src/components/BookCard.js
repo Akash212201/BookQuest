@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { addToCart } from '../Slices/cartSlice';
 
 const BookCard = ({ book }) => {
@@ -14,6 +15,7 @@ const BookCard = ({ book }) => {
       totalPrice
     }
     dispatch(addToCart(tempbook));
+    toast.success("Book Added to the cart")
   };
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {

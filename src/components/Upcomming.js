@@ -22,20 +22,20 @@ const SamplePrevArrow = (props) => {
   return (
     <div className="cursor-pointer" onClick={onClick}>
       <button className='flex justify-center items-center absolute -top-14 lg:left-[94%] left-[76%] rounded border-[2px] w-[40px] h-[40px] border-[#000]'>
-        <FaLongArrowAltLeft className="text-3xl text-black"/>
+        <FaLongArrowAltLeft className="text-3xl text-black" />
       </button>
     </div>
   )
 }
-const Upcomming = ({ books,url, title }) => {
- 
+const Upcomming = ({ books, url, title }) => {
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow/>,
+    nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
@@ -67,22 +67,26 @@ const Upcomming = ({ books,url, title }) => {
   return (
     <div className={'py-5 px-3 lg:px-10'}>
       <div className='mb-5'>
-      <div className='flex justify-between items-center px-3 mb-14'>
-        <h1 className="font-medium text-3xl">{title}</h1>
-        <Link to={`/${url}`} className="text-[#e50813] font-medium">View All</Link>
-      </div>
+        <div className='flex justify-between items-center px-3 mb-14'>
+          <h1 className="font-medium text-3xl">{title}</h1>
+          <Link to={`/${url}`} className="text-[#e50813] font-medium">View All</Link>
+        </div>
+        {books ? <div>
+          <Slider {...settings}>
+            {books && books.map((book, i) => {
+              return (
+                <div key={i} className="px-4"> <BookCard book={book} /> </div>
+              )
+            })}
+          </Slider>
+        </div> :
+          <div className="h-[280px] flex justify-center items-center">
+            <h1 className="text-[1.5rem]">Loading...</h1>
+          </div>
+        }
 
-      <div> 
-      <Slider {...settings}> 
-        {books && books.map((book,i) => {
-          return (
-          <div key={i} className="px-4"> <BookCard book = {book} /> </div>
-          )
-        })}
-      </Slider>
-      </div>
 
-    </div>
+      </div>
     </div>
   )
 }
