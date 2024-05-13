@@ -25,14 +25,14 @@ const UpdateBook = () => {
     const fetchData = async() => {
       try {
         const resp = await showbookdetails(id);
-        // console.log("first",resp.data)
-        setBookData(resp?.data || {});
-        setBookName(resp?.data?.bookName);
-        setBookAuthor(resp?.data?.bookAuthor)
-        setBookSummary(resp?.data?.bookSummary)
-        setPrice(resp?.data?.price)
-        setThumbnail(resp?.data?.thumbnail)
-        setpdf(resp?.data?.pdfUrl)
+        console.log("first",resp.data)
+        setBookData(resp?.data.bookDetails || {});
+        setBookName(resp?.data.bookDetails?.bookName);
+        setBookAuthor(resp?.data.bookDetails?.bookAuthor)
+        setBookSummary(resp?.data.bookDetails?.bookSummary)
+        setPrice(resp?.data.bookDetails?.price)
+        setThumbnail(resp?.data.bookDetails?.thumbnail)
+        setpdf(resp?.data.bookDetails?.pdfUrl)
       } catch (error) {
         console.log(error);
       }
