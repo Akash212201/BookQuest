@@ -40,10 +40,7 @@ const BookInfo = () => {
     };
 
     useEffect(() => {
-        setTimeout(() =>{
-            fetchData();
-
-        },10000)
+        fetchData();
         
     }, [location.pathname]);
 
@@ -91,7 +88,7 @@ const BookInfo = () => {
     };
 
     return (
-        <div className=''>
+        <div className='min-h-[80vh]'>
             {book && Object.keys(book).length > 0 ? (
                 <div className='py-10 px-7 lg:px-[10vw] flex lg:flex-row flex-col gap-4'>
                     <div className='lg:w-[30%] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] w-full h-[450px] px-2 py-4'>
