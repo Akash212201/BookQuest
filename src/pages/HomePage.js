@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Hero from '../components/Hero'
 import HeroSlider from '../components/HeroSlider'
 import Upcomming from "../components/Upcomming"
 import Newsletter from '../components/Newsletter';

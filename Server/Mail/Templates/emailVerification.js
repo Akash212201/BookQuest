@@ -65,19 +65,20 @@ const otpTemplate = (otp) => {
 	</head>
 	
 	<body>
-		<div class="container">
+		<div className="container">
 			<a
-			href="https://bookquest-five.vercel.app/" ><img class="logo" src="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713252161/logo-black.jpg"></a>
-			<div class="message">OTP Verification Email</div>
-			<div class="body">
+			href="https://bookquest-five.vercel.app/" >
+				<img className="logo" src="https://res.cloudinary.com/di6kkhr2o/image/upload/v1713252161/logo-black.jpg"></a>
+			<div className="message">OTP Verification Email</div>
+			<div className="body">
 				<p>Dear User,</p>
 				<p>Thank you for registering with BookQuest. To complete your registration, please use the following OTP
 					(One-Time Password) to verify your account:</p>
-				<h2 class="highlight">${otp}</h2>
+				<h2 className="highlight">${otp}</h2>
 				<p>This OTP is valid for 5 minutes. If you did not request this verification, please disregard this email.
 				Once your account is verified, you will have access to our platform and its features.</p>
 			</div>
-			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
+			<div className="support">If you have any questions or need assistance, please feel free to reach out to us at <a
 					href="mailto:info@bookquest.com">info@bookquest.com</a>. We are here to help!</div>
 		</div>
 	</body>

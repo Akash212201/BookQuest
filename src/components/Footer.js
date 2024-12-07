@@ -100,9 +100,9 @@ const Footer = () => {
     ]
     return (
         <footer className='flex justify-center items-center flex-col pb-2'>
-            <div class="w-[95%]">
-                <div class="flex lg:flex-row flex-col justify-between items-start">
-                    <div class="lg:w-[30%] md:w-[50%] w-full">
+            <div className="w-[95%]">
+                <div className="flex lg:flex-row flex-col justify-between items-start">
+                    <div className="lg:w-[30%] md:w-[50%] w-full">
                         <Link to="/" className='text-4xl'>BookQuest</Link>
                         <br /><br />
                         <p>A place to find all types of books hustle free. </p>
@@ -124,16 +124,16 @@ const Footer = () => {
                             <strong>Hours:</strong>10:00 - 18:00, Mon - Fri
                         </p>
                     </div>
-                    <div class="lg:w-[70%] w-full">
+                    <div className="lg:w-[70%] w-full">
 
-                        <div class="flex flex-wrap justify-between items-start">
+                        <div className="flex flex-wrap justify-between items-start">
                             {
                                 footerItems.map((footerItem, idx) => (
-                                    <div class="col" key={idx}>
+                                    <div className="col" key={idx}>
                                         <h3 className='text-[1.25rem] mb-2 lg:mt-0 mt-2 font-semibold text-[#000000]'>{footerItem.title}</h3>
-                                        <ul class="">
+                                        <ul className="">
                                             {footerItem.items.map((item, idx) => (
-                                                <li key={idx} className='text-[1rem] lg:mb-3 mb-1 text-[#000000] font-semibold opacity-85 hover:scale-X-100 duration-200 ease-in-out'>
+                                                <li key={idx} className='text-[1rem] lg:mb-3 mb-1 text-[#000000] font-semibold opacity-85 hover:scale-y-50 duration-200 ease-in-out'>
                                                     <Link to="/">{item.item}</Link>
                                                 </li>
                                             ))}
@@ -147,39 +147,39 @@ const Footer = () => {
                     </div>
                 </div>
                 <hr />
-                <div class="flex lg:flex-row flex-col justify-between items-center lg:gap-0 gap-2">
+                <div className="flex lg:flex-row flex-col justify-between items-center lg:gap-0 gap-2">
 
-                    <div class="flex items-center">
+                    <div className="flex items-center">
 
-                        <p class="mb-0">
+                        <p className="mb-0">
                             © 2024, BookQuest All rights reserved
                         </p>
 
                     </div>
 
-                    <div class="flex items-center justify-end">
+                    <div className="flex items-center justify-end">
 
-                        <div class="flex items-center gap-4">
+                        <div className="flex items-center gap-4">
 
                             <h5 className='text-2xl text-[#333333]'>Follow Us</h5>
 
 
-                            <ul class="flex gap-3">
-                                <li class="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
+                            <ul className="flex gap-3">
+                                <li className="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
                                     <Link to="/">
                                         <FaFacebookF />
                                     </Link>
                                 </li>
-                                <li class="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
+                                <li className="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
                                     <Link to="/">
                                         <FaInstagram />
                                     </Link>
                                 </li>
-                                <li class="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
+                                <li className="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
                                     <Link to="/">
                                         <FaLinkedinIn />                                    </Link>
                                 </li>
-                                <li class="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
+                                <li className="p-3 rounded-full text-white bg-[#218659] hover:bg-[#525252]">
                                     <Link to="/">
                                         <FaYoutube />
                                     </Link>

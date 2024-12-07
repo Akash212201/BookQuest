@@ -116,15 +116,15 @@ const BookInfo = () => {
                             {
                                 user1 && user1.accountType === "Admin" ? <></>
                                     : <div className='my-10 flex items-center lg:text-xl'>
-                                        <button onClick={paymenthandler} className='rounded-full flex items-center border px-6 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-400 transition mr-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
+                                        <button onClick={paymenthandler} className='rounded-xl flex items-center border px-6 py-2 text-white bg-[#3beb9c] hover:bg-red-500 cursor-pointer transition mr-5 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'>
                                             <MdOutlineShoppingCart className='mr-2' />
                                             Buy Now
                                         </button>
                                         <button
-                                            className='rounded-full flex items-center border px-6 py-2 text-white bg-red-500 cursor-pointer hover:bg-red-400 transition shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'
+                                            className='rounded-lg flex items-center border px-6 py-2 text-white bg-[#3beb9c] hover:bg-red-500 cursor-pointer transition shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'
                                             onClick={addToCartHandler}>
                                             <LuShoppingBag className='mr-2' />
-                                            Add to Cart
+                                            Add To Cart
                                         </button>
                                     </div>
                             }

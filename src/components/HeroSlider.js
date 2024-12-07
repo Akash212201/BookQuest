@@ -3,13 +3,10 @@ import Slider from "react-slick";
 
 const HeroSlider = () => {
     const bannerImages = [
+        "../images/home1.jpg",
         "../images/home2.jpg",
-        "../images/home2.jpg",
-        "../images/home2.jpg",
-        "../images/home2.jpg",
-        "../images/home2.jpg",
-        "../images/home2.jpg",
-        "../images/home2.jpg",
+        "../images/home3.jpg",
+        "../images/home4.jpg",
     ]
     const settings = {
         dots: true,

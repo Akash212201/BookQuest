@@ -34,7 +34,14 @@ const Header2 = () => {
         },
     ];
 
-
+    const mobileNavLinks = [
+        ...navLinks,
+        {
+            name: 'Categories',
+            path: '/:id',
+            onClick: ()=>setIsCategoriesOpen(!isCategoriesOpen),
+        },
+    ];
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -49,9 +56,10 @@ const Header2 = () => {
     }, []);
 
     const renderCategories = () => {
+       
         if (isCategoriesOpen) {
             return (
-                <ul className="z-10 absolute top-full bg-green-500 text-white list-none w-[350px]">
+                <ul className="z-10 absolute top-full bg-green-500 text-white list-none w-[350px] lg:left-8 left-4 lg:opacity-90 opacity-75">
                     {categories.map((category, index) => (
                         <li key={index} className="py-2 px-4 hover:bg-green-700" >
                             <Link
@@ -61,8 +69,6 @@ const Header2 = () => {
                                     setShowSidebar(false);
                                 }}
                             >
-
-
                                 {category.categoryName}
                             </Link>
                         </li>
@@ -75,10 +81,11 @@ const Header2 = () => {
 
     return (
         <div className='relative mb-4'>
-            <div className="text-[#35faa1] mobile flex justify-start items-center gap-4 border-b-2 border-[#808080]">
+            <div className="text-[#35faa1] mobile flex justify-start items-center gap-4 border-b-2 border-t-2">
                 <div className='flex justify-start items-center gap-2 text-xl w-[30%] lg:px-8 px-2 py-3'>
                     <TbCategory />
-                    <button onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}>Categories</button>
+                    <button onClick={()=>setIsCategoriesOpen(!isCategoriesOpen)}>Categories</button>
+                    <div>{renderCategories()}</div>
                 </div>
                 <div className=''>
                     <ul className="flex justify-center items-center relative">
@@ -100,9 +107,11 @@ const Header2 = () => {
                 <div className='w-[30px] bg-black h-[5px] mb-1 naviline2'></div>
                 <div className='w-[30px] bg-black h-[5px] naviline3'></div>
             </div>
-            {showSidebar && (
+            {
+                
+            showSidebar && (
                 <div className="z-10 absolute bg-white h-full w-full">
-                    <Sidebar hideSidebar={hideSidebar} navLinks={navLinks} renderCategories={renderCategories} />
+                    <Sidebar hideSidebar={hideSidebar} navLinks={mobileNavLinks} renderCategories={renderCategories} />
                 </div>
             )}
         </div>

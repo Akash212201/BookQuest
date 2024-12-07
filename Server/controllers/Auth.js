@@ -192,7 +192,7 @@ exports.login = async (req, resp) => {
         accountType: checkuser.accountType
       }
 
-      console.log("B")
+      
 
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "24h"
