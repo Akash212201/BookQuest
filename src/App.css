@@ -196,7 +196,7 @@ body {
 
 @media(max-width: 776px) {
   .mobile {
-    display: none;
+    display: none !important;
   }
 }
 

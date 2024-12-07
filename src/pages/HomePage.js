@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Hero from '../components/Hero'
+import HeroSlider from '../components/HeroSlider'
 import Upcomming from "../components/Upcomming"
 import Newsletter from '../components/Newsletter';
 import { groupCategory } from "../services/operations/bookcategory";
@@ -33,7 +34,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Hero />
+      <HeroSlider />
       <Upcomming books={categorybooks} url={"availablebooks"} title="Available Books" />
       <Upcomming books={latestbooks} url={"newarrival"} title="New Arrival" />
       <Upcomming books={mostSellingBooks} url={"bestseller"} title="Bestseller" />

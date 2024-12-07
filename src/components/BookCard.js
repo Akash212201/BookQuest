@@ -40,7 +40,7 @@ const BookCard = ({ book }) => {
         </Link>
         <p>{book.bookAuthor}</p>
         <p>Price: <span className='text-red-500 text-xl'>₹{book.price}</span></p>
-        <div className='bg-red-500 py-2 text-xl text-white text-center absolute bottom-0 left-0 right-0 addToCartbutton' 
+        <div className='bg-[#3beb9c] hover:bg-[#47f3a6] py-2 text-xl text-white text-center absolute bottom-0 left-0 right-0 addToCartbutton' 
         onClick={addToCartHandler}>
           <button>Add to cart</button>
           </div>

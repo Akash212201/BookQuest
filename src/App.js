@@ -6,7 +6,7 @@ import {
   useLocation
 } from 'react-router-dom';
 import Header1 from './components/Header1';
-import Header from './components/Header';
+import Header2 from './components/Header2'; 
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import BookInfo from './components/BookInfo';
@@ -60,7 +60,7 @@ const App = () => {
     <div>
       
       {
-        !isDashboard ? (<div><Header1 /><Header /></div>) : <div><AdminNavbar toggleSidebar={toggleSidebar} /></div>
+        !isDashboard ? (<div><Header1 /><Header2/></div>) : <div><AdminNavbar toggleSidebar={toggleSidebar} /></div>
       }
 
       <div className={`${isDashboard ? `h-[100vh] bg-background-color pt-[60px] ${sidebarOpen ? 'hidesidebar' : 'admin'}` : ''}`}>

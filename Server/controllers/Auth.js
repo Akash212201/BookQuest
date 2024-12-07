@@ -162,8 +162,6 @@ exports.signup = async (req, resp) => {
   }
 }
 
-
-
 // Login
 exports.login = async (req, resp) => {
   try {

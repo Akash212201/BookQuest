@@ -69,8 +69,6 @@ exports.isCustomer = async (req, resp, next) => {
 exports.isAdmin = async (req, resp, next) => {
     try {
         const userdetails = await User.findOne({ email: req.user.email })
-
-
         if (userdetails.accountType !== "Admin") {
             return resp.status(400).json({
                 success: false,
